@@ -76,7 +76,7 @@ tr:nth-child(even)
 		vertical-align:middle;
 		background-color:#34495E;
 		border: 2px solid #BDC3C7;
-		border-left: 8px solid #F1C40F;
+		border-left: 8px solid #8080ff;
 	}
 	.menu ul ul{
 		transition: all 0.3s;
@@ -95,7 +95,7 @@ tr:nth-child(even)
 	}
 	
 	.menu >ul >li{
-		border-right: 5px solid #F1C40F;
+		border-right: 5px solid #8080ff;
 	}
 	.menu ul li a{
 		color:#fff;
@@ -124,5 +124,20 @@ tr:nth-child(even)
 	width:30%;
 	display:flex;
 	justify-content: right;
+	}
+	
+	
+	.login{
+		background : #c0c0c0;
+		padding-botton: 15px;
+		widht: 30%;
+		display:grid;
+	    grid-template-columns: 30%;
+	    grid-gap:20px;
+	}
+	
+	
+	.btn-primary{
+		background: #91bbff;
 	}
 	

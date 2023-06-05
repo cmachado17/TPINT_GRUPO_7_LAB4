@@ -23,20 +23,26 @@
 
 		<div class="menu">
 		<ul>
-			<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Administrador</a> 
+			<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Pacientes</a> 
 			
 					<ul>
-				<li class="sub-menu"><a href="servletClinica?Param=0" class="sub-menu">Alta Pacientes</a></li>
-						<li class="sub-menu"><a href="servletClinica?Param=1" class="sub-menu">Alta Medicos</a></li>
-						<li class="sub-menu"><a href="servletClinica?Param=2" class="sub-menu">Asignacion Turnos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=0" class="sub-menu">Alta Pacientes</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=1" class="sub-menu">Baja Pacientes</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=2" class="sub-menu">Modificacion Pacientes</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=3" class="sub-menu">Listado Pacientes</a></li>
 					</ul>
 			
 			</li>
-					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Medico</a> 
-					
-					<!-- Aca chequeariamos quien esta en la sesion para mostrar los menus o no -->
+					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Medicos</a> 
+			
 					<ul>
-							<li class="sub-menu"><a href="servletClinica?Param=3" >Mis turnos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=4" >Mis turnos</a></li>
+					</ul>
+					
+					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Turnos</a> 
+			
+					<ul>
+						<li class="sub-menu"><a href="servletClinica?Param=3" >Mis turnos</a></li>
 					</ul>
 			
 
@@ -44,6 +50,9 @@
 		</div>
 
 </div>
+
+
+
 <div class="parteDer"> 
 
 <h2> Alta de pacientes </h2> </br>

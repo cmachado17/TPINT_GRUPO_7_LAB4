@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Home</title>
+
+<title>Baja Pacientes</title>
 </head>
 <body>
 
@@ -38,7 +38,7 @@
 					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Medicos</a> 
 			
 					<ul>
-						<li class="sub-menu"><a href="servletClinica?Param=3" >Mis turnos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=4" >Mis turnos</a></li>
 					</ul>
 					
 					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Turnos</a> 
@@ -52,31 +52,43 @@
 		</div>
 
 </div>
+
+
+
 <div class="parteDer"> 
 
-<form>
-<div class="mb-3">
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su usuario" requiered>
-</div>
-<div class="mb-3">
- <input  type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su clave" requiered>
-</div>
-<div class="mb-3">
- <input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar">
-</div>
+<h2> Baja de pacientes </h2> </br>
+
+<form method="post" action="ServletHTML">
+<div class="formulario">
+    <label>DNI</label>
+    <input type="number" name="DNI" disabled ></input>
+        <label>Nombre</label>
+    <input type="text" name="nombre" ></input>
+        <label>Apellido</label>
+    <input type="text" name="apellido"></input>
+        <label>Nacionalidad</label>
+   <input type="text" name="nacionalidad"></input>
+        <label>Fecha</label>
+    <input type="date" name="fechaNacimiento"></input>
+        <label>Direccion</label>
+    <input type="text" name="direccion"></input>
+        <label>Localidad</label>
+    <input type="text" name="localidad"></input>
+        <label>Provincia</label>
+    <input type="text" name="provincia"></input>
+       <label>Email</label>
+     <input type="email" name="Email"></input>
+       <label>Telefono</label>
+   <input type="tel" name="Telefono"></input>
+    </div>
+    <div class="submit">
+     <input type="submit" name="btnEnviar" value="Enviar" ></input></br>
+    </div>
 </form>
 
-
 </div>
-
-
-
-
-
 </div>
-
-
-
 
 </body>
 </html>
