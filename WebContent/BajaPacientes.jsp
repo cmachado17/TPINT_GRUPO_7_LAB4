@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<% request.setCharacterEncoding("UTF-8"); %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -16,7 +17,7 @@
 
 <div class="encabezado">
 <div class="sesion">
-	<p>Usuario logeado</p>
+	<p>Usuario logueado</p>
 </div>
 </div>
 
@@ -60,27 +61,35 @@
 <h2> Baja de pacientes </h2> </br>
 
 <form method="post" action="ServletHTML">
+<input type="text" name="buscar">
+<input type="submit" name="btnBuscar" value="Buscar">
+</form>
+
+<br> <br>
+
+
+<form method="post" action="ServletHTML">
 <div class="formulario">
     <label>DNI</label>
     <input type="number" name="DNI" disabled ></input>
         <label>Nombre</label>
-    <input type="text" name="nombre" ></input>
+    <input type="text" name="nombre" disabled ></input>
         <label>Apellido</label>
-    <input type="text" name="apellido"></input>
+    <input type="text" name="apellido" disabled></input>
         <label>Nacionalidad</label>
-   <input type="text" name="nacionalidad"></input>
+   <input type="text" name="nacionalidad" disabled></input>
         <label>Fecha</label>
-    <input type="date" name="fechaNacimiento"></input>
+    <input type="date" name="fechaNacimiento" disabled></input>
         <label>Direccion</label>
-    <input type="text" name="direccion"></input>
+    <input type="text" name="direccion" disabled></input>
         <label>Localidad</label>
-    <input type="text" name="localidad"></input>
+    <input type="text" name="localidad" disabled></input>
         <label>Provincia</label>
-    <input type="text" name="provincia"></input>
+    <input type="text" name="provincia" disabled></input>
        <label>Email</label>
-     <input type="email" name="Email"></input>
+     <input type="email" name="Email" disabled></input>
        <label>Telefono</label>
-   <input type="tel" name="Telefono"></input>
+   <input type="tel" name="Telefono" disabled></input>
     </div>
     <div class="submit">
      <input type="submit" name="btnEnviar" value="Enviar" ></input></br>

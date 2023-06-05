@@ -128,16 +128,15 @@ tr:nth-child(even)
 	
 	
 	.login{
-		background : #c0c0c0;
-		padding-botton: 15px;
-		widht: 30%;
-		display:grid;
-	    grid-template-columns: 30%;
-	    grid-gap:20px;
+		border-collapse: collapse;
+    	width: 50%;
+		margin-left: 20%;
+		margin-top: 5%;
 	}
 	
 	
 	.btn-primary{
-		background: #91bbff;
+		background: #8080ff;
+		margin-left: 40%;
 	}
 	
