@@ -29,6 +29,12 @@ public class servletClinica extends HttpServlet {
 			case "1":
 				dispatcher = "/BajaPacientes.jsp";
 				break;
+			case "2":
+				dispatcher = "/ModificacionPacientes.jsp";
+				break;
+			case "3":
+				dispatcher = "/ListadoPacientes.jsp";
+				break;
 			default:
 				dispatcher = "/Principal.jsp";
 				break;

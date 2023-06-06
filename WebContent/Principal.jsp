@@ -14,7 +14,7 @@
 <title>Home</title>
 </head>
 <body>
-
+|
 <div class="encabezado">
 <div class="sesion">
 	<p>Usuario logeado</p>
