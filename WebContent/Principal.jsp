@@ -37,9 +37,13 @@
 			
 			</li>
 					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Medicos</a> 
-			
+			        
 					<ul>
-						<li class="sub-menu"><a href="servletClinica?Param=3" >Mis turnos</a></li>
+					    <li class="sub-menu"><a href="servletClinica?Param=0" class="sub-menu">Alta Medicos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=1" class="sub-menu">Baja Medicos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=2" class="sub-menu">Modificacion Medicos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=3" class="sub-menu">Listado Medicos</a></li>
+															
 					</ul>
 					
 					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Turnos</a> 
@@ -57,10 +61,12 @@
 
 <form class="login">
 <div class="mb-3">
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su usuario" requiered>
+  <H1>User: </H1>
+  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="clinica@utn.com" requiered>
 </div>
 <div class="mb-3">
- <input  type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su clave" requiered>
+  <H1>Password: </H1>
+ <input  type="text" class="form-control" id="exampleFormControlInput1" placeholder="************" requiered>
 </div>
 <div class="mb-3">
  <input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar">

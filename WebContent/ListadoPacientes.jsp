@@ -46,8 +46,6 @@
 					</ul>
 			
 			</li>
-					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Medicos</a> 
-			
 					<ul>
 						<li class="sub-menu"><a href="servletClinica?Param=4" >Mis turnos</a></li>
 					</ul>

@@ -39,7 +39,10 @@
 					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Medicos</a> 
 			
 					<ul>
-						<li class="sub-menu"><a href="servletClinica?Param=4" >Mis turnos</a></li>
+						 <li class="sub-menu"><a href="servletClinica?Param=0" class="sub-menu">Alta Medicos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=1" class="sub-menu">Baja Medicos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=2" class="sub-menu">Modificacion Medicos</a></li>
+						<li class="sub-menu"><a href="servletClinica?Param=3" class="sub-menu">Listado Medicos</a></li>
 					</ul>
 					
 					<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Turnos</a> 
