@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class servletPacientes
+ * Servlet implementation class servletMedicos
  */
-@WebServlet("/servletPacientes")
-public class servletPacientes extends HttpServlet {
+@WebServlet("/servletMedicos")
+public class servletEmpleados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletPacientes() {
+    public servletEmpleados() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,16 @@ public class servletPacientes extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
-				dispatcher = "/AltaPacientes.jsp";
+				dispatcher = "/AltaEmpleados.jsp";
 				break;
 			case "1":
-				dispatcher = "/BajaPacientes.jsp";
+				dispatcher = "/BajaEmpleados.jsp";
 				break;
 			case "2":
-				dispatcher = "/ModificacionPacientes.jsp";
+				dispatcher = "/ModificacionEmpleados.jsp";
 				break;
 			case "3":
-				dispatcher = "/ListadoPacientes.jsp";
+				dispatcher = "/ListadoEmpleados.jsp";
 				break;
 			default:
 				dispatcher = "/Principal.jsp";
@@ -53,7 +53,6 @@ public class servletPacientes extends HttpServlet {
 		    rd.forward(request, response);  
 			}
 		}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

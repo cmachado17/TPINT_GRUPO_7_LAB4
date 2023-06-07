@@ -3,18 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<% request.setCharacterEncoding("UTF-8"); %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Home</title>
+<title>Alta Empleados</title>
 </head>
 <body>
-|
+
 <div class="encabezado">
 <div class="sesion">
 	<p>Usuario logeado</p>
@@ -22,7 +20,6 @@
 </div>
 
 <div class="contenedor">
-
 	<div class="parteIzq">
 		<div class="menu">
 			<ul>
@@ -54,22 +51,58 @@
 		</div>
 	</div>
 	
+	
+<div class="parteDer"> 
 
-	<div class="parteDer"> 
-		<form class="login">
-			<div class="mb-3">
-		 		<H1>User: </H1>
-			  		<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="clinica@utn.com" requiered>
-			</div>
-			<div class="mb-3">
-				<H1>Password: </H1>
-			 		<input  type="text" class="form-control" id="exampleFormControlInput1" placeholder="************" requiered>
-			</div>
-			<div class="mb-3">
-				<input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar">
-			</div>
-		</form>
-	</div>
+<h2> Alta de Empleados </h2> </br>
+
+<form method="post" action="ServletHTML">
+<div class="formulario">
+    <label>DNI</label>
+    <input type="number" name="DNI" required></input>
+        <label>Nombre</label>
+    <input type="text" name="nombre" required></input>
+        <label>Apellido</label>
+    <input type="text" name="apellido" required></input>
+        <label>Sexo</label>
+    <input type="text" name="sexo" required></input>
+        <label>Nacionalidad</label>
+   <input type="text" name="nacionalidad" required></input>
+        <label>Fecha Nac.</label>
+    <input type="date" name="fechaNacimiento"></input>
+        <label>Direccion</label>
+    <input type="text" name="direccion" required></input>
+        <label>Localidad</label>
+    <input type="text" name="localidad" required></input>
+        <label>Provincia</label>
+    <input type="text" name="provincia" required></input>
+       <label>Email</label>
+     <input type="email" name="Email"></input>
+       <label>Tel. fijo</label>
+   <input type="tel" name="Telefono"></input>
+       <label>Celular</label>
+   <input type="tel" name="Celular"></input>
+       <label>Tipo de Usuario</label>     	 
+    	 <ul>
+			<td> <input type="checkbox" name="Medico"></input> Médico</td>
+			<td> <input type="checkbox" name="Admin"></input> Administrador</td>
+		</ul>
+  
+  <h3>Si es médico se despliegan <br>
+   las especialidades:</h3>
+        <br>
+        <br>
+        <label>Especialidades</label>
+   <input type="text" name="Especialidad"></input>
+   
+    </div>
+    <div class="submit">
+     <input type="submit" name="btnEnviar" value="Enviar" ></input></br>
+    </div>
+</form>
+
 </div>
+</div>
+
 </body>
 </html>

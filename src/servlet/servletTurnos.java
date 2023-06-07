@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class servletMedicos
+ * Servlet implementation class servletTurnos
  */
-@WebServlet("/servletMedicos")
-public class servletMedicos extends HttpServlet {
+@WebServlet("/servletTurnos")
+public class servletTurnos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletMedicos() {
+    public servletTurnos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,9 +28,29 @@ public class servletMedicos extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		if(request.getParameter("Param")!=null) {
+			String dispatcher="";
+			
+			switch(request.getParameter("Param")) {
+			case "0":
+				dispatcher = "/AltaTurnos.jsp";
+				break;
+			case "1":
+				dispatcher = "/BajaTurnos.jsp";
+				break;
+			case "2":
+				dispatcher = "/ModificacionTurnos.jsp";
+				break;
+			default:
+				dispatcher = "/Principal.jsp";
+				break;
+			}
+				
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}
+		}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
