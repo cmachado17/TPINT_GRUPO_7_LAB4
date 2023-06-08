@@ -66,7 +66,7 @@
 		
 <div class="parteDer"> 
 
-<h2> Listado de Pacientes </h2> </br>
+<h2 class="tituloForm"> Listado de Pacientes </h2> </br>
 	<table id="table_id" class="display">
 		<thead>
 			<tr>

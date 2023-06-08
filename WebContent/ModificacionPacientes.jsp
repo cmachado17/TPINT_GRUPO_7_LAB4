@@ -55,7 +55,16 @@
 	
 <div class="parteDer"> 
 
-<h2> Modificacion Paciente </h2> </br>
+<h2 class="tituloForm"> Modificacion Paciente </h2> </br>
+
+<form method="post" action="ServletHTML">
+<div class="formulario">
+<input type="text" name="buscar">
+<input type="submit" class="btn btn-light" name="btnBuscar" value="Buscar">
+</div>
+</form>
+
+<br>
 
 <form method="post" action="ServletHTML">
 <div class="formulario">
@@ -85,7 +94,7 @@
    <input type="tel" name="Celular"></input>
     </div>
     <div class="submit">
-     <input type="submit" name="btnModificar" value="Modificar" ></input></br>
+     <input type="submit" class="btn btn-light" name="btnModificar" value="Modificar" ></input></br>
     </div>
 </form>
 

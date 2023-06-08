@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<% request.setCharacterEncoding("UTF-8"); %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
@@ -11,14 +10,14 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+<title>Modificacion Empleados</title>
 
-<title>Baja Pacientes</title>
 </head>
 <body>
 
 <div class="encabezado">
 <div class="sesion">
-	<p>Usuario logueado</p>
+	<p>Usuario logeado</p>
 </div>
 </div>
 
@@ -53,10 +52,10 @@
 			</ul>
 		</div>
 	</div>
-		
+	
 <div class="parteDer"> 
 
-<h2 class="tituloForm"> Baja de pacientes </h2> </br>
+<h2 class="tituloForm"> Modificacion Empleados </h2> </br>
 
 <form method="post" action="ServletHTML">
 <div class="formulario">
@@ -65,38 +64,37 @@
 </div>
 </form>
 
-<br> 
-
+<br>
 
 <form method="post" action="ServletHTML">
 <div class="formulario">
     <label>DNI</label>
-    <input type="number" name="DNI" disabled ></input>
+    <input type="number" name="DNI" disabled></input>
         <label>Nombre</label>
-    <input type="text" name="nombre" disabled ></input>
+    <input type="text" name="nombre" required></input>
         <label>Apellido</label>
-    <input type="text" name="apellido" disabled></input>
+    <input type="text" name="apellido" required></input>
         <label>Sexo</label>
-    <input type="text" name="sexo" disabled></input>
+    <input type="text" name="sexo" required></input>
         <label>Nacionalidad</label>
-   <input type="text" name="nacionalidad" disabled></input>
+   <input type="text" name="nacionalidad" required></input>
         <label>Fecha</label>
-    <input type="date" name="fechaNacimiento" disabled></input>
+    <input type="date" name="fechaNacimiento"></input>
         <label>Direccion</label>
-    <input type="text" name="direccion" disabled></input>
+    <input type="text" name="direccion" required></input>
         <label>Localidad</label>
-    <input type="text" name="localidad" disabled></input>
+    <input type="text" name="localidad" required></input>
         <label>Provincia</label>
-    <input type="text" name="provincia" disabled></input>
+    <input type="text" name="provincia" required></input>
        <label>Email</label>
-     <input type="email" name="Email" disabled></input>
+     <input type="email" name="Email"></input>
        <label>Tel. fijo</label>
-   <input type="tel" name="Telefono" disabled></input>
+   <input type="tel" name="Telefono"></input>
        <label>Celular</label>
-   <input type="tel" name="Celular" disabled></input>
+   <input type="tel" name="Celular"></input>
     </div>
     <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnEnviar" value="Eliminar" ></input></br>
+     <input type="submit" class="btn btn-light" name="btnModificar" value="Modificar" ></input></br>
     </div>
 </form>
 

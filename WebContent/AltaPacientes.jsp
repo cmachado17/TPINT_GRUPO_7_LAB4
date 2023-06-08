@@ -53,7 +53,7 @@
 		
 <div class="parteDer"> 
 
-<h2> Alta de pacientes </h2> </br>
+<h2 class="tituloForm"> Alta de pacientes </h2> </br>
 
 <form method="post" action="ServletHTML">
 <div class="formulario">
@@ -83,7 +83,7 @@
    <input type="tel" name="Celular"></input>
     </div>
     <div class="submit">
-     <input type="submit" name="btnEnviar" value="Enviar" ></input></br>
+     <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
     </div>
 </form>
 

@@ -54,7 +54,7 @@
 	
 <div class="parteDer"> 
 
-<h2> Alta de Empleados </h2> </br>
+<h2 class="tituloForm"> Alta de Empleados </h2> </br>
 
 <form method="post" action="ServletHTML">
 <div class="formulario">
@@ -87,17 +87,11 @@
 			<td> <input type="checkbox" name="Medico"></input> Médico</td>
 			<td> <input type="checkbox" name="Admin"></input> Administrador</td>
 		</ul>
-  
-  <h3>Si es médico se despliegan <br>
-   las especialidades:</h3>
-        <br>
-        <br>
         <label>Especialidades</label>
    <input type="text" name="Especialidad"></input>
-   
     </div>
     <div class="submit">
-     <input type="submit" name="btnEnviar" value="Enviar" ></input></br>
+     <input type="submit" name="btnEnviar" value="Enviar" class="btn btn-light"></input>
     </div>
 </form>
 

@@ -67,7 +67,7 @@
 			</div>
 			<div class="mb-3">
 				<H1>Password: </H1>
-			 		<input  type="text" class="form-control" id="exampleFormControlInput1" placeholder="************" requiered>
+			 		<input  type="password" class="form-control" id="exampleFormControlInput1" placeholder="************" requiered>
 			</div>
 			<div class="mb-3">
 				<input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar">

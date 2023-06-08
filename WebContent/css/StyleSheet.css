@@ -49,7 +49,7 @@ tr:nth-child(even)
 	 	float:left;
 	 	padding: 30px;
 	 	border-radius:50px;
-	 	height:95%;
+	 	height:100%;
 	 	margin: 0 10px;
 	 	
 	}
@@ -115,16 +115,18 @@ tr:nth-child(even)
     display:grid;
     grid-template-columns: max-content max-content;
     grid-gap:5px;
+    justify-content: center;
 	}
 
-	div.formulario label       { text-align:right; }
+	div.formulario label       { text-align:right; color:white; font-family: 'Kanit', sans-serif;}
 	div.formulario label:after { content: ":"; }
 	
 	.submit{
 	margin-top: 20px;
 	width:30%;
 	display:flex;
-	justify-content: right;
+	justify-content: center;
+	margin-left: 40%;
 	}
 	
 	
@@ -150,6 +152,18 @@ tr:nth-child(even)
 	}
 	
 	p{
+	font-family: 'Kanit', sans-serif;
+	color: white;
+	}
+	
+	.tituloForm{
+	font-family: 'Kanit', sans-serif;
+	color: white;
+	text-align: center;
+	}
+	
+	.btn-light{
+	background: #34495E;
 	font-family: 'Kanit', sans-serif;
 	color: white;
 	}
