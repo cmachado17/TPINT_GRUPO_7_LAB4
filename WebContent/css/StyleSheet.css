@@ -10,7 +10,7 @@ th, td {
 
 tr:nth-child(even)
 	{
-		background-color: #f2f2f2
+		background-color: #34495E
 	}
 
 	.sesion{
@@ -24,7 +24,7 @@ tr:nth-child(even)
 
 	.encabezado
 	{
-		background-color:#bdfce6;
+		background-color:#34495E;
 		height:50px;
 		border-radius: 80px 20px 0px 0px; 
 	}
@@ -36,7 +36,7 @@ tr:nth-child(even)
 	.parteIzq
 	{
 		padding:30px 0;
-		background-color:#bdfce6;
+		background-color:#c0c0c0;
 		width:20%;
 		float:left;
 		height:95%
@@ -44,13 +44,14 @@ tr:nth-child(even)
 
 	.parteDer
 	{
-	 	background-color:#e1edf5;
+	 	background-color:#8080ff;;
 	 	width:80%;
 	 	float:left;
 	 	padding: 30px;
 	 	border-radius:50px;
 	 	height:95%;
-	 	margin: 0 20px;
+	 	margin: 0 10px;
+	 	
 	}
 	.menu
 	{
@@ -129,14 +130,27 @@ tr:nth-child(even)
 	
 	.login{
 		border-collapse: collapse;
-    	width: 50%;
-		margin-left: 20%;
-		margin-top: 5%;
+    	width: 45%;
+		margin-left: 25%;
+		margin-top: 1%;
+		font-family: 'Kanit', sans-serif;
+		
 	}
 	
 	
 	.btn-primary{
 		background: #8080ff;
 		margin-left: 40%;
+	}
+	
+	.text-bg-light p-3{
+		
+		display:flex;
+		justify-content: center;
+	}
+	
+	p{
+	font-family: 'Kanit', sans-serif;
+	color: white;
 	}
 	
