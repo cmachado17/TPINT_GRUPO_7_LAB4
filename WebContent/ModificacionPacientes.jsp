@@ -57,12 +57,12 @@
 
 <h2 class="tituloForm"> Modificacion Paciente </h2> </br>
 
-<form method="post" action="ServletHTML">
+<!--<form method="post" action="ServletHTML">
 <div class="formulario">
 <input type="text" name="buscar">
 <input type="submit" class="btn btn-light" name="btnBuscar" value="Buscar">
 </div>
-</form>
+</form> -->
 
 <br>
 

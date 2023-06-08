@@ -52,6 +52,13 @@ public class servletPacientes extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+		
+		if(request.getParameter("btnEditar")!=null) {
+			String dispatcher="/ModificacionPacientes.jsp";
+		
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}
 		}
 
 
