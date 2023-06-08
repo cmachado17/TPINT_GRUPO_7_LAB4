@@ -33,19 +33,23 @@ public class servletTurnos extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
-				dispatcher = "/AltaTurnos.jsp";
+				dispatcher = "/AsignarTurnos.jsp";
 				break;
 			case "1":
-				dispatcher = "/BajaTurnos.jsp";
-				break;
-			case "2":
-				dispatcher = "/ModificacionTurnos.jsp";
+				dispatcher = "/ListadoTurnos.jsp";
 				break;
 			default:
 				dispatcher = "/Principal.jsp";
 				break;
 			}
 				
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}
+		
+		if(request.getParameter("btnEditar")!=null) {
+			String dispatcher="/ModificacionTurnos.jsp";
+		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}

@@ -48,10 +48,18 @@ public class servletEmpleados extends HttpServlet {
 				dispatcher = "/Principal.jsp";
 				break;
 			}
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+		    }
 				
+		
+		if(request.getParameter("btnEditar")!=null) {
+			String dispatcher="/ModificacionEmpleados.jsp";
+		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+
 		}
 
 	/**

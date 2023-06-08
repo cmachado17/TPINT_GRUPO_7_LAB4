@@ -26,16 +26,16 @@
 				<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Pacientes</a> 				
 					<ul>
 						<li class="sub-menu"><a href="servletPacientes?Param=0" class="sub-menu">Alta Pacientes</a></li>
-						<li class="sub-menu"><a href="servletPacientes?Param=1" class="sub-menu">Baja Pacientes</a></li>
-						<li class="sub-menu"><a href="servletPacientes?Param=2" class="sub-menu">Modificacion Pacientes</a></li>
+						<!-- <li class="sub-menu"><a href="servletPacientes?Param=1" class="sub-menu">Baja Pacientes</a></li> -->
+						<!--<li class="sub-menu"><a href="servletPacientes?Param=2" class="sub-menu">Modificacion Pacientes</a></li>-->
 						<li class="sub-menu"><a href="servletPacientes?Param=3" class="sub-menu">Listado Pacientes</a></li>
 					</ul>	
 				</li>
 				<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Empleados</a> 				        
 					<ul>
 					    <li class="sub-menu"><a href="servletMedicos?Param=0" class="sub-menu">Alta Empleados</a></li>
-						<li class="sub-menu"><a href="servletMedicos?Param=1" class="sub-menu">Baja Empleados</a></li>
-						<li class="sub-menu"><a href="servletMedicos?Param=2" class="sub-menu">Modificacion Empleados</a></li>
+						<!--<li class="sub-menu"><a href="servletMedicos?Param=1" class="sub-menu">Baja Empleados</a></li>-->
+						<!--<li class="sub-menu"><a href="servletMedicos?Param=2" class="sub-menu">Modificacion Empleados</a></li>-->
 						<li class="sub-menu"><a href="servletMedicos?Param=3" class="sub-menu">Listado Empleados</a></li>
 															
 					</ul>
@@ -43,8 +43,8 @@
 				<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Turnos</a> 				
 					<ul>
 						<li class="sub-menu"><a href="servletTurnos?Param=0" >Asignar Turno</a></li>
-						<li class="sub-menu"><a href="servletTurnos?Param=1" >Modificar Turno</a></li>
-						<li class="sub-menu"><a href="servletTurnos?Param=2" >Anular Turno</a></li>
+						<li class="sub-menu"><a href="servletTurnos?Param=1" >Listado Turnos</a></li>
+						<!--<li class="sub-menu"><a href="servletTurnos?Param=2" >Anular Turno</a></li>-->
 					</ul>
 				</li>
 			</ul>
