@@ -35,10 +35,10 @@
 				</li>
 				<li> <a href="Principal.jsp"> <span class="fa fa-home"></span>Empleados</a> 				        
 					<ul>
-					    <li class="sub-menu"><a href="servletMedicos?Param=0" class="sub-menu">Alta Empleados</a></li>
-						<!--<li class="sub-menu"><a href="servletMedicos?Param=1" class="sub-menu">Baja Empleados</a></li>-->
-						<!--<li class="sub-menu"><a href="servletMedicos?Param=2" class="sub-menu">Modificacion Empleados</a></li>-->
-						<li class="sub-menu"><a href="servletMedicos?Param=3" class="sub-menu">Listado Empleados</a></li>
+					    <li class="sub-menu"><a href="servletEmpleados?Param=0" class="sub-menu">Alta Empleados</a></li>
+						<!--<li class="sub-menu"><a href="servletEmpleados?Param=1" class="sub-menu">Baja Empleados</a></li>-->
+						<!--<li class="sub-menu"><a href="servletEmpleados?Param=2" class="sub-menu">Modificacion Empleados</a></li>-->
+						<li class="sub-menu"><a href="servletEmpleados?Param=3" class="sub-menu">Listado Empleados</a></li>
 															
 					</ul>
 				</li>					
