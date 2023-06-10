@@ -13,7 +13,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Home</title>
+<title>Paciente</title>
 </head>
 <body>
 
@@ -41,9 +41,39 @@
 
 <div class="parteDer"> 
 
-	<h2 class="tituloForm">Bienvenido</h2>
-</div>
+<form method="post" action="servletClinica">
+<div class="formulario">
+    <label>DNI</label>
+    <input type="number" name="DNI" disabled ></input>
+        <label>Nombre</label>
+    <input type="text" name="nombre" disabled ></input>
+        <label>Apellido</label>
+    <input type="text" name="apellido" disabled></input>
+        <label>Sexo</label>
+    <input type="text" name="sexo" disabled></input>
+        <label>Nacionalidad</label>
+   <input type="text" name="nacionalidad" disabled></input>
+        <label>Fecha</label>
+    <input type="date" name="fechaNacimiento" disabled></input>
+        <label>Direccion</label>
+    <input type="text" name="direccion" disabled></input>
+        <label>Localidad</label>
+    <input type="text" name="localidad" disabled></input>
+        <label>Provincia</label>
+    <input type="text" name="provincia" disabled></input>
+       <label>Email</label>
+     <input type="email" name="Email" disabled></input>
+       <label>Tel. fijo</label>
+   <input type="tel" name="Telefono" disabled></input>
+       <label>Celular</label>
+   <input type="tel" name="Celular" disabled></input>
+    </div>
+    <div class="submit">
+     <input type="submit" class="btn btn-light" name="btnVolver" value="Volver" ></input></br>
+    </div>
+</form>
 
+</div>
 
 </div>
 

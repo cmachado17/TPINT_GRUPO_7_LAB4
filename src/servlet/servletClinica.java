@@ -24,17 +24,9 @@ public class servletClinica extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
-				dispatcher = "/AltaPacientes.jsp";
+				dispatcher = "/TurnosAsignados.jsp";
 				break;
-			case "1":
-				dispatcher = "/BajaPacientes.jsp";
-				break;
-			case "2":
-				dispatcher = "/ModificacionPacientes.jsp";
-				break;
-			case "3":
-				dispatcher = "/ListadoPacientes.jsp";
-				break;
+			
 			default:
 				dispatcher = "/Principal.jsp";
 				break;
@@ -43,11 +35,36 @@ public class servletClinica extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+		
+			if(request.getParameter("btnVer")!=null) {
+				String dispatcher="/VerPaciente.jsp";
+			
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}
+			
+		
+			if(request.getParameter("btnEditarEstado")!=null) {
+				String dispatcher="/ModificarEstado.jsp";
+			
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}
+		
+
 		}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
+		
+		if(request.getParameter("btnVolver")!=null) {
+			String dispatcher="/TurnosAsignados.jsp";
+		
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}
 	}
 
 }

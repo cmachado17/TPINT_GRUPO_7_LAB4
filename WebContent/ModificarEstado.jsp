@@ -13,7 +13,7 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-<title>Home</title>
+<title>Modificar Estado</title>
 </head>
 <body>
 
@@ -38,15 +38,28 @@
 		</div>
 	</div>
 
-
 <div class="parteDer"> 
 
-	<h2 class="tituloForm">Bienvenido</h2>
+<h2 class="tituloForm"> Modificar Estado </h2> </br>
+
+<form method="post" action="servletClinica">
+<div class="formulario">
+	<label>Estado</label>
+	<select  name="estado"> 
+		<option value="1">Ausente</option>
+		<option value="2">Presente</option>
+	</select>
+		
+		<br> <br>
+		
+    <div class="submit">
+     <input type="submit" class="btn btn-light" name="btnVolver" value="Volver" ></input></br>
+    </div>
+    
+</form>
+
 </div>
-
-
 </div>
-
 
 </body>
 </html>

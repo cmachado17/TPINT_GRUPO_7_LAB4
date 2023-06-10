@@ -17,7 +17,7 @@
 
 <div class="encabezado">
 <div class="sesion">
-	<p>Usuario logeado</p>
+	<p class="user" >Usuario logeado</p>
 </div>
 </div>
 
