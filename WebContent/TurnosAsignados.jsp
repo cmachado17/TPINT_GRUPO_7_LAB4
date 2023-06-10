@@ -52,20 +52,35 @@
 <div class="parteDer"> 
 
 <h2 class="tituloForm"> Turnos asignados </h2> </br>
-	<table id="table_id" class="display">
+<form method="post" action="ServletHTML">
+  <div class="row my-2">
+    <div class="col">
+    <label>Desde</label>
+      <input type="date" class="form-control">
+    </div>
+    <div class="col">
+     <label>Hasta</label>
+      <input type="date" class="form-control">
+    </div>
+      <div class="col d-flex align-items-end">
+       <input type="submit" class="btn btn-light" name="btnBuscar" value="Enviar" ></input>
+    </div>
+  </div>
+</form>
+	<table id="table_id" class="display table table-striped">
 		<thead>
 			<tr>
-				<th>Dia y Horario</th>
-				<th>Paciente</th>
-				<th></th>
-				<th>Estado</th>
-				<th></th>
+				<th scope="col">Dia y Horario</th>
+				<th scope="col">Paciente</th>
+				<th scope="col"></th>
+				<th scope="col">Estado</th>
+				<th scope="col"></th>
 				
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>17/06/2023 17:00 HS</td>
+				<td scope="row">17/06/2023 17:00 HS</td>
 				<td>Roberto Gomez</td>
 				<td><input type="submit" class="btn btn-light" value="Ver" name="btnVer" onclick="window.location.href='servletClinica?btnVer'"/></td>
 				<td>Ocupado</td>

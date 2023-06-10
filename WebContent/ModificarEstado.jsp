@@ -43,19 +43,27 @@
 <h2 class="tituloForm"> Modificar Estado </h2> </br>
 
 <form method="post" action="servletClinica">
-<div class="formulario">
-	<label>Estado</label>
-	<select  name="estado"> 
+<div class="d-flex justify-content-center">
+<div class="form-group w-50">
+ <div class="form-group">
+	<label class="mb-2">Estado</label>
+	<select class="form-control" name="estado"> 
 		<option value="1">Ausente</option>
 		<option value="2">Presente</option>
 	</select>
-		
+	</div>
+	<div class="form-group">
+    	<label for="comentario" class="mb-2">Comentario</label>
+    	<textarea class="form-control" id="comentario" rows="3"></textarea>
+    </div>
 		<br> <br>
 		
     <div class="submit">
      <input type="submit" class="btn btn-light" name="btnVolver" value="Volver" ></input></br>
     </div>
     
+</div>
+
 </form>
 
 </div>

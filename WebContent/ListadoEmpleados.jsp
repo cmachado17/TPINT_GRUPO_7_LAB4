@@ -70,17 +70,17 @@
 <div class="parteDer"> 
 
 <h2 class="tituloForm"> Listado de Empleados </h2> </br>
-	<table id="table_id" class="display">
+	<table id="table_id" class="display table table-striped">
 		<thead>
 			<tr>
-				<th>Legajo</th>
-				<th>Nombre</th>
-				<th>Apellido</th>
-				<th>Sexo</th>
-				<th>Nacionalidad</th>
-				<th>Fecha Nacimiento</th>
-				<th>Correo electronico</th>
-				<th>Especialidad</th>
+				<th scope="col">Legajo</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Sexo</th>
+				<th scope="col">Nacionalidad</th>
+				<th scope="col">Fecha Nacimiento</th>
+				<th scope="col">Correo electronico</th>
+				<th scope="col">Especialidad</th>
 				
 				<th></th>
 				<th></th>
@@ -88,9 +88,27 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>111111</td>
+				<td scope="row">111111</td>
 				<td>Carlos</td>
 				<td>Luna</td>
+				<td>Hombre</td>
+				<td>Argentina</td>
+				<td>11/08/1980</td>
+				<td>cluna@gmail.com</td>
+				<td>Clinica</td>
+				<!-- Codigo comentado: Observar que utilizo el onClick al servlet y le paso de parámetro el nombre del boton con otros atributos -->
+				<td><input type="submit" value="Eliminar" name="btnEliminar" onclick="window.location.href='servletMedicos?btnEliminar=1'"/></td>
+				<td><input type="submit" value="Editar" name="btnEditar" onclick="window.location.href='servletMedicos?btnEditar=1'"/></td>
+			</tr>
+					<tr>
+				<td scope="row">111111</td>
+				<td>Carlos</td>
+				<td>Luna</td>
+				<td>Hombre</td>
+				<td>Argentina</td>
+				<td>11/08/1980</td>
+				<td>cluna@gmail.com</td>
+				<td>Clinica</td>
 				<!-- Codigo comentado: Observar que utilizo el onClick al servlet y le paso de parámetro el nombre del boton con otros atributos -->
 				<td><input type="submit" value="Eliminar" name="btnEliminar" onclick="window.location.href='servletMedicos?btnEliminar=1'"/></td>
 				<td><input type="submit" value="Editar" name="btnEditar" onclick="window.location.href='servletMedicos?btnEditar=1'"/></td>

@@ -70,21 +70,21 @@
 <div class="parteDer"> 
 
 <h2 class="tituloForm"> Listado de turnos </h2> </br>
-	<table id="table_id" class="display">
+	<table id="table_id" class="display table table-striped">
 		<thead>
 			<tr>
-				<th>Especialidad</th>
-				<th>Medico</th>
-				<th>Dia y Horario</th>
-				<th>Paciente</th>
-				<th>Estado</th>
-				<th></th>
-				<th></th>
+				<th scope="col">Especialidad</th>
+				<th scope="col">Medico</th>
+				<th scope="col">Dia y Horario</th>
+				<th scope="col">Paciente</th>
+				<th scope="col">Estado</th>
+				<th scope="col"></th>
+				<th scope="col"></th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>Cardiologia</td>
+				<td scope="row">Cardiologia</td>
 				<td>Pepito Luna</td>
 				<td>17/06/2023 17:00 HS</td>
 				<td>Roberto Gomez</td>
