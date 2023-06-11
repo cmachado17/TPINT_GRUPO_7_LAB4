@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,11 +12,10 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
-	
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -52,7 +50,7 @@
 					    <li class="sub-menu"><a href="servletEmpleados?Param=0" class="sub-menu">Alta Empleados</a></li>
 						<!--<li class="sub-menu"><a href="servletEmpleados?Param=1" class="sub-menu">Baja Empleados</a></li>-->
 						<!--<li class="sub-menu"><a href="servletEmpleados?Param=2" class="sub-menu">Modificacion Empleados</a></li>-->
-						<li class="sub-menu"><a href="servletEmpleadosParam=3" class="sub-menu">Listado Empleados</a></li>
+						<li class="sub-menu"><a href="servletEmpleados?Param=3" class="sub-menu">Listado Empleados</a></li>
 															
 					</ul>
 				</li>					
