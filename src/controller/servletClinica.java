@@ -1,4 +1,4 @@
-package servlet;
+package controller;
 
 import java.io.IOException;
 
@@ -9,35 +9,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class servletTurnos
- */
-@WebServlet("/servletTurnos")
-public class servletTurnos extends HttpServlet {
+@WebServlet("/servletClinica")
+public class servletClinica extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletTurnos() {
+    public servletClinica() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("Param")!=null) {
 			String dispatcher="";
 			
 			switch(request.getParameter("Param")) {
 			case "0":
-				dispatcher = "/AsignarTurnos.jsp";
+				dispatcher = "/TurnosAsignados.jsp";
 				break;
-			case "1":
-				dispatcher = "/ListadoTurnos.jsp";
-				break;
+			
 			default:
 				dispatcher = "/Principal.jsp";
 				break;
@@ -47,21 +36,35 @@ public class servletTurnos extends HttpServlet {
 		    rd.forward(request, response);  
 			}
 		
-		if(request.getParameter("btnEditar")!=null) {
-			String dispatcher="/ModificacionTurnos.jsp";
+			if(request.getParameter("btnVer")!=null) {
+				String dispatcher="/VerPaciente.jsp";
+			
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}
+			
+		
+			if(request.getParameter("btnEditarEstado")!=null) {
+				String dispatcher="/ModificarEstado.jsp";
+			
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}
+		
+
+		}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+		
+		if(request.getParameter("btnVolver")!=null) {
+			String dispatcher="/TurnosAsignados.jsp";
 		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
-		}
-
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }
