@@ -1,4 +1,4 @@
-package controller;
+package presentacion.controller;
 
 import java.io.IOException;
 
@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class servletPacientes
+ * Servlet implementation class servletTurnos
  */
-@WebServlet("/servletPacientes")
-public class servletPacientes extends HttpServlet {
+@WebServlet("/servletTurnos")
+public class servletTurnos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletPacientes() {
+    public servletTurnos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,16 +33,10 @@ public class servletPacientes extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
-				dispatcher = "/AltaPacientes.jsp";
+				dispatcher = "/AsignarTurnos.jsp";
 				break;
 			case "1":
-				dispatcher = "/BajaPacientes.jsp";
-				break;
-			case "2":
-				dispatcher = "/ModificacionPacientes.jsp";
-				break;
-			case "3":
-				dispatcher = "/ListadoPacientes.jsp";
+				dispatcher = "/ListadoTurnos.jsp";
 				break;
 			default:
 				dispatcher = "/Principal.jsp";
@@ -54,7 +48,7 @@ public class servletPacientes extends HttpServlet {
 			}
 		
 		if(request.getParameter("btnEditar")!=null) {
-			String dispatcher="/ModificacionPacientes.jsp";
+			String dispatcher="/ModificacionTurnos.jsp";
 		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  

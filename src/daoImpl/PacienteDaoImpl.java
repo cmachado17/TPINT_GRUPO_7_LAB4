@@ -131,7 +131,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				pacientes.add(getPacientes(resultSet));
+				//pacientes.add(getPacientes(resultSet));
 			}
 		} 
 		catch (SQLException e) 

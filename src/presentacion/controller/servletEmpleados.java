@@ -1,4 +1,4 @@
-package controller;
+package presentacion.controller;
 
 import java.io.IOException;
 
@@ -9,56 +9,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class servletTurnos
- */
-@WebServlet("/servletTurnos")
-public class servletTurnos extends HttpServlet {
+@WebServlet("/servletEmpleados")
+public class servletEmpleados extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public servletTurnos() {
+   
+    public servletEmpleados() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getParameter("Param")!=null) {
 			String dispatcher="";
 			
 			switch(request.getParameter("Param")) {
 			case "0":
-				dispatcher = "/AsignarTurnos.jsp";
+				dispatcher = "/AltaEmpleados.jsp";
 				break;
 			case "1":
-				dispatcher = "/ListadoTurnos.jsp";
+				dispatcher = "/BajaEmpleados.jsp";
+				break;
+			case "2":
+				dispatcher = "/ModificacionEmpleados.jsp";
+				break;
+			case "3":
+				dispatcher = "/ListadoEmpleados.jsp";
 				break;
 			default:
 				dispatcher = "/Principal.jsp";
 				break;
 			}
-				
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
-			}
+		    }
+				
 		
 		if(request.getParameter("btnEditar")!=null) {
-			String dispatcher="/ModificacionTurnos.jsp";
+			String dispatcher="/ModificacionEmpleados.jsp";
 		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+
 		}
 
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
