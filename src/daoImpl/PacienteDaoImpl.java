@@ -5,8 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import dao.PacienteDao;
 import entidad.Paciente;
@@ -120,7 +118,7 @@ public class PacienteDaoImpl implements PacienteDao{
 	}
 
 	@Override
-	public List<Paciente> readAll() {
+	public ArrayList<Paciente> readAll() {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
@@ -131,7 +129,11 @@ public class PacienteDaoImpl implements PacienteDao{
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				//pacientes.add(getPacientes(resultSet));
+				Paciente paciente = new Paciente();
+				paciente.setDni(resultSet.getInt("DNI"));
+				paciente.setNombre(resultSet.getString("NOMBRE"));
+				paciente.setApellido(resultSet.getString("APELLIDO"));
+				pacientes.add(paciente);
 			}
 		} 
 		catch (SQLException e) 

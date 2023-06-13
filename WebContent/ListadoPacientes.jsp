@@ -1,3 +1,5 @@
+<%@ page import="entidad.Paciente"%>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -25,6 +27,12 @@
 
 <title>Listado de Pacientes</title>
 </head>
+<%
+ArrayList <Paciente> listaPacientes = null;
+if(request.getAttribute("listaPacientes") != null){
+	listaPacientes = (ArrayList <Paciente>) request.getAttribute("listaPacientes");
+}
+%>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
@@ -95,107 +103,19 @@
 						<th scope="col"></th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td scope="row">111111</td>
-						<td>Carlos</td>
-						<td>Luna</td>
-						<!-- Codigo comentado: Observar que utilizo el onClick al servlet y le paso de parámetro el nombre del boton con otros atributos -->
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=111111&txtNombre=Carlos&txtApellido=Luna'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=111111&txtNombre=Carlos&txtApellido=Luna'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">222222</td>
-						<td>Martin</td>
-						<td>Galmarini</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=222222&txtNombre=Martin&txtApellido=Galmarini'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=222222&txtNombre=Martin&txtApellido=Galmarini'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">333333</td>
-						<td>Diego</td>
-						<td>Morales</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=333333&txtNombre=Diego&txtApellido=Morales'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=333333&txtNombre=Diego&txtApellido=Morales'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">444444</td>
-						<td>Gonzalo</td>
-						<td>Marinelli</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=444444&txtNombre=Gonzalo&txtApellido=Marinelli'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=444444&txtNombre=Gonzalo&txtApellido=Marinelli'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">555555</td>
-						<td>Lucas</td>
-						<td>Menossi</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=555555&txtNombre=Lucas&txtApellido=Menossi'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=555555&txtNombre=Lucas&txtApellido=Menossi'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">666666</td>
-						<td>Lucas</td>
-						<td>Janson</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=666666&txtNombre=Lucas&txtApellido=Janson'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=666666&txtNombre=Lucas&txtApellido=Janson'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">777777</td>
-						<td>Federico</td>
-						<td>Gonzalez</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=777777&txtNombre=Federico&txtApellido=Gonzalez'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=777777&txtNombre=Federico&txtApellido=Gonzalez'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">888888</td>
-						<td>Walter</td>
-						<td>Montillo</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=888888&txtNombre=Walter&txtApellido=Montillo'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=888888&txtNombre=Walter&txtApellido=Montillo'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">999999</td>
-						<td>Nestor</td>
-						<td>Gorosito</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=999999&txtNombre=Nestor&txtApellido=Gorosito'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=999999&txtNombre=Nestor&txtApellido=Gorosito'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">101010</td>
-						<td>Juani</td>
-						<td>Cavalaro</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=101010&txtNombre=Juani&txtApellido=Cavalaro'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=101010&txtNombre=Juani&txtApellido=Cavalaro'" /></td>
-					</tr>
-					<tr>
-						<td scope="row">122222</td>
-						<td>Gerardo</td>
-						<td>Alcoba</td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
-							onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=122222&txtNombre=Gerardo&txtApellido=Alcoba'" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
-							onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=122222&txtNombre=Gerardo&txtApellido=Alcoba'" /></td>
-					</tr>
+				<tbody>	
+					<% if(listaPacientes != null)
+						for(Paciente paciente : listaPacientes){%>
+						<tr>
+							<td scope="row"><%=paciente.getDni() %></td>
+							<td scope="row"><%= paciente.getNombre()%></td>
+							<td scope="row"><%= paciente.getApellido() %></td>
+							<td><input type="submit" value="Eliminar" name="btnEliminar"
+								onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
+							<td><input type="submit" value="Editar" name="btnEditar"
+								onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
+						</tr>
+					<%} %>					
 				</tbody>
 			</table>
 		</div>

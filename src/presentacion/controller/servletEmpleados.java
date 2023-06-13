@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @WebServlet("/servletEmpleados")
 public class servletEmpleados extends HttpServlet {
 	
@@ -33,7 +34,7 @@ public class servletEmpleados extends HttpServlet {
 			case "2":
 				dispatcher = "/ModificacionEmpleados.jsp";
 				break;
-			case "3":
+			case "3":	
 				dispatcher = "/ListadoEmpleados.jsp";
 				break;
 			default:

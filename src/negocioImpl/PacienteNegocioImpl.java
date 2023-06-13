@@ -1,6 +1,6 @@
 package negocioImpl;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import dao.PacienteDao;
 import daoImpl.PacienteDaoImpl;
@@ -53,7 +53,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 	}
 
 	@Override
-	public List<Paciente> readAll() {
+	public ArrayList<Paciente> readAll() {
 		
 		return pDao.readAll();
 	}

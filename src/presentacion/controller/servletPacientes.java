@@ -1,6 +1,7 @@
 package presentacion.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import entidad.Paciente;
+import negocio.PacienteNegocio;
+import negocioImpl.PacienteNegocioImpl;
 
 /**
  * Servlet implementation class servletPacientes
@@ -41,7 +46,10 @@ public class servletPacientes extends HttpServlet {
 			case "2":
 				dispatcher = "/ModificacionPacientes.jsp";
 				break;
-			case "3":
+			case "3":				
+				PacienteNegocio pacienteNegocio = new PacienteNegocioImpl();
+				ArrayList<Paciente> listaPacientes = pacienteNegocio.readAll();
+				request.setAttribute("listaPacientes", listaPacientes);	
 				dispatcher = "/ListadoPacientes.jsp";
 				break;
 			default:
