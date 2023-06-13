@@ -1,3 +1,5 @@
+<%@page import="entidad.Paciente"%>
+<%@page import="daoImpl.PacienteDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -74,15 +76,15 @@
     <input type="text" name="apellido" placeholder="Escriba el apellido"  required></input>
         <label>Sexo</label>
     <select name="sexo" required>
-    	<option value="1">Hombre</option>
-    	<option value="2">Mujer</option>
+    	<option value="1">F</option>
+    	<option value="2">M</option>
     </select>
          <label>Nacionalidad</label>
    <select name="nacionalidad" required>
    <!-- Se cargan desde la BD -->
     	<option value="1">Argentina</option>
     	<option value="2">Chile</option>
-						<option value="2">Uruguay</option>
+		<option value="2">Uruguay</option>
     </select>
         <label>Fecha</label>
     <input type="date" name="fechaNacimiento"></input>
@@ -90,20 +92,43 @@
     <input type="text" name="direccion" placeholder="Av. Siempreviva 742"  required></input>
         <label>Localidad</label>
     <input type="text" name="localidad" placeholder="Springfield"  required></input>
-        <label>Provincia</label>
-    <input type="text" name="provincia" placeholder="Escriba el nombre"  required></input>
+    <label>Provincia</label>
+	<select name="provincia" required>
+    <!-- Se cargan desde la BD -->
+    	<option value="1">Caba</option>
+    	<option value="2">Buenos Aires</option>
+		<option value="2">Entre Ríos</option>
+	</select>   
        <label>Email</label>
-     <input type="email" name="Email" placeholder="ejemplo@clinica.com"></input>
-       <label>Tel. fijo</label>
-   <input type="tel" name="Telefono"></input>
-       <label>Celular</label>
-   <input type="tel" name="Celular"></input>
+     <input type="email" name="email" placeholder="ejemplo@clinica.com" required></input>
+       <label>Telefono</label>
+   <input type="text" name="telefono" required></input>
     </div>
     <div class="submit">
      <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
+</div>
     </div>
 </form>
 </div>
+</div>
+
+<%
+	int filas =0;
+	String mensaje = "";
+
+	if(request.getAttribute("insercion")!=null){
+		filas=Integer.parseInt(request.getAttribute("insercion").toString());
+		if(filas!=0) {
+			mensaje= "Paciente agregado correctamente!";
+		}
+		else{
+			mensaje = "Error al agregar al paciente.";
+		}
+	}
+	%>
+	
+<div style="text-align: center;">
+		<%=mensaje %>
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

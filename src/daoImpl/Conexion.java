@@ -4,17 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion {
+public class Conexion {		//CONEXION GRUPO 7
 	
+	private String host = "jdbc:mysql://localhost:3306/";
+	private String user = "root";
+	private String pass = "root";
+	private String dbName = "clinica??profileSQL=true&useSSL=false";
 	public static Conexion instancia;
-	private Connection connection;
+	
+	protected Connection connection;
 	
 	private Conexion()
 	{
 		try
 		{
 			Class.forName("com.mysql.jdbc.Driver"); // quitar si no es necesario
-			this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/clinica","root","root");
+			this.connection = DriverManager.getConnection(host+dbName, user, pass);
 			this.connection.setAutoCommit(false);
 		}
 		catch(Exception e)

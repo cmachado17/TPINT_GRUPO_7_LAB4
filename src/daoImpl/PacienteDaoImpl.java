@@ -11,8 +11,7 @@ import entidad.Paciente;
 
 public class PacienteDaoImpl implements PacienteDao{
 	
-	private static final String insert  = "INSERT INTO pacientes(Dni, Nombre, Apellido, Sexo, Cod_Nacionalidad,"
-			+ "Fecha_Nac, Direccion, Localidad, Pronvincia, Email, Telefono, Estado) VALUES(?, ?, ?, ?,?,?,?,?,?,?,?,?)";
+	private static final String insert  = "INSERT INTO pacientes (DNI, NOMBRE, APELLIDO, SEXO, COD_NACIONALIDAD, FECHA_NAC, DIRECCION, LOCALIDAD, PROVINCIA, EMAIL, TELEFONO, ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String delete  = "DELETE FROM pacientes WHERE Dni = ?";
 	private static final String readall = "SELECT * FROM pacientes";
 	private static final String update  = "UPDATE pacientes SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
@@ -21,23 +20,27 @@ public class PacienteDaoImpl implements PacienteDao{
 
 	@Override
 	public boolean insert(Paciente paciente) {
-		PreparedStatement statement;
-		Connection conexion = Conexion.getConexion().getSQLConexion();
+		
+		Connection conexion = null;
+		conexion=Conexion.getConexion().getSQLConexion();
+		
 		boolean isOk = false;
+		
 		try
-		{
-			statement = conexion.prepareStatement(insert);
+		{		
+			PreparedStatement statement = conexion.prepareStatement(insert);
 			statement.setInt(1, paciente.getDni());
 			statement.setString(2, paciente.getNombre());
 			statement.setString(3, paciente.getApellido());
 			statement.setString(4, paciente.getSexo());
 			statement.setInt(5, paciente.getCodNacionalidad());
-			statement.setDate(3, paciente.getFechaNacimiento());
-			statement.setString(3, paciente.getDireccion());
-			statement.setString(3, paciente.getLocalidad());
-			statement.setInt(3, paciente.getProvincia());
-			statement.setString(3, paciente.getEmail());
-			statement.setString(3, paciente.getTelefono());
+			statement.setString(6, paciente.getFechaNacimiento());
+			statement.setString(7, paciente.getDireccion());
+			statement.setString(8, paciente.getLocalidad());
+			statement.setInt(9, paciente.getProvincia());
+			statement.setString(10, paciente.getEmail());
+			statement.setString(11, paciente.getTelefono());
+			statement.setBoolean(12, paciente.getEstado());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -92,7 +95,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(3, paciente.getApellido());
 			statement.setString(4, paciente.getSexo());
 			statement.setInt(5, paciente.getCodNacionalidad());
-			statement.setDate(3, paciente.getFechaNacimiento());
+			statement.setString(3, paciente.getFechaNacimiento());
 			statement.setString(3, paciente.getDireccion());
 			statement.setString(3, paciente.getLocalidad());
 			statement.setInt(3, paciente.getProvincia());

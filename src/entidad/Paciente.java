@@ -9,7 +9,7 @@ public class Paciente {
 	private String Apellido;
 	private String Sexo;
 	private int CodNacionalidad;
-	private Date FechaNacimiento;
+	private String FechaNacimiento;
 	private String Direccion;
 	private String Localidad;
 	private int Provincia;
@@ -53,10 +53,10 @@ public class Paciente {
 	public void setCodNacionalidad(int codNacionalidad) {
 		CodNacionalidad = codNacionalidad;
 	}
-	public Date getFechaNacimiento() {
+	public String getFechaNacimiento() {
 		return FechaNacimiento;
 	}
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		FechaNacimiento = fechaNacimiento;
 	}
 	public String getDireccion() {
