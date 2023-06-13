@@ -32,7 +32,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(3, paciente.getApellido());
 			statement.setString(4, paciente.getSexo());
 			statement.setInt(5, paciente.getCodNacionalidad());
-			//statement.setDate(3, paciente.getFechaNacimiento());
+			statement.setDate(3, paciente.getFechaNacimiento());
 			statement.setString(3, paciente.getDireccion());
 			statement.setString(3, paciente.getLocalidad());
 			statement.setInt(3, paciente.getProvincia());
@@ -92,7 +92,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(3, paciente.getApellido());
 			statement.setString(4, paciente.getSexo());
 			statement.setInt(5, paciente.getCodNacionalidad());
-			//statement.setDate(3, paciente.getFechaNacimiento());
+			statement.setDate(3, paciente.getFechaNacimiento());
 			statement.setString(3, paciente.getDireccion());
 			statement.setString(3, paciente.getLocalidad());
 			statement.setInt(3, paciente.getProvincia());
