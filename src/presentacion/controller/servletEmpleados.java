@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.EmpleadoDaoImpl;
+import entidad.Empleado;
+
 
 @WebServlet("/servletEmpleados")
 public class servletEmpleados extends HttpServlet {
@@ -21,6 +24,12 @@ public class servletEmpleados extends HttpServlet {
     }
         
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("Sesion") == null) {
+			RequestDispatcher rd=request.getRequestDispatcher("/Principal.jsp");  
+		    rd.forward(request, response); 
+		}
+		
+		
 		if(request.getParameter("Param")!=null) {
 			String dispatcher="";
 			
@@ -52,13 +61,11 @@ public class servletEmpleados extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
-
 		}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
 	}
 
 }

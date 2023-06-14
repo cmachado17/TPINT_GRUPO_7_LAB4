@@ -64,7 +64,12 @@
 					</ul></li>
 			</ul>
 			<div class="text-light pt-2">
-				<p>Usuario logeado</p>
+				 <% if(session.getAttribute("Sesion") != null){ %>
+      	<p><%= session.getAttribute("Sesion") %></p>
+      	<a href="servletUsuarios?logout=1">Logout</a>
+      <%}else{ %>
+      	<p>No logeado</p>
+      	<%} %>
 			</div>
 		</div>
 	</div>

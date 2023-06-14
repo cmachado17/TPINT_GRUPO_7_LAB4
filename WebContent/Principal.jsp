@@ -53,7 +53,12 @@
         </li>
       </ul>
       <div class="text-light pt-2">
-      	<p>Usuario logeado</p>
+      <% if(session.getAttribute("Sesion") != null){ %>
+      	<p><%= session.getAttribute("Sesion") %></p>
+      	<a href="servletUsuarios?logout=1">Logout</a>
+      <%}else{ %>
+      	<p>No logeado</p>
+      	<%} %>
       </div>
     </div>
   </div>
@@ -61,19 +66,23 @@
 
 <div class="container"> 
 	<div class="text-bg-light p-3 contenedor-principal">
-		<form class="login">
+	<% if(session.getAttribute("Sesion") == null){ %>
+		<form class="login" method="post" action="servletUsuarios">
 			<div class="mb-3">
 		 		<H1>User: </H1>
-			  		<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="clinica@utn.com" requiered>
+			  		<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="clinica@utn.com" name="txtUsuario" requiered>
 			</div>
 			<div class="mb-3">
 				<H1>Password: </H1>
-			 		<input  type="password" class="form-control" id="exampleFormControlInput1" placeholder="************" requiered>
+			 		<input  type="password" class="form-control" id="exampleFormControlInput1" placeholder="************" name="txtClave" requiered>
 			</div>
 			<div class="mb-3">
-				<input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar">
+				<input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar-login">
 			</div>
 		</form>
+		<%}else{ %>
+		<h2>Bienvenido</h2>
+		<%} %>
 	</div>
 </div>
 
