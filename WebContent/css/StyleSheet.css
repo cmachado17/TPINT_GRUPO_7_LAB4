@@ -11,6 +11,7 @@ th, td {
 tr:nth-child(even)
 	{
 		background-color: #34495E
+		
 	}
 
 	.sesion{
@@ -27,6 +28,7 @@ tr:nth-child(even)
 		background-color:#34495E;
 		height:50px;
 		border-radius: 80px 20px 0px 0px; 
+		color: white
 	}
 
 	.contenedor{
@@ -141,7 +143,7 @@ tr:nth-child(even)
 	
 	
 	.btn-primary{
-		background: #8080ff;
+		background: #34495E;;
 		margin-left: 40%;
 	}
 	
@@ -172,4 +174,39 @@ tr:nth-child(even)
 	background-color:#8080ff;
 	border-radius:25px;
 	margin-top: 30px;
+	height: 100%;
+	}
+	
+	.imagen{
+	width: 50%;
+	float:left;
+	}
+	
+	body{
+	background-color:#bcbcbc;
+	}
+	
+	.user2{
+	font-family: 'Kanit', sans-serif;
+	color: #8080ff;
+	}
+	
+	.fa{
+	color: #8080ff;
+	}
+	
+	.fa-home{
+	color: #8080ff;
+	}
+	
+	.dropdown-menu{
+	clor:white;
+	}
+	
+	.dropdown-item{
+	color: #34495E;
+	}
+	
+	.nav-link{
+	color:white;
 	}

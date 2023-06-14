@@ -25,14 +25,14 @@ public class servletUsuarios extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("Sesion") == null) {
-			RequestDispatcher rd=request.getRequestDispatcher("/Principal.jsp");  
+			RequestDispatcher rd=request.getRequestDispatcher("/Home.jsp");  
 		    rd.forward(request, response); 
 		}
 		
 		if(request.getParameter("logout")!= null) {
 			
 			request.getSession().invalidate();
-			RequestDispatcher rd = request.getRequestDispatcher("/Principal.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/Home.jsp");
 			rd.forward(request, response);
 		}
 

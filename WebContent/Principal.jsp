@@ -54,10 +54,10 @@
       </ul>
       <div class="text-light pt-2">
       <% if(session.getAttribute("Sesion") != null){ %>
-      	<p><%= session.getAttribute("Sesion") %></p>
-      	<a href="servletUsuarios?logout=1">Logout</a>
+      	<p class="user"><%= session.getAttribute("Sesion") %></p>
+      	<a class="user2" href="servletUsuarios?logout=1">Logout</a>
       <%}else{ %>
-      	<p>No logeado</p>
+      	<p class="user">No logueado</p>
       	<%} %>
       </div>
     </div>
@@ -66,23 +66,10 @@
 
 <div class="container"> 
 	<div class="text-bg-light p-3 contenedor-principal">
-	<% if(session.getAttribute("Sesion") == null){ %>
-		<form class="login" method="post" action="servletUsuarios">
-			<div class="mb-3">
-		 		<H1>User: </H1>
-			  		<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="clinica@utn.com" name="txtUsuario" requiered>
-			</div>
-			<div class="mb-3">
-				<H1>Password: </H1>
-			 		<input  type="password" class="form-control" id="exampleFormControlInput1" placeholder="************" name="txtClave" requiered>
-			</div>
-			<div class="mb-3">
-				<input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar-login">
-			</div>
-		</form>
-		<%}else{ %>
-		<h2>Bienvenido</h2>
-		<%} %>
+		<h2 class="tituloForm">Bienvenidos</h2>
+		<br>
+		<img class="imagen" src="imagenInicio.jpg">
+		<img class="imagen" src="imagenInicio2.jpg">
 	</div>
 </div>
 
