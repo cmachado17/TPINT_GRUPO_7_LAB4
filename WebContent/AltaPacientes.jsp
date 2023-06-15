@@ -14,6 +14,17 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {			//script para hacer que el cartel de "Paciente agregado correctamente" se desvanezca a los 3 seg luego de aparecer
+    setTimeout(function() {
+        $(".content").fadeOut(1500);
+    },3000);
+});
+</script>
+
+
 <title>Alta Pacientes</title>
 </head>
 <body>
@@ -74,11 +85,11 @@
 <form method="post" action="ServletHTML" class="my-4">
 <div class="formulario">
     <label>DNI</label>
-    <input type="number" name="DNI" placeholder="Escriba el DNI"  required></input>
+    <input type="number" name="DNI" placeholder="Escriba el DNI"  min="1111111" max="99999999" required></input>
         <label>Nombre</label>
-    <input type="text" name="nombre" placeholder="Escriba el nombre"  required></input>
+    <input type="text" name="nombre" placeholder="Escriba el nombre"  required minlength="3" maxlength="20"></input>
         <label>Apellido</label>
-    <input type="text" name="apellido" placeholder="Escriba el apellido"  required></input>
+    <input type="text" name="apellido" placeholder="Escriba el apellido" required minlength="2" maxlength="30"></input>
         <label>Sexo</label>
     <select name="sexo" required>
     	<option value="1">F</option>
@@ -94,9 +105,9 @@
         <label>Fecha</label>
     <input type="date" name="fechaNacimiento"></input>
         <label>Direccion</label>
-    <input type="text" name="direccion" placeholder="Av. Siempreviva 742"  required></input>
+    <input type="text" name="direccion" placeholder="Av. Siempreviva 742" required minlength="1" maxlength="40"></input>
         <label>Localidad</label>
-    <input type="text" name="localidad" placeholder="Springfield"  required></input>
+    <input type="text" name="localidad" placeholder="Springfield" required minlength="3" maxlength="20"></input>
     <label>Provincia</label>
 	<select name="provincia" required>
     <!-- Se cargan desde la BD -->
@@ -105,9 +116,9 @@
 		<option value="2">Entre Ríos</option>
 	</select>   
        <label>Email</label>
-     <input type="email" name="email" placeholder="ejemplo@clinica.com" required></input>
+     <input type="email" name="email" placeholder="ejemplo@clinica.com" required minlength="3" maxlength="40"></input>
        <label>Telefono</label>
-   <input type="text" name="telefono" required></input>
+   <input type="text" name="telefono" required minlength="6" maxlength="15"></input>
     </div>
     <div class="submit">
      <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
@@ -130,10 +141,12 @@
 			mensaje = "Error al agregar al paciente.";
 		}
 	}
-	%>
 	
-<div style="text-align: center;">
-		<%=mensaje %>
+	
+%>
+<!-- <div style="text-align: center;"> -->
+<%-- 		<%=mensaje %> --%>
+<div class="content" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

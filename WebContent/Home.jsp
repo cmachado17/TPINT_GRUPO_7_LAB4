@@ -13,6 +13,18 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {			//script para hacer que el cartel de "Paciente agregado correctamente" se desvanezca a los 3 seg luego de aparecer
+    setTimeout(function() {
+        $(".content").fadeOut(1500);
+    },3000);
+});
+</script>
+
+
 <title>Home</title>
 </head>
 <body>
@@ -47,7 +59,23 @@
 	
 	</div>
 </div>
+<%
+	int filas =0;
+	String mensaje = "";
 
+	if(request.getAttribute("estadoLogin")!=null){
+		filas=Integer.parseInt(request.getAttribute("estadoLogin").toString());
+		if(filas==0) {
+			mensaje= "Error al iniciar sesión, datos incorrectos. Intente nuevamente.";
+		}
+
+	}
+	
+	
+%>
+<!-- <div style="text-align: center;"> -->
+<%-- 		<%=mensaje %> --%>
+<div class="content" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

@@ -18,4 +18,11 @@ public class TipoUsuario {
 	public void setDescripcion(String descripcion) {
 		Descripcion = descripcion;
 	}
+
+	@Override
+	public String toString() {
+		return "TipoUsuario [CodigoTipoUsuario=" + CodigoTipoUsuario + ", Descripcion=" + Descripcion + "]";
+	}
+	
+	
 }

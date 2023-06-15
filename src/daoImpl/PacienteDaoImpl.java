@@ -12,7 +12,8 @@ import entidad.Paciente;
 public class PacienteDaoImpl implements PacienteDao{
 	
 	private static final String insert  = "INSERT INTO pacientes (DNI, NOMBRE, APELLIDO, SEXO, COD_NACIONALIDAD, FECHA_NAC, DIRECCION, LOCALIDAD, PROVINCIA, EMAIL, TELEFONO, ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String delete  = "DELETE FROM pacientes WHERE Dni = ?";
+//	private static final String delete  = "DELETE FROM pacientes WHERE Dni = ?";
+	private static final String delete  = "UPDATE pacientes SET ESTADO=0 WHERE Dni = ?";
 	private static final String readall = "SELECT * FROM pacientes";
 	private static final String update  = "UPDATE pacientes SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
 		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefono = ? WHERE Dni = ?";

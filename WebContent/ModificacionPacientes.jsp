@@ -96,7 +96,7 @@
 			%>
 			<form method="post" action="servletPacientes">
 				<div class="formulario">
-					<label>DNI</label> <input type="number" name="DNI" readonly="readonly" value="<%=paciente.getDni() %>"></input>
+					<label>DNI</label> <input type="number" name="DNI" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
 					<label>Nombre</label> <input type="text" name="nombre" required value="<%=paciente.getNombre() %>"></input>
 					<label>Apellido</label> <input type="text" name="apellido" required value="<%=paciente.getApellido() %>"></input>
 					<label>Sexo</label> <select name="sexo" required >
