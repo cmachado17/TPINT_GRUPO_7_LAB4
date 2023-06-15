@@ -111,14 +111,15 @@ if(request.getAttribute("listaPacientes") != null){
 				<tbody>	
 					<% if(listaPacientes != null)
 						for(Paciente paciente : listaPacientes){%>
-						<tr>
-							<td scope="row"><%=paciente.getDni() %></td>
+						<tr>			
+							<td scope="row"><%=paciente.getDni() %> </td>
 							<td scope="row"><%= paciente.getNombre()%></td>
 							<td scope="row"><%= paciente.getApellido() %></td>
 							<td><input type="submit" value="Eliminar" name="btnEliminar"
 								onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
 							<td><input type="submit" value="Editar" name="btnEditar"
 								onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
+						
 						</tr>
 					<%} %>					
 				</tbody>

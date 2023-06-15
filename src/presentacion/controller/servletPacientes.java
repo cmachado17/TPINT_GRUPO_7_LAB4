@@ -127,14 +127,29 @@ public class servletPacientes extends HttpServlet {
 
 			
 		}
+		
+		if(request.getParameter("btnEliminar")!=null) {
+			
+            PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
+			
+			int dni = Integer.parseInt(request.getParameter("txtDni"));
+			
+			pacienteDao.delete(dni);
+		
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
+			rd.forward(request, response);
 		}
+		
+		
 
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		
 		doGet(request, response);
 	}
 

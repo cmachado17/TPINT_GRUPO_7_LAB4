@@ -28,11 +28,11 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 	}
 
 	@Override
-	public boolean delete(Paciente paciente_a_eliminar) {
+	public boolean delete(int dni) {
 		boolean estado=false;
-		if(paciente_a_eliminar.getDni() > 0)
+		if(dni > 0)
 		{
-			estado = pDao.delete(paciente_a_eliminar);
+			estado = pDao.delete(dni);
 		}
 		return estado;
 	}

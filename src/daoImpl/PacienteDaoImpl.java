@@ -61,14 +61,14 @@ public class PacienteDaoImpl implements PacienteDao{
 	}
 
 	@Override
-	public boolean delete(Paciente paciente_a_eliminar) {
+	public boolean delete(int dni) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
-			statement.setInt(1, paciente_a_eliminar.getDni());
+			statement.setInt(1, dni);
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
