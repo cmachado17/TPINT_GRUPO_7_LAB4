@@ -1,3 +1,4 @@
+<%@ page import="entidad.Paciente"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -89,41 +90,43 @@
 </form> -->
 
 			<br>
-
+			<% Paciente paciente = null;
+			if(request.getAttribute("PacienteModificable") != null) {
+				paciente = (Paciente)request.getAttribute("PacienteModificable");
+			%>
 			<form method="post" action="ServletHTML">
 				<div class="formulario">
-					<label>DNI</label> <input type="number" name="DNI" disabled></input>
-					<label>Nombre</label> <input type="text" name="nombre" required></input>
-					<label>Apellido</label> <input type="text" name="apellido" required></input>
-					<label>Sexo</label> <select name="sexo" required>
-						<option value="1">Hombre</option>
-						<option value="2">Mujer</option>
+					<label>DNI</label> <input type="number" name="DNI" disabled value="<%=paciente.getDni() %>"></input>
+					<label>Nombre</label> <input type="text" name="nombre" required value="<%=paciente.getNombre() %>"></input>
+					<label>Apellido</label> <input type="text" name="apellido" required value="<%=paciente.getApellido() %>"></input>
+					<label>Sexo</label> <select name="sexo" required >
+						<option value="1" <% if (paciente.getSexo() == "M") {%>selected <%}%>>Hombre</option>
+						<option value="2" <% if (paciente.getSexo() == "F") {%>selected <%}%>>Mujer</option>
 					</select> <label>Nacionalidad</label> <select name="nacionalidad" required>
 						<!-- Se cargan desde la BD -->
-						<option value="1">Argentina</option>
-						<option value="2">Chile</option>
-						<option value="2">Uruguay</option>
+						<option value="1" <% if (paciente.getCodNacionalidad() == 1) {%>selected <%}%>>Argentina</option>
+						<option value="2" <% if (paciente.getCodNacionalidad() == 2) {%>selected <%}%>>Chile</option>
+						<option value="3" <% if (paciente.getCodNacionalidad() == 3) {%>selected <%}%>>Uruguay</option>
+						<option value="4" <% if (paciente.getCodNacionalidad() == 4) {%>selected <%}%>>Bolivia</option>
 					</select> <label>Fecha</label> 
-					<input type="date" name="fechaNacimiento"></input>
+					<input type="date" name="fechaNacimiento" value="<%=paciente.getFechaNacimiento() %>"></input>
 					<label>Direccion</label> 
-					<input type="text" name="direccion" required></input>
+					<input type="text" name="direccion" required value="<%=paciente.getDireccion() %>"></input>
 					<label>Localidad</label> 
-					<input type="text" name="localidad" required></input> 
+					<input type="text" name="localidad" required value="<%=paciente.getLocalidad() %>"></input> 
 					<label>Provincia</label>
-					 <input type="text" name="provincia" required></input> 
+					 <input type="text" name="provincia" required value="<%=paciente.getProvincia() %>"></input> 
 					<label>Email</label>
-					<input type="email" name="Email"></input> 
+					<input type="email" name="Email" value="<%=paciente.getEmail() %>"></input> 
 					<label>Tel. fijo</label>
-					<input type="tel" name="Telefono"></input> 
-					<label>Celular</label>
-					 <input type="tel" name="Celular"></input>
+					<input type="tel" name="Telefono" value="<%=paciente.getTelefono() %>"></input> 
 				</div>
 				<div class="submit">
 					<input type="submit" class="btn btn-light" name="btnModificar"
 						value="Modificar"></input></br>
 				</div>
 			</form>
-
+<%} %>
 		</div>
 	</div>
 </body>

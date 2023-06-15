@@ -173,6 +173,37 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		return filas;
 	}
-	
+
+	@Override
+	public Paciente BuscarPaciente(String dni) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		Paciente encontrado = new Paciente();
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(dniExiste);
+			statement.setInt(1,Integer.parseInt(dni));
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				encontrado.setDni(resultSet.getInt(2));
+				encontrado.setNombre(resultSet.getString(3));
+				encontrado.setApellido(resultSet.getString(4));
+				encontrado.setSexo(resultSet.getString(5));
+				encontrado.setCodNacionalidad(resultSet.getInt(6));
+				encontrado.setFechaNacimiento(resultSet.getString(7));
+				encontrado.setDireccion(resultSet.getString(8));
+				encontrado.setLocalidad(resultSet.getString(9));
+				encontrado.setProvincia(resultSet.getInt(10));
+				encontrado.setEmail(resultSet.getString(11));
+				encontrado.setTelefono(resultSet.getString(12));
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return encontrado;
+		}
 
 }

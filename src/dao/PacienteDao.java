@@ -11,4 +11,5 @@ public interface PacienteDao {
 	public boolean update(Paciente paciente);
 	public ArrayList<Paciente> readAll();
 	public int dniNoExiste(Paciente paciente);
+	public Paciente BuscarPaciente(String dni);
 }

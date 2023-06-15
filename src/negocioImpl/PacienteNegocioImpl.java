@@ -66,4 +66,9 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 		return false;
 	}
 
+	@Override
+	public Paciente buscarPaciente(String dni) {
+		return pDao.BuscarPaciente(dni);
+	}
+
 }

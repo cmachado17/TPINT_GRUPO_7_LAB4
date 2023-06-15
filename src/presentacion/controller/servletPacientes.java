@@ -68,6 +68,11 @@ public class servletPacientes extends HttpServlet {
 		
 		if(request.getParameter("btnEditar")!=null) {
 			String dispatcher="/ModificacionPacientes.jsp";
+			
+			PacienteNegocio pacienteNegocio = new PacienteNegocioImpl();
+			Paciente paciente = new Paciente();
+			
+			request.setAttribute("PacienteModificable", pacienteNegocio.buscarPaciente(request.getParameter("txtDni")));
 		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  

@@ -12,4 +12,5 @@ public interface PacienteNegocio {
 	public boolean update(Paciente paciente);
 	public ArrayList<Paciente> readAll();
 	public boolean dniNoExiste(Paciente paciente);
+	public Paciente buscarPaciente(String dni);
 }
