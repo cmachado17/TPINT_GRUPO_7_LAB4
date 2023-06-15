@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.PacienteDaoImpl;
 import entidad.Paciente;
 import negocio.PacienteNegocio;
 import negocioImpl.PacienteNegocioImpl;
@@ -77,6 +78,55 @@ public class servletPacientes extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+		
+		
+		if(request.getParameter("btnModificar")!=null)
+		{
+			boolean camposCompletos=true;
+			
+			int dni = Integer.parseInt(request.getParameter("DNI"));
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellido");
+			String sexo = request.getParameter("sexo");
+			int codNacionalidad = Integer.parseInt(request.getParameter("nacionalidad"));
+			String fecha = request.getParameter("fechaNacimiento");
+			String direccion = request.getParameter("direccion");
+			String localidad = request.getParameter("localidad");
+			int provincia = Integer.parseInt(request.getParameter("provincia"));
+			String email = request.getParameter("Email");
+			String telefono = request.getParameter("Telefono");
+			
+			Paciente paciente = new Paciente();
+			paciente.setDni(dni);
+			paciente.setNombre(nombre);
+			paciente.setApellido(apellido);
+			paciente.setSexo(sexo);
+			paciente.setCodNacionalidad(codNacionalidad);
+			paciente.setFechaNacimiento(fecha);
+			paciente.setDireccion(direccion);
+			paciente.setLocalidad(localidad);
+			paciente.setProvincia(provincia);
+			paciente.setEmail(email);
+			paciente.setTelefono(telefono);
+			
+			PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
+			
+			if(pacienteDao.update(paciente)) {
+				//REQUEST DISPATCHER
+				request.setAttribute("modificacion", 1);
+				PacienteNegocio pacienteNegocio = new PacienteNegocioImpl();
+				ArrayList<Paciente> listaPacientes = pacienteNegocio.readAll();
+				request.setAttribute("listaPacientes", listaPacientes);	
+				RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
+				rd.forward(request, response);
+			}
+
+			
+		}
 		}
 
 

@@ -85,5 +85,6 @@ public class ServletHTML extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaPacientes.jsp");
 			rd.forward(request, response);
 		}
+
 	}
 }

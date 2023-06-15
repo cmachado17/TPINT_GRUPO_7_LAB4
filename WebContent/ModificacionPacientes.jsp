@@ -94,9 +94,9 @@
 			if(request.getAttribute("PacienteModificable") != null) {
 				paciente = (Paciente)request.getAttribute("PacienteModificable");
 			%>
-			<form method="post" action="ServletHTML">
+			<form method="post" action="servletPacientes">
 				<div class="formulario">
-					<label>DNI</label> <input type="number" name="DNI" disabled value="<%=paciente.getDni() %>"></input>
+					<label>DNI</label> <input type="number" name="DNI" readonly="readonly" value="<%=paciente.getDni() %>"></input>
 					<label>Nombre</label> <input type="text" name="nombre" required value="<%=paciente.getNombre() %>"></input>
 					<label>Apellido</label> <input type="text" name="apellido" required value="<%=paciente.getApellido() %>"></input>
 					<label>Sexo</label> <select name="sexo" required >

@@ -15,7 +15,7 @@ public class PacienteDaoImpl implements PacienteDao{
 	private static final String delete  = "DELETE FROM pacientes WHERE Dni = ?";
 	private static final String readall = "SELECT * FROM pacientes";
 	private static final String update  = "UPDATE pacientes SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
-		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefoo = ?, Estado = ? WHERE Dni = ?";
+		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefono = ? WHERE Dni = ?";
 	private static final String dniExiste= "SELECT * FROM pacientes WHERE Dni = ?";
 
 	@Override
@@ -90,17 +90,19 @@ public class PacienteDaoImpl implements PacienteDao{
 		try
 		{
 			statement = conexion.prepareStatement(update);
-			statement.setInt(1, paciente.getDni());
-			statement.setString(2, paciente.getNombre());
-			statement.setString(3, paciente.getApellido());
-			statement.setString(4, paciente.getSexo());
-			statement.setInt(5, paciente.getCodNacionalidad());
-			statement.setString(3, paciente.getFechaNacimiento());
-			statement.setString(3, paciente.getDireccion());
-			statement.setString(3, paciente.getLocalidad());
-			statement.setInt(3, paciente.getProvincia());
-			statement.setString(3, paciente.getEmail());
-			statement.setString(3, paciente.getTelefono());
+			
+			statement.setString(1, paciente.getNombre());
+			statement.setString(2, paciente.getApellido());
+			statement.setString(3, paciente.getSexo());
+			statement.setInt(4, paciente.getCodNacionalidad());
+			statement.setString(5, paciente.getFechaNacimiento());
+			statement.setString(6, paciente.getDireccion());
+			statement.setString(7, paciente.getLocalidad());
+			statement.setInt(8, paciente.getProvincia());
+			statement.setString(9, paciente.getEmail());
+			statement.setString(10, paciente.getTelefono());
+			statement.setInt(11, paciente.getDni());
+			
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -116,7 +118,6 @@ public class PacienteDaoImpl implements PacienteDao{
 				e1.printStackTrace();
 			}
 		}
-		
 		return isOk;
 	}
 
