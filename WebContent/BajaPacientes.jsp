@@ -5,7 +5,6 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <style type="text/css">
@@ -13,6 +12,9 @@
 </style>
 
 <title>Baja Pacientes</title>
+
+
+
 </head>
 <body>
 
@@ -96,7 +98,7 @@
    <input type="tel" name="Celular" disabled></input>
     </div>
     <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnEnviar" value="Eliminar" ></input></br>
+     <input type="submit" class="btn btn-light" name="btnEnviar" value="Eliminar"  ></input></br>
     </div>
 </form>
 

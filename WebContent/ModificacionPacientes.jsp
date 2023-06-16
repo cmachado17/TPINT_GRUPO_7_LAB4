@@ -16,6 +16,37 @@
 </style>
 <title>Modificacion Paciente</title>
 
+<!-- Agrega los enlaces a SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+
+<script>
+    // Función para mostrar el mensaje de confirmación
+    function confirmarModificacion() {
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas modificar este registro?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Modificar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma la modificación, envía el formulario
+                document.getElementById('formularioModificacion').submit();
+            }
+        });
+    }
+    
+	 // Función para interceptar el envío del formulario
+    function interceptarEnvioFormulario(event) {
+        event.preventDefault(); // Evita que el formulario se envíe automáticamente
+        confirmarModificacion(); // Muestra el mensaje de confirmación
+    }
+</script>
+
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -94,14 +125,14 @@
 			if(request.getAttribute("PacienteModificable") != null) {
 				paciente = (Paciente)request.getAttribute("PacienteModificable");
 			%>
-			<form method="post" action="servletPacientes">
+			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)">
 				<div class="formulario">
 					<label>DNI</label> <input type="number" name="DNI" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
 					<label>Nombre</label> <input type="text" name="nombre" required value="<%=paciente.getNombre() %>"></input>
 					<label>Apellido</label> <input type="text" name="apellido" required value="<%=paciente.getApellido() %>"></input>
 					<label>Sexo</label> <select name="sexo" required >
 						<option value="1" <% if (paciente.getSexo() == "M") {%>selected <%}%>>Hombre</option>
-						<option value="2" <% if (paciente.getSexo() == "F") {%>selected <%}%>>Mujer</option>
+						<option value="2" <% if (paciente.getSexo()  == "F") {%>selected <%}%>>Mujer</option>
 					</select> <label>Nacionalidad</label> <select name="nacionalidad" required>
 						<!-- Se cargan desde la BD -->
 						<option value="1" <% if (paciente.getCodNacionalidad() == 1) {%>selected <%}%>>Argentina</option>
@@ -109,21 +140,20 @@
 						<option value="3" <% if (paciente.getCodNacionalidad() == 3) {%>selected <%}%>>Uruguay</option>
 						<option value="4" <% if (paciente.getCodNacionalidad() == 4) {%>selected <%}%>>Bolivia</option>
 					</select> <label>Fecha</label> 
-					<input type="date" name="fechaNacimiento" value="<%=paciente.getFechaNacimiento() %>"></input>
+					<input type="date" name="fechaNacimiento" value="<%=paciente.getFechaNacimiento()%>"></input>
 					<label>Direccion</label> 
 					<input type="text" name="direccion" required value="<%=paciente.getDireccion() %>"></input>
 					<label>Localidad</label> 
-					<input type="text" name="localidad" required value="<%=paciente.getLocalidad() %>"></input> 
+					<input type="text" name="localidad" required value="<%=paciente.getLocalidad()%>"></input> 
 					<label>Provincia</label>
-					 <input type="text" name="provincia" required value="<%=paciente.getProvincia() %>"></input> 
+					 <input type="text" name="provincia" required value="<%=paciente.getProvincia()%>"></input> 
 					<label>Email</label>
 					<input type="email" name="Email" value="<%=paciente.getEmail() %>"></input> 
 					<label>Tel. fijo</label>
 					<input type="tel" name="Telefono" value="<%=paciente.getTelefono() %>"></input> 
 				</div>
 				<div class="submit">
-					<input type="submit" class="btn btn-light" name="btnModificar"
-						value="Modificar"></input></br>
+					<input type="submit" class="btn btn-light" name="btnModificar"></input></br>
 				</div>
 			</form>
 <%} %>

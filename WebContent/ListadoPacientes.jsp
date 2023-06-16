@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,15 +16,45 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+
+
+<!-- Agrega los enlaces a SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#table_id').DataTable();
 	});
 </script>
+
+<script>
+    // Función para mostrar el cartel de confirmación
+    function confirmarEliminacion(dni) {
+
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas eliminar este registro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Si el usuario confirma la eliminación, envía el formulario
+                //event.target.submit();
+                window.location.href='servletPacientes?btnEliminar=1&txtDni='+ dni
+                		
+            }
+        });
+    }
+</script>
+
 
 <title>Listado de Pacientes</title>
 </head>
@@ -116,10 +147,9 @@ if(request.getAttribute("listaPacientes") != null){
 							<td scope="row"><%= paciente.getNombre()%></td>
 							<td scope="row"><%= paciente.getApellido() %></td>
 							<td><input type="submit" value="Eliminar" name="btnEliminar"
-								onclick="window.location.href='servletPacientes?btnEliminar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
+								onclick="confirmarEliminacion(<%= paciente.getDni()%>)" /></td>
 							<td><input type="submit" value="Editar" name="btnEditar"
 								onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
-						
 						</tr>
 					<%} %>					
 				</tbody>

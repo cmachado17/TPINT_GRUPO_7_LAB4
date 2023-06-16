@@ -128,16 +128,11 @@ public class servletPacientes extends HttpServlet {
 			
 		}
 		
-		if(request.getParameter("btnEliminar")!=null) {
-			
-            PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
-			
-			int dni = Integer.parseInt(request.getParameter("txtDni"));
-			
-			pacienteDao.delete(dni);
-		
-			
-			RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
+		if(request.getParameter("btnEliminar")!=null) {			
+            PacienteDaoImpl pacienteDao = new PacienteDaoImpl();			
+			int dni = Integer.parseInt(request.getParameter("txtDni"));			
+			pacienteDao.delete(dni);	
+			RequestDispatcher rd = request.getRequestDispatcher("/servletPacientes?Param=3");
 			rd.forward(request, response);
 		}
 		
