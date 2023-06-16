@@ -39,7 +39,8 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+     <% if(Integer.parseInt(session.getAttribute("tipoUsuario").toString()) == 1){ %>
+     	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <span class="fa fa-home"></span>Pacientes
@@ -68,12 +69,25 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
           </ul>
         </li>
       </ul>
+     <%}else if(Integer.parseInt(session.getAttribute("tipoUsuario").toString()) == 2){ %>
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fa fa-home"></span>Medicos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="servletClinica?Param=0" class="dropdown-item">Turnos asignados</a></li>
+          </ul>
+        </li>
+      </ul>
+      <%}%>
       <div class="text-light pt-2">
-      	 <% if(session.getAttribute("Sesion") != null){ %>
-      	<p><%= session.getAttribute("Sesion") %></p>
-      	<a href="servletUsuarios?logout=1">Logout</a>
+      <% if(session.getAttribute("Sesion") != null){ %>
+      	<p class="user"><%= session.getAttribute("Sesion") %> - <%= session.getAttribute("DescripcionTipoUsuario") %></p>
+      	
+      	<a class="user2" href="servletUsuarios?logout=1">Logout</a>
       <%}else{ %>
-      	<p>No logeado</p>
+      	<p class="user">No logueado</p>
       	<%} %>
       </div>
     </div>
@@ -82,6 +96,27 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 
 
 <div class="container"> 
+
+<%
+	int filas =0;
+	String mensaje = "";
+
+	if(request.getAttribute("insercion")!=null){
+		filas=Integer.parseInt(request.getAttribute("insercion").toString());
+		if(filas!=0) {
+			mensaje= "Paciente agregado correctamente!";
+		}
+		else{
+			mensaje = "Error al agregar al paciente.";
+		}
+	}
+	
+	
+%>
+<!-- <div style="text-align: center;"> -->
+<%-- 		<%=mensaje %> --%>
+<div class="content" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
+
 	<div class="p-3 contenedor-principal">
 
 <h2 class="tituloForm"> Alta de pacientes </h2>
@@ -124,7 +159,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 	%>
     </select>
         <label>Fecha</label>
-    <input type="date" name="fechaNacimiento"></input>
+    <input type="date" name="fechaNacimiento" required></input>
         <label>Direccion</label>
     <input type="text" name="direccion" placeholder="Av. Siempreviva 742" required minlength="1" maxlength="40"></input>
         <label>Localidad</label>
@@ -152,26 +187,6 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 </div>
 </div>
 
-<%
-	int filas =0;
-	String mensaje = "";
-
-	if(request.getAttribute("insercion")!=null){
-		filas=Integer.parseInt(request.getAttribute("insercion").toString());
-		if(filas!=0) {
-			mensaje= "Paciente agregado correctamente!";
-		}
-		else{
-			mensaje = "Error al agregar al paciente.";
-		}
-	}
-	
-	
-%>
-<!-- <div style="text-align: center;"> -->
-<%-- 		<%=mensaje %> --%>
-<div class="content" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
-</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>

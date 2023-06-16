@@ -64,7 +64,7 @@ public class ServletHTML extends HttpServlet {
 			PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
 			
 			if(!pacienteDao.insert(paciente)) {
-				filas=Integer.parseInt(null);			
+				filas=0;			
 			}
 			else {
 				filas=1;

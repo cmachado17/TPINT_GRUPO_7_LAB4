@@ -12,7 +12,8 @@ import entidad.Usuario;
 public class UsuarioDaoImpl implements UsuarioDao {
 
 
-	private static final String Usuario= "SELECT DNI, COD_TIPOSUSUARIO FROM USUARIOS WHERE DNI = ? AND CONTRASENIA = ?";
+	private static final String Usuario= "SELECT U.DNI, U.COD_TIPOSUSUARIO, TU.DESCRIPCION FROM USUARIOS U INNER JOIN "
+			+ "TIPOS_USUARIO TU ON TU.CODIGO = U.COD_TIPOSUSUARIO WHERE U.DNI = ? AND U.CONTRASENIA = ?";
 
 	public Usuario Login(Usuario usuario) {
 		PreparedStatement statement;
@@ -31,8 +32,10 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
 
-				encontrado.setDni(resultSet.getInt(1));
-				encontradoTipoUsuario.setCodigoTipoUsuario(resultSet.getInt(2));
+				encontrado.setDni(resultSet.getInt("U.DNI"));
+				encontradoTipoUsuario.setCodigoTipoUsuario(resultSet.getInt("U.COD_TIPOSUSUARIO"));
+				encontradoTipoUsuario.setDescripcion(resultSet.getString("TU.DESCRIPCION"));
+				
 				encontrado.setTipoUser(encontradoTipoUsuario);
 			}else {
 				encontrado = null;

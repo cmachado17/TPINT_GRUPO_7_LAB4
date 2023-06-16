@@ -54,6 +54,7 @@ public class servletUsuarios extends HttpServlet {
 			if(u != null) {		
 				request.getSession().setAttribute("Sesion", u.getDni());
 				request.getSession().setAttribute("tipoUsuario", u.getTipoUser().getCodigoTipoUsuario());
+				request.getSession().setAttribute("DescripcionTipoUsuario", u.getTipoUser().getDescripcion());
 				//REQUEST DISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("/Principal.jsp");
 				rd.forward(request, response);

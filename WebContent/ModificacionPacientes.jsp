@@ -150,7 +150,7 @@
 					<%}%>
 		
 					</select> <label>Fecha</label> 
-					<input type="date" name="fechaNacimiento" value="<%=paciente.getFechaNacimiento()%>"></input>
+					<input type="date" name="fechaNacimiento" required value="<%=paciente.getFechaNacimiento()%>"></input>
 					<label>Direccion</label> 
 					<input type="text" name="direccion" required value="<%=paciente.getDireccion() %>"></input>
 					<label>Localidad</label> 

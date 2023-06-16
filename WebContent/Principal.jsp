@@ -67,7 +67,8 @@
       <%}%>
       <div class="text-light pt-2">
       <% if(session.getAttribute("Sesion") != null){ %>
-      	<p class="user"><%= session.getAttribute("Sesion") %></p>
+      	<p class="user"><%= session.getAttribute("Sesion") %> - <%= session.getAttribute("DescripcionTipoUsuario") %></p>
+      	
       	<a class="user2" href="servletUsuarios?logout=1">Logout</a>
       <%}else{ %>
       	<p class="user">No logueado</p>

@@ -31,62 +31,67 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container">
-		<a class="navbar-brand" href="Principal.jsp"><i
-			class="far fa-hospital px-2"></i>Sistema Clinica</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-			data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> <span
-						class="fa fa-home"></span>Pacientes
-				</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a href="servletPacientes?Param=0" class="dropdown-item">Alta
-								Pacientes</a></li>
-						<li><a href="servletPacientes?Param=3" class="dropdown-item">Listado
-								Pacientes</a></li>
-					</ul></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> <span
-						class="fa fa-home"></span>Empleados
-				</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a href="servletEmpleados?Param=0" class="dropdown-item">Alta
-								Empleados</a></li>
-						<li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado
-								Empleados</a></li>
-					</ul></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> <span
-						class="fa fa-home"></span>Turnos
-				</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a href="servletTurnos?Param=0" class="dropdown-item">Alta
-								Turno</a></li>
-						<li><a href="servletTurnos?Param=1" class="dropdown-item">Listado
-								Turnos</a></li>
-					</ul></li>
-			</ul>
-			<div class="text-light pt-2">
-				 <% if(session.getAttribute("Sesion") != null){ %>
-      	<p><%= session.getAttribute("Sesion") %></p>
-      	<a href="servletUsuarios?logout=1">Logout</a>
+  <div class="container">
+    <a class="navbar-brand" href="Principal.jsp"><i class="far fa-hospital px-2"></i>Sistema Clinica</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     <% if(Integer.parseInt(session.getAttribute("tipoUsuario").toString()) == 1){ %>
+     	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fa fa-home"></span>Pacientes
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="servletPacientes?Param=0" class="dropdown-item">Alta Pacientes</a></li>
+            <li><a href="servletPacientes?Param=3" class="dropdown-item">Listado Pacientes</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             <span class="fa fa-home"></span>Empleados
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="servletEmpleados?Param=0" class="dropdown-item">Alta Empleados</a></li>
+            <li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado Empleados</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <span class="fa fa-home"></span>Turnos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="servletTurnos?Param=0" class="dropdown-item">Alta Turno</a></li>
+            <li><a href="servletTurnos?Param=1" class="dropdown-item">Listado Turnos</a></li>
+          </ul>
+        </li>
+      </ul>
+     <%}else if(Integer.parseInt(session.getAttribute("tipoUsuario").toString()) == 2){ %>
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <span class="fa fa-home"></span>Medicos
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a href="servletClinica?Param=0" class="dropdown-item">Turnos asignados</a></li>
+          </ul>
+        </li>
+      </ul>
+      <%}%>
+      <div class="text-light pt-2">
+      <% if(session.getAttribute("Sesion") != null){ %>
+      	<p class="user"><%= session.getAttribute("Sesion") %> - <%= session.getAttribute("DescripcionTipoUsuario") %></p>
+      	
+      	<a class="user2" href="servletUsuarios?logout=1">Logout</a>
       <%}else{ %>
-      	<p>No logeado</p>
+      	<p class="user">No logueado</p>
       	<%} %>
-			</div>
-		</div>
-	</div>
-	</nav>
+      </div>
+    </div>
+  </div>
+</nav>
+
 	<div class="container">
 		<div class="p-3 contenedor-principal">
 <h2 class="tituloForm"> Listado de turnos </h2> </br>
