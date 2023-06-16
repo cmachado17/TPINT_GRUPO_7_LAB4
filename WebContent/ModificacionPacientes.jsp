@@ -135,10 +135,10 @@
 						<option value="2" <% if (paciente.getSexo()  == "F") {%>selected <%}%>>Mujer</option>
 					</select> <label>Nacionalidad</label> <select name="nacionalidad" required>
 						<!-- Se cargan desde la BD -->
-						<option value="1" <% if (paciente.getCodNacionalidad() == 1) {%>selected <%}%>>Argentina</option>
-						<option value="2" <% if (paciente.getCodNacionalidad() == 2) {%>selected <%}%>>Chile</option>
-						<option value="3" <% if (paciente.getCodNacionalidad() == 3) {%>selected <%}%>>Uruguay</option>
-						<option value="4" <% if (paciente.getCodNacionalidad() == 4) {%>selected <%}%>>Bolivia</option>
+						<option value="1" <% if (paciente.getCodNacionalidad().getCodigo()== 1) {%>selected <%}%>>Argentina</option>
+						<option value="2" <% if (paciente.getCodNacionalidad().getCodigo() == 2) {%>selected <%}%>>Chile</option>
+						<option value="3" <% if (paciente.getCodNacionalidad().getCodigo() == 3) {%>selected <%}%>>Uruguay</option>
+						<option value="4" <% if (paciente.getCodNacionalidad().getCodigo() == 4) {%>selected <%}%>>Bolivia</option>
 					</select> <label>Fecha</label> 
 					<input type="date" name="fechaNacimiento" value="<%=paciente.getFechaNacimiento()%>"></input>
 					<label>Direccion</label> 

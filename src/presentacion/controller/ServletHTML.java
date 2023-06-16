@@ -12,38 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import daoImpl.PacienteDaoImpl;
 import entidad.Paciente;
 
-/**
- * Servlet implementation class ServletHTML
- */
 @WebServlet("/ServletHTML")
 public class ServletHTML extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+  
     public ServletHTML() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int filas=0;
 
 		if(request.getParameter("btnEnviar")!=null)
 		{
-			boolean camposCompletos=true;
+			//boolean camposCompletos=true;
 			
 			int dni = Integer.parseInt(request.getParameter("DNI"));
 			String nombre = request.getParameter("nombre");
@@ -62,11 +50,11 @@ public class ServletHTML extends HttpServlet {
 			paciente.setNombre(nombre);
 			paciente.setApellido(apellido);
 			paciente.setSexo(sexo);
-			paciente.setCodNacionalidad(codNacionalidad);
+			paciente.getCodNacionalidad().setCodigo(codNacionalidad);
 			paciente.setFechaNacimiento(fecha);
 			paciente.setDireccion(direccion);
 			paciente.setLocalidad(localidad);
-			paciente.setProvincia(provincia);
+			paciente.getProvincia().setCodigo(provincia);
 			paciente.setEmail(email);
 			paciente.setTelefono(telefono);
 			paciente.setEstado(true);

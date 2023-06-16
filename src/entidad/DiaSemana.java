@@ -1,12 +1,17 @@
 package entidad;
 
-public class Especialidad {
-	
+public class DiaSemana {
+
 	private int codigo;
 	private String descripcion;
 	
-	public Especialidad() {
+	public DiaSemana() {
 		
+	}
+	
+	public DiaSemana(int codigo, String descripcion) {
+		this.codigo = codigo;
+		this.descripcion = descripcion;
 	}
 	
 	public int getCodigo() {
@@ -24,9 +29,8 @@ public class Especialidad {
 
 	@Override
 	public String toString() {
-		return "Especialidad [codigo=" + codigo + ", descripcion=" + descripcion + "]";
+		return "DiaSemana [codigo=" + codigo + ", descripcion=" + descripcion + "]";
 	}
-	
 	
 	
 }

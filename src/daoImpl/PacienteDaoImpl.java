@@ -33,11 +33,11 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(2, paciente.getNombre());
 			statement.setString(3, paciente.getApellido());
 			statement.setString(4, paciente.getSexo());
-			statement.setInt(5, paciente.getCodNacionalidad());
+			statement.setInt(5, paciente.getCodNacionalidad().getCodigo());
 			statement.setString(6, paciente.getFechaNacimiento());
 			statement.setString(7, paciente.getDireccion());
 			statement.setString(8, paciente.getLocalidad());
-			statement.setInt(9, paciente.getProvincia());
+			statement.setInt(9, paciente.getProvincia().getCodigo());
 			statement.setString(10, paciente.getEmail());
 			statement.setString(11, paciente.getTelefono());
 			statement.setBoolean(12, paciente.getEstado());
@@ -94,11 +94,11 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(1, paciente.getNombre());
 			statement.setString(2, paciente.getApellido());
 			statement.setString(3, paciente.getSexo());
-			statement.setInt(4, paciente.getCodNacionalidad());
+			statement.setInt(4, paciente.getCodNacionalidad().getCodigo());
 			statement.setString(5, paciente.getFechaNacimiento());
 			statement.setString(6, paciente.getDireccion());
 			statement.setString(7, paciente.getLocalidad());
-			statement.setInt(8, paciente.getProvincia());
+			statement.setInt(8, paciente.getProvincia().getCodigo());
 			statement.setString(9, paciente.getEmail());
 			statement.setString(10, paciente.getTelefono());
 			statement.setInt(11, paciente.getDni());
@@ -192,11 +192,11 @@ public class PacienteDaoImpl implements PacienteDao{
 				encontrado.setNombre(resultSet.getString(3));
 				encontrado.setApellido(resultSet.getString(4));
 				encontrado.setSexo(resultSet.getString(5));
-				encontrado.setCodNacionalidad(resultSet.getInt(6));
+				encontrado.getCodNacionalidad().setCodigo(resultSet.getInt(6));
 				encontrado.setFechaNacimiento(resultSet.getString(7));
 				encontrado.setDireccion(resultSet.getString(8));
 				encontrado.setLocalidad(resultSet.getString(9));
-				encontrado.setProvincia(resultSet.getInt(10));
+				encontrado.getProvincia().setCodigo(resultSet.getInt(10));
 				encontrado.setEmail(resultSet.getString(11));
 				encontrado.setTelefono(resultSet.getString(12));
 			}

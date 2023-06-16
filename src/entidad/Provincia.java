@@ -1,6 +1,7 @@
 package entidad;
 
 public class Provincia {
+	
 	private int codigo;
 	private String descripcion;
 	

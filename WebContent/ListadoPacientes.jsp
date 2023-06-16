@@ -144,7 +144,7 @@ if(request.getAttribute("listaPacientes") != null){
 						for(Paciente paciente : listaPacientes){%>
 						<tr>			
 							<td scope="row"><%=paciente.getDni() %> </td>
-							<td scope="row"><%= paciente.getNombre()%></td>
+							<td scope="row"><%= paciente.getNombre() %></td>
 							<td scope="row"><%= paciente.getApellido() %></td>
 							<td><input type="submit" value="Eliminar" name="btnEliminar"
 								onclick="confirmarEliminacion(<%= paciente.getDni()%>)" /></td>

@@ -1,6 +1,7 @@
 package entidad;
 
 public class Nacionalidad {
+	
 	private int codigo;
 	private String descripcion;
 	

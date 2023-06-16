@@ -1,6 +1,7 @@
 package entidad;
 
 public class Usuario {
+	
 	private int CodigoUsuario;
 	private int Dni;
 	private String Clave;

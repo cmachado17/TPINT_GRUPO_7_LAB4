@@ -1,25 +1,25 @@
 package entidad;
 
-import java.sql.Date;
+import java.sql.Time;
 
 public class Medico extends Persona {
 
-	private int tipoUsuario;
 	private Especialidad especialidad;
-	private String diaAtencion;
-	int horarioInicioAtencion;
-	int horarioFinAtencion;
-
+	private DiaSemana diaAtencion;
+	private Time horarioInicioAtencion;
+	private Time horarioFinAtencion;
+	
 	public Medico() {
-		
+		super();
 	}
 
-	public int getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	public void setTipoUsuario(int tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
+	public Medico(Especialidad especialidad, DiaSemana diaAtencion, Time horarioInicioAtencion,
+			Time horarioFinAtencion) {
+		super();
+		this.especialidad = especialidad;
+		this.diaAtencion = diaAtencion;
+		this.horarioInicioAtencion = horarioInicioAtencion;
+		this.horarioFinAtencion = horarioFinAtencion;
 	}
 
 	public Especialidad getEspecialidad() {
@@ -30,35 +30,38 @@ public class Medico extends Persona {
 		this.especialidad = especialidad;
 	}
 
-	public String getDiaAtencion() {
+	public DiaSemana getDiaAtencion() {
 		return diaAtencion;
 	}
 
-	public void setDiaAtencion(String diaAtencion) {
+	public void setDiaAtencion(DiaSemana diaAtencion) {
 		this.diaAtencion = diaAtencion;
 	}
 
-	public int getHorarioInicioAtencion() {
+	public Time getHorarioInicioAtencion() {
 		return horarioInicioAtencion;
 	}
 
-	public void setHorarioInicioAtencion(int horarioInicioAtencion) {
+	public void setHorarioInicioAtencion(Time horarioInicioAtencion) {
 		this.horarioInicioAtencion = horarioInicioAtencion;
 	}
 
-	public int getHorarioFinAtencion() {
+	public Time getHorarioFinAtencion() {
 		return horarioFinAtencion;
 	}
 
-	public void setHorarioFinAtencion(int horarioFinAtencion) {
+	public void setHorarioFinAtencion(Time horarioFinAtencion) {
 		this.horarioFinAtencion = horarioFinAtencion;
 	}
 
 	@Override
 	public String toString() {
-		return "Medico [tipoUsuario=" + tipoUsuario + ", especialidad=" + especialidad + ", diaAtencion=" + diaAtencion
-				+ ", horarioInicioAtencion=" + horarioInicioAtencion + ", horarioFinAtencion=" + horarioFinAtencion
-				+ "]";
+		return "Medico [especialidad=" + especialidad + ", diaAtencion=" + diaAtencion + ", horarioInicioAtencion="
+				+ horarioInicioAtencion + ", horarioFinAtencion=" + horarioFinAtencion + "]";
 	}
+
+	
+
+	
 	
 }

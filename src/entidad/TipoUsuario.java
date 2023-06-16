@@ -1,6 +1,7 @@
 package entidad;
 
 public class TipoUsuario {
+	
 	private int CodigoTipoUsuario;
 	private String Descripcion;
 	

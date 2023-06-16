@@ -106,12 +106,20 @@ public class Persona {
 		Telefono = telefono;
 	}
 
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return Estado;
 	}
 
 	public void setEstado(boolean estado) {
 		Estado = estado;
+	}
+
+	@Override
+	public String toString() {
+		return "Persona [Dni=" + Dni + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo=" + Sexo
+				+ ", CodNacionalidad=" + CodNacionalidad + ", FechaNacimiento=" + FechaNacimiento + ", Direccion="
+				+ Direccion + ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Email=" + Email
+				+ ", Telefono=" + Telefono + ", Estado=" + Estado + "]";
 	}
 	
 	

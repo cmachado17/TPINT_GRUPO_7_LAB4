@@ -15,24 +15,15 @@ import entidad.Paciente;
 import negocio.PacienteNegocio;
 import negocioImpl.PacienteNegocioImpl;
 
-/**
- * Servlet implementation class servletPacientes
- */
 @WebServlet("/servletPacientes")
 public class servletPacientes extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public servletPacientes() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(request.getSession().getAttribute("Sesion") == null) {
 			RequestDispatcher rd=request.getRequestDispatcher("/Principal.jsp");  
@@ -71,7 +62,7 @@ public class servletPacientes extends HttpServlet {
 			String dispatcher="/ModificacionPacientes.jsp";
 			
 			PacienteNegocio pacienteNegocio = new PacienteNegocioImpl();
-			Paciente paciente = new Paciente();
+			//Paciente paciente = new Paciente();
 			
 			request.setAttribute("PacienteModificable", pacienteNegocio.buscarPaciente(request.getParameter("txtDni")));
 		
@@ -82,7 +73,7 @@ public class servletPacientes extends HttpServlet {
 		
 		if(request.getParameter("btnModificar")!=null)
 		{
-			boolean camposCompletos=true;
+			//boolean camposCompletos=true;
 			
 			int dni = Integer.parseInt(request.getParameter("DNI"));
 			String nombre = request.getParameter("nombre");
@@ -101,11 +92,11 @@ public class servletPacientes extends HttpServlet {
 			paciente.setNombre(nombre);
 			paciente.setApellido(apellido);
 			paciente.setSexo(sexo);
-			paciente.setCodNacionalidad(codNacionalidad);
+			paciente.getCodNacionalidad().setCodigo(codNacionalidad);
 			paciente.setFechaNacimiento(fecha);
 			paciente.setDireccion(direccion);
 			paciente.setLocalidad(localidad);
-			paciente.setProvincia(provincia);
+			paciente.getProvincia().setCodigo(provincia);
 			paciente.setEmail(email);
 			paciente.setTelefono(telefono);
 			
@@ -139,11 +130,8 @@ public class servletPacientes extends HttpServlet {
 		
 
 	}
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		doGet(request, response);
 	}

@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import daoImpl.EmpleadoDaoImpl;
-import entidad.Empleado;
-
 
 @WebServlet("/servletEmpleados")
 public class servletEmpleados extends HttpServlet {
