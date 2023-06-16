@@ -45,11 +45,11 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		<form class="login" method="post" action="servletUsuarios">
 			<div class="mb-3">
 		 		<H1>User: </H1>
-			  		<input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su DNI" name="txtUsuario" requiered>
+			  		<input type="number"  min="1111111" max="99999999"  class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su DNI" name="txtUsuario" required>
 			</div>
 			<div class="mb-3">
 				<H1>Password: </H1>
-			 		<input  type="password" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su clave" name="txtClave" requiered>
+			 		<input  type="password" type="number"  class="form-control" id="exampleFormControlInput1" placeholder="Ingrese su clave" name="txtClave" required>
 			</div>
 			<div class="mb-3">
 				<input type="submit" class="btn btn-primary" class="form-control" id="exampleFormControlInput1" value="Ingresar" name="btnIngresar-login">
@@ -69,7 +69,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 			mensaje= "Error al iniciar sesión, datos incorrectos. Intente nuevamente.";
 		}
 
-	}
+	} 
 	
 	
 %>
