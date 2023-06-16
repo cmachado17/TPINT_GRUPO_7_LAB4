@@ -1,4 +1,9 @@
-<%@ page import="entidad.Paciente"%>
+<%@page import="entidad.Paciente"%>
+<%@page import="entidad.Provincia"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="daoImpl.PacienteDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -113,32 +118,37 @@
 
 			<h2 class="tituloForm">Modificacion Paciente</h2>
 
-			<!--<form method="post" action="ServletHTML">
-<div class="formulario">
-<input type="text" name="buscar">
-<input type="submit" class="btn btn-light" name="btnBuscar" value="Buscar">
-</div>
-</form> -->
+		<%	List<Provincia> listaP = new ArrayList<Provincia>();
 
-			<br>
-			<% Paciente paciente = null;
-			if(request.getAttribute("PacienteModificable") != null) {
-				paciente = (Paciente)request.getAttribute("PacienteModificable");
-			%>
+		if (request.getAttribute("listaProv") != null) {
+			listaP = (List<Provincia>) request.getAttribute("listaProv");
+		}
+		
+		List<Nacionalidad> listaN = new ArrayList<Nacionalidad>();
+
+		if (request.getAttribute("listaNac") != null) {
+			listaN = (List<Nacionalidad>) request.getAttribute("listaNac");
+		}
+		
+		Paciente paciente = null;
+		
+		if(request.getAttribute("PacienteModificable") != null) {
+			paciente = (Paciente)request.getAttribute("PacienteModificable");%>
+			
 			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)">
 				<div class="formulario">
 					<label>DNI</label> <input type="number" name="DNI" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
 					<label>Nombre</label> <input type="text" name="nombre" required value="<%=paciente.getNombre() %>"></input>
 					<label>Apellido</label> <input type="text" name="apellido" required value="<%=paciente.getApellido() %>"></input>
 					<label>Sexo</label> <select name="sexo" required >
-						<option value="1" <% if (paciente.getSexo() == "M") {%>selected <%}%>>Hombre</option>
-						<option value="2" <% if (paciente.getSexo()  == "F") {%>selected <%}%>>Mujer</option>
+						<option value="M" <% if (paciente.getSexo() == "M") {%>selected <%}%>>M</option>
+						<option value="F" <% if (paciente.getSexo()  == "F") {%>selected <%}%>>F</option>
 					</select> <label>Nacionalidad</label> <select name="nacionalidad" required>
 						<!-- Se cargan desde la BD -->
-						<option value="1" <% if (paciente.getCodNacionalidad().getCodigo()== 1) {%>selected <%}%>>Argentina</option>
-						<option value="2" <% if (paciente.getCodNacionalidad().getCodigo() == 2) {%>selected <%}%>>Chile</option>
-						<option value="3" <% if (paciente.getCodNacionalidad().getCodigo() == 3) {%>selected <%}%>>Uruguay</option>
-						<option value="4" <% if (paciente.getCodNacionalidad().getCodigo() == 4) {%>selected <%}%>>Bolivia</option>
+					<%for (Nacionalidad n : listaN) {%>
+	<option value="<%=n.getCodigo()%>" <% if (paciente.getCodNacionalidad().getCodigo()== n.getCodigo()) {%>selected <%}%>><%=n.getDescripcion()%></option>
+					<%}%>
+		
 					</select> <label>Fecha</label> 
 					<input type="date" name="fechaNacimiento" value="<%=paciente.getFechaNacimiento()%>"></input>
 					<label>Direccion</label> 
@@ -146,7 +156,11 @@
 					<label>Localidad</label> 
 					<input type="text" name="localidad" required value="<%=paciente.getLocalidad()%>"></input> 
 					<label>Provincia</label>
-					 <input type="text" name="provincia" required value="<%=paciente.getProvincia()%>"></input> 
+					 	<select name="provincia" required>
+<%for (Provincia p : listaP) {%>
+	<option value="<%=p.getCodigo()%>" <% if (paciente.getProvincia().getCodigo()== p.getCodigo()) {%>selected <%}%>><%=p.getDescripcion()%></option>
+<%}%>
+	</select> 
 					<label>Email</label>
 					<input type="email" name="Email" value="<%=paciente.getEmail() %>"></input> 
 					<label>Tel. fijo</label>

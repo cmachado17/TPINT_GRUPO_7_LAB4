@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.PacienteDaoImpl;
+import entidad.Nacionalidad;
 import entidad.Paciente;
+import entidad.Provincia;
 import negocio.NacionalidadNegocio;
 import negocio.PacienteNegocio;
 import negocio.ProvinciaNegocio;
@@ -75,6 +77,9 @@ public class servletPacientes extends HttpServlet {
 			//Paciente paciente = new Paciente();
 			
 			request.setAttribute("PacienteModificable", pacienteNegocio.buscarPaciente(request.getParameter("txtDni")));
+			//Se carga la lista de provincias y nacionalidades
+			request.setAttribute("listaProv", negProv.obtenerProvincias());
+			request.setAttribute("listaNac", negNac.obtenerNacionalidades());
 		
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
@@ -93,22 +98,29 @@ public class servletPacientes extends HttpServlet {
 			String fecha = request.getParameter("fechaNacimiento");
 			String direccion = request.getParameter("direccion");
 			String localidad = request.getParameter("localidad");
-			int provincia = Integer.parseInt(request.getParameter("provincia"));
+			int provinciaForm = Integer.parseInt(request.getParameter("provincia"));
 			String email = request.getParameter("Email");
 			String telefono = request.getParameter("Telefono");
 			
 			Paciente paciente = new Paciente();
+			Nacionalidad nacionalidad = new Nacionalidad();
+			Provincia provincia = new Provincia();
+			
+			nacionalidad.setCodigo(codNacionalidad);
+			provincia.setCodigo(provinciaForm);
+			
 			paciente.setDni(dni);
 			paciente.setNombre(nombre);
 			paciente.setApellido(apellido);
 			paciente.setSexo(sexo);
-			paciente.getCodNacionalidad().setCodigo(codNacionalidad);
 			paciente.setFechaNacimiento(fecha);
 			paciente.setDireccion(direccion);
 			paciente.setLocalidad(localidad);
-			paciente.getProvincia().setCodigo(provincia);
 			paciente.setEmail(email);
 			paciente.setTelefono(telefono);
+			paciente.setCodNacionalidad(nacionalidad);
+			paciente.setProvincia(provincia);
+			
 			
 			PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
 			

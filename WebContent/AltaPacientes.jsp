@@ -110,8 +110,8 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
     <input type="text" name="apellido" placeholder="Escriba el apellido" required minlength="2" maxlength="30"></input>
         <label>Sexo</label>
     <select name="sexo" required>
-    	<option value="1">F</option>
-    	<option value="2">M</option>
+    	<option value="F">F</option>
+    	<option value="M">M</option>
     </select>
          <label>Nacionalidad</label>
    <select name="nacionalidad" required>

@@ -7,7 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.PacienteDao;
+import entidad.Nacionalidad;
 import entidad.Paciente;
+import entidad.Provincia;
 
 public class PacienteDaoImpl implements PacienteDao{
 	
@@ -17,7 +19,12 @@ public class PacienteDaoImpl implements PacienteDao{
 	private static final String update  = "UPDATE pacientes SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
 		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefono = ? WHERE Dni = ?";
 	private static final String dniExiste= "SELECT * FROM pacientes WHERE Dni = ?";
-
+	private static final String buscarPaciente= "SELECT pa.DNI, PA.Nombre, PA.Apellido, PA.Sexo"
+			+ ", PA.FECHA_NAC, PA.DIRECCION, PA.LOCALIDAD, PA.EMAIL, PA.TELEFONO, PRO.CODIGO, PRO.DESCRIPCION,"
+			+ "NAC.CODIGO, NAC.DESCRIPCION FROM pacientes pa "
+			+ "INNER JOIN PROVINCIAS PRO ON PRO.CODIGO = PA.PROVINCIA "
+			+ "INNER JOIN NACIONALIDADES NAC ON NAC.CODIGO = PA.COD_NACIONALIDAD WHERE pa.Dni = ?";
+	
 	@Override
 	public boolean insert(Paciente paciente) {
 		
@@ -174,31 +181,41 @@ public class PacienteDaoImpl implements PacienteDao{
 		
 		return filas;
 	}
+	
 
 	@Override
 	public Paciente BuscarPaciente(String dni) {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Paciente encontrado = new Paciente();
+		Nacionalidad nacionalidad = new Nacionalidad();
+		Provincia provincia = new Provincia();
 		
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try 
 		{
-			statement = conexion.prepareStatement(dniExiste);
+			statement = conexion.prepareStatement(buscarPaciente);
 			statement.setInt(1,Integer.parseInt(dni));
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
-				encontrado.setDni(resultSet.getInt(2));
-				encontrado.setNombre(resultSet.getString(3));
-				encontrado.setApellido(resultSet.getString(4));
-				encontrado.setSexo(resultSet.getString(5));
-				encontrado.getCodNacionalidad().setCodigo(resultSet.getInt(6));
-				encontrado.setFechaNacimiento(resultSet.getString(7));
-				encontrado.setDireccion(resultSet.getString(8));
-				encontrado.setLocalidad(resultSet.getString(9));
-				encontrado.getProvincia().setCodigo(resultSet.getInt(10));
-				encontrado.setEmail(resultSet.getString(11));
-				encontrado.setTelefono(resultSet.getString(12));
+				encontrado.setDni(resultSet.getInt(1));
+				encontrado.setNombre(resultSet.getString(2));
+				encontrado.setApellido(resultSet.getString(3));
+				encontrado.setSexo(resultSet.getString(4));
+				encontrado.setFechaNacimiento(resultSet.getString(5));
+				encontrado.setDireccion(resultSet.getString(6));
+				encontrado.setLocalidad(resultSet.getString(7));
+				encontrado.setEmail(resultSet.getString(8));
+				encontrado.setTelefono(resultSet.getString(9));
+				
+				nacionalidad.setCodigo(resultSet.getInt("NAC.CODIGO"));
+				nacionalidad.setDescripcion(resultSet.getString("NAC.DESCRIPCION"));
+				
+				provincia.setCodigo(resultSet.getInt("PRO.CODIGO"));
+				provincia.setDescripcion(resultSet.getString("PRO.DESCRIPCION"));
+				
+				encontrado.setCodNacionalidad(nacionalidad);
+				encontrado.setProvincia(provincia);
 			}
 		}
 		catch(SQLException e) {
