@@ -12,7 +12,6 @@ public class Empleado {
 	private int Provincia;
 	private String Email;
 	private String Telefono;
-	private TipoUsuario TipoUser;
 	private String Clave;
 	private boolean Estado;
 	
@@ -81,12 +80,6 @@ public class Empleado {
 	}
 	public void setTelefono(String telefono) {
 		Telefono = telefono;
-	}
-	public TipoUsuario getTipoUser() {
-		return TipoUser;
-	}
-	public void setTipoUser(TipoUsuario tipoUser) {
-		TipoUser = tipoUser;
 	}
 	public String getClave() {
 		return Clave;

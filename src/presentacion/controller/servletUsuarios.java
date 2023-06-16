@@ -42,7 +42,6 @@ public class servletUsuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if (request.getParameter("btnIngresar-login") != null) {
-			int filas=0;
 			UsuarioDaoImpl uDao = new UsuarioDaoImpl();
 			
 			Usuario u = new Usuario();
@@ -50,17 +49,17 @@ public class servletUsuarios extends HttpServlet {
 			u.setDni(Integer.parseInt(request.getParameter("txtUsuario")));
 			u.setClave(request.getParameter("txtClave"));
 			
-			filas= uDao.Login(u);
+			u = uDao.Login(u);
 			
-			if(filas != 0) {		
+			if(u != null) {		
 				request.getSession().setAttribute("Sesion", u.getDni());
-			
+				request.getSession().setAttribute("tipoUsuario", u.getTipoUser().getCodigoTipoUsuario());
 			//REQUEST DISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("/Principal.jsp");
 				rd.forward(request, response);
 			}
 			else {
-				request.setAttribute("estadoLogin", filas);
+				request.setAttribute("estadoLogin", 0);
 				RequestDispatcher rd = request.getRequestDispatcher("/Home.jsp");
 				rd.forward(request, response);
 			}

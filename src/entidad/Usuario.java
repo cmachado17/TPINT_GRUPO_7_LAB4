@@ -4,6 +4,7 @@ public class Usuario {
 	private int CodigoUsuario;
 	private int Dni;
 	private String Clave;
+	private TipoUsuario TipoUser;
 	private boolean Estado;
 	
 	public Usuario() {}
@@ -25,6 +26,12 @@ public class Usuario {
 	}
 	public void setClave(String clave) {
 		Clave = clave;
+	}
+	public TipoUsuario getTipoUser() {
+		return TipoUser;
+	}
+	public void setTipoUser(TipoUsuario tipoUser) {
+		TipoUser = tipoUser;
 	}
 	public boolean isEstado() {
 		return Estado;

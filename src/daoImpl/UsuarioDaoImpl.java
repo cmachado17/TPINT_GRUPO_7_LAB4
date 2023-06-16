@@ -6,17 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dao.UsuarioDao;
+import entidad.TipoUsuario;
 import entidad.Usuario;
 
 public class UsuarioDaoImpl implements UsuarioDao {
 
 
-	private static final String Usuario= "SELECT DNI FROM USUARIOS WHERE DNI = ? AND CONTRASENIA = ?";
+	private static final String Usuario= "SELECT DNI, COD_TIPOSUSUARIO FROM USUARIOS WHERE DNI = ? AND CONTRASENIA = ?";
 
-	public int Login(Usuario usuario) {
+	public Usuario Login(Usuario usuario) {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Usuario encontrado = new Usuario();
+		TipoUsuario encontradoTipoUsuario = new TipoUsuario();
 		int filas=0;
 		
 		Connection conexion = Conexion.getConexion().getSQLConexion();
@@ -29,7 +31,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			if(resultSet.next()) {
 
 				encontrado.setDni(resultSet.getInt(1));
-				filas=encontrado.getDni();
+				encontradoTipoUsuario.setCodigoTipoUsuario(resultSet.getInt(2));
+				encontrado.setTipoUser(encontradoTipoUsuario);
 			}
 			
 		} 
@@ -38,7 +41,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			e.printStackTrace();
 		}
 		
-		return filas;
+		return encontrado;
 	}
 
 }
