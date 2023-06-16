@@ -18,8 +18,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Usuario encontrado = new Usuario();
+
 		TipoUsuario encontradoTipoUsuario = new TipoUsuario();
-		int filas=0;
+
 		
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try 
@@ -33,6 +34,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				encontrado.setDni(resultSet.getInt(1));
 				encontradoTipoUsuario.setCodigoTipoUsuario(resultSet.getInt(2));
 				encontrado.setTipoUser(encontradoTipoUsuario);
+			}else {
+				encontrado = null;
 			}
 			
 		} 

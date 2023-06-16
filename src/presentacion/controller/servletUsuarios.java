@@ -54,12 +54,13 @@ public class servletUsuarios extends HttpServlet {
 			if(u != null) {		
 				request.getSession().setAttribute("Sesion", u.getDni());
 				request.getSession().setAttribute("tipoUsuario", u.getTipoUser().getCodigoTipoUsuario());
-			//REQUEST DISPATCHER
+				//REQUEST DISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("/Principal.jsp");
 				rd.forward(request, response);
-			}
-			else {
+			}else {
+				request.getSession().invalidate();
 				request.setAttribute("estadoLogin", 0);
+				//REQUEST DISPATCHER
 				RequestDispatcher rd = request.getRequestDispatcher("/Home.jsp");
 				rd.forward(request, response);
 			}
