@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.PacienteDaoImpl;
+import entidad.Nacionalidad;
 import entidad.Paciente;
+import entidad.Provincia;
 
 @WebServlet("/ServletHTML")
 public class ServletHTML extends HttpServlet {
@@ -37,11 +39,11 @@ public class ServletHTML extends HttpServlet {
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
 			String sexo = request.getParameter("sexo");
-			int codNacionalidad = Integer.parseInt(request.getParameter("nacionalidad"));
+			Nacionalidad codNacionalidad = new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
 			String fecha = request.getParameter("fechaNacimiento");
 			String direccion = request.getParameter("direccion");
 			String localidad = request.getParameter("localidad");
-			int provincia = Integer.parseInt(request.getParameter("provincia"));
+			Provincia provincia = new Provincia (Integer.parseInt(request.getParameter("provincia")));
 			String email = request.getParameter("email");
 			String telefono = request.getParameter("telefono");
 			
@@ -50,11 +52,11 @@ public class ServletHTML extends HttpServlet {
 			paciente.setNombre(nombre);
 			paciente.setApellido(apellido);
 			paciente.setSexo(sexo);
-			paciente.getCodNacionalidad().setCodigo(codNacionalidad);
+			paciente.setCodNacionalidad(codNacionalidad);
 			paciente.setFechaNacimiento(fecha);
 			paciente.setDireccion(direccion);
 			paciente.setLocalidad(localidad);
-			paciente.getProvincia().setCodigo(provincia);
+			paciente.setProvincia(provincia);
 			paciente.setEmail(email);
 			paciente.setTelefono(telefono);
 			paciente.setEstado(true);

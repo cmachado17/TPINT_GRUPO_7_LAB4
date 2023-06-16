@@ -9,6 +9,14 @@ public class Nacionalidad {
 		
 	}
 	
+	public Nacionalidad(int codigo, String descripcion) {
+		this.codigo = codigo;
+	}
+
+	public Nacionalidad(int codigo) {
+		this.codigo = codigo;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

@@ -12,13 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.PacienteDaoImpl;
 import entidad.Paciente;
+import negocio.NacionalidadNegocio;
 import negocio.PacienteNegocio;
+import negocio.ProvinciaNegocio;
+import negocioImpl.NacionalidadNegocioImpl;
 import negocioImpl.PacienteNegocioImpl;
+import negocioImpl.ProvinciaNegocioImpl;
 
 @WebServlet("/servletPacientes")
 public class servletPacientes extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	ProvinciaNegocio negProv = new ProvinciaNegocioImpl();
+	NacionalidadNegocio negNac = new NacionalidadNegocioImpl();
        
     public servletPacientes() {
         super();
@@ -35,6 +42,9 @@ public class servletPacientes extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
+				//Se carga la lista de provincias y nacionalidades
+				request.setAttribute("listaProv", negProv.obtenerProvincias());
+				request.setAttribute("listaNac", negNac.obtenerNacionalidades());
 				dispatcher = "/AltaPacientes.jsp";
 				break;
 			case "1":

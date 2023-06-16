@@ -9,6 +9,15 @@ public class Provincia {
 		
 	}
 	
+	public Provincia(int codigo, String descripcion) {
+		this.codigo = codigo;
+		this.descripcion = descripcion;
+	}
+
+	public Provincia(int codigo) {
+		this.codigo = codigo;
+	}
+
 	public int getCodigo() {
 		return codigo;
 	}

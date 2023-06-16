@@ -1,4 +1,8 @@
 <%@page import="entidad.Paciente"%>
+<%@page import="entidad.Provincia"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="daoImpl.PacienteDaoImpl"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -82,6 +86,20 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 
 <h2 class="tituloForm"> Alta de pacientes </h2>
 
+<%
+		List<Provincia> listaP = new ArrayList<Provincia>();
+
+		if (request.getAttribute("listaProv") != null) {
+			listaP = (List<Provincia>) request.getAttribute("listaProv");
+		}
+		
+		List<Nacionalidad> listaN = new ArrayList<Nacionalidad>();
+
+		if (request.getAttribute("listaNac") != null) {
+			listaN = (List<Nacionalidad>) request.getAttribute("listaNac");
+		}
+%>
+
 <form method="post" action="ServletHTML" class="my-4">
 <div class="formulario">
     <label>DNI</label>
@@ -97,10 +115,13 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
     </select>
          <label>Nacionalidad</label>
    <select name="nacionalidad" required>
-   <!-- Se cargan desde la BD -->
-    	<option value="1">Argentina</option>
-    	<option value="2">Chile</option>
-		<option value="2">Uruguay</option>
+  <%
+	for (Nacionalidad n : listaN) {
+%>
+	<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
+<%
+	}
+	%>
     </select>
         <label>Fecha</label>
     <input type="date" name="fechaNacimiento"></input>
@@ -110,10 +131,13 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
     <input type="text" name="localidad" placeholder="Springfield" required minlength="3" maxlength="20"></input>
     <label>Provincia</label>
 	<select name="provincia" required>
-    <!-- Se cargan desde la BD -->
-    	<option value="1">Caba</option>
-    	<option value="2">Buenos Aires</option>
-		<option value="2">Entre Ríos</option>
+<%
+	for (Provincia p : listaP) {
+%>
+	<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
+<%
+	}
+	%>
 	</select>   
        <label>Email</label>
      <input type="email" name="email" placeholder="ejemplo@clinica.com" required minlength="3" maxlength="40"></input>

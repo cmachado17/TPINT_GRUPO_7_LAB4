@@ -11,19 +11,21 @@ public class Turno {
 	private Paciente paciente;
 	private Especialidad especialidad;
 	private EstadoTurno estadoTurno;
+	private boolean estado;
 	
 	public Turno() {
 
 	}
 	
 	public Turno(Medico medico, Date dia, Time horario, Paciente paciente, Especialidad especialidad,
-			EstadoTurno estadoTurno) {
+			EstadoTurno estadoTurno, boolean estado) {
 		this.medico = medico;
 		this.dia = dia;
 		this.horario = horario;
 		this.paciente = paciente;
 		this.especialidad = especialidad;
 		this.estadoTurno = estadoTurno;
+		this.estado = estado;
 	}
 	
 	public Medico getMedico() {
@@ -62,6 +64,15 @@ public class Turno {
 	public void setEstadoTurno(EstadoTurno estadoTurno) {
 		this.estadoTurno = estadoTurno;
 	}
+	
+	public boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 	@Override
 	public String toString() {
 		return "Turno [medico=" + medico + ", dia=" + dia + ", horario=" + horario + ", paciente=" + paciente
