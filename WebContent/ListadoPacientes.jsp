@@ -32,10 +32,11 @@
 	});
 </script>
 
+
+
 <script>
     // Función para mostrar el cartel de confirmación
     function confirmarEliminacion(dni) {
-
         Swal.fire({
             title: 'Confirmación',
             text: '¿Estás seguro de que deseas eliminar este registro?',
@@ -46,14 +47,22 @@
             confirmButtonText: 'Eliminar'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Si el usuario confirma la eliminación, envía el formulario
-                //event.target.submit();
-                window.location.href='servletPacientes?btnEliminar=1&txtDni='+ dni
-                		
+            	Swal.fire({
+           		 position: 'center',
+           		  icon: 'success',
+           		  title: 'Registro eliminado!',
+           		  showConfirmButton: false,
+           		  timer: 1500
+          		})
+          		 // Redirecciona a la página de servlet
+          		setTimeout(function(){
+          			window.location.href = 'servletPacientes?btnEliminar=1&txtDni=' + dni;
+					}, 1500);
             }
         });
     }
 </script>
+
 
 
 <title>Listado de Pacientes</title>

@@ -38,8 +38,16 @@
             confirmButtonText: 'Modificar'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Si el usuario confirma la modificación, envía el formulario
-                document.getElementById('formularioModificacion').submit();
+            	Swal.fire({
+            		  position: 'center',
+            		  icon: 'success',
+            		  title: 'Registro modificado!',
+            		  showConfirmButton: false,
+            		  timer: 1500
+            		})
+            		setTimeout(function(){
+            			document.getElementById('formularioModificacion').submit()
+					}, 1500);
             }
         });
     }
