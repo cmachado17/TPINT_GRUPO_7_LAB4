@@ -1,4 +1,4 @@
-<%@page import="entidad.Paciente"%>
+<%@page import="entidad.DiaSemana"%>
 <%@page import="entidad.Especialidad"%>
 <%@page import="entidad.Provincia"%>
 <%@page import="entidad.Nacionalidad"%>
@@ -108,87 +108,157 @@
 		
 		if (request.getAttribute("listaEsp") != null) {
 			listaEsp = (List<Especialidad>) request.getAttribute("listaEsp");
-			}
+		}
+		
+		List<DiaSemana> listaDia = new ArrayList<DiaSemana>();
+		
+		if (request.getAttribute("listaDias") != null) {
+			listaDia = (List<DiaSemana>) request.getAttribute("listaDias");
+		}
 %>
-			
-			</br>
-			<form method="post" action="ServletHTML">
-				<div class="formulario">
-					<label>DNI</label> <input type="number" name="DNI" required></input>
-					<label>Nombre</label> <input type="text" name="nombre" required></input>
-					<label>Apellido</label> <input type="text" name="apellido" required></input>
-					<label>Sexo</label>     <select name="sexo" required>
-    	<option value="F">MUJER</option>
-    	<option value="M">HOMBRE</option>
-    </select> <label>Nacionalidad</label> <select name="nacionalidad" required>
-  <%
-	for (Nacionalidad n : listaN) {
-%>
-	<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
-<%
-	}
-	%>
-					</select> 
-					 <label>Fecha Nac.</label> <input type="date"
-						name="fechaNacimiento"></input> 
-						<label>Direccion</label> 
-						<input type="text" name="direccion" required></input>
-						 <label>Localidad</label>
-					<input type="text" name="localidad" required></input>
-					 <label>Provincia</label>
-					<select type="text" name="provincia" required>
-						<%
-	for (Provincia p : listaP) {
-%>
-	<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
-<%
-	}
-	%>
-					</select> 
-					<label>Email</label>
-					<input type="email" name="Email"></input> 
-					<label>Tel. fijo</label>
-					<input type="tel" name="Telefono"></input> 
-					<label>Celular</label> <input
-						type="tel" name="Celular"></input>
-						 <label>Tipo de Usuario</label>
-					<ul>
-						<td><input type="radio" id="show" name="tipousuario"></input> Médico</td>
-						<td><input type="radio" id="Hided" name="tipousuario"></input>Administrador</td>
-					</ul>
-			
-						<label id="especialidades" style="display:none" >Especialidades</label> 
-						<select type="text" name="Especialidad" id="especialidadesbox" style="display:none">
-													<%
-	for (Especialidad esp : listaEsp) {
-%>
-	<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
-<%
-	}
-	%>
-						</select>
-				
+<div class="d-flex justify-content-center text-light">
+			<form method="post" action="ServletHTML" class="w-75">
+				<div class="form-group">
+				<label>DNI</label> <input type="number" name="DNI" class="form-control" required></input>
 				</div>
+				<div class="form-group">
+				<label>Nombre</label> <input type="text" name="nombre"  class="form-control"required></input>
+				</div>
+				<div class="form-group">
+				<label>Apellido</label> <input type="text" name="apellido" class="form-control" required></input>
+				</div>
+				<div class="form-group">
+					<label>Sexo</label>    
+				 	<select name="sexo" required class="form-control">
+    					<option value="F">MUJER</option>
+    					<option value="M">HOMBRE</option>
+   		 			</select> 
+				</div>
+				<div class="form-group">
+					<label>Nacionalidad</label> 
+   		 			<select name="nacionalidad" required class="form-control custom-select">
+  						<%for (Nacionalidad n : listaN) {%>
+  						<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
+						<%}%>
+					</select> 
+				</div>
+				<div class="form-group">
+				 <label>Fecha Nac.</label> <input type="date"
+						name="fechaNacimiento" class="form-control"></input> 
+				</div>
+				<div class="form-group">
+				<label>Direccion</label> 
+						<input type="text" name="direccion" required class="form-control"></input>
+				</div>
+				<div class="form-group">
+				 <label>Localidad</label>
+					<input type="text" name="localidad" required class="form-control"></input>
+				</div>
+				<div class="form-group">
+					 <label>Provincia</label>
+					<select type="text" name="provincia" required class="form-control">
+						<%for (Provincia p : listaP) {%>
+						<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
+						<%}%>
+					</select> 
+				</div>
+				<div class="form-group">
+				<label>Email</label>
+					<input type="email" name="Email" class="form-control"></input> 
+				</div>
+				<div class="form-group">
+				<label>Tel. fijo</label>
+					<input type="tel" name="Telefono" class="form-control"></input> 
+				</div>
+				<div class="form-group">
+					<label>Celular</label> <input
+						type="tel" name="Celular" class="form-control"></input>
+				</div>
+
+					<label>Tipo de Usuario</label>
+						<div class="form-check">
+							<input type="radio" id="show" name="tipousuario" class="form-check-input"></input> 
+							<label class="form-check-label">Médico</label>
+						</div>
+						<div class="form-check">
+							<input type="radio" id="Hided" name="tipousuario" class="form-check-input"></input>
+							<label class="form-check-label">Administrador</label>
+						</div>
+				<div id="show-this" style="display:none">
+					<div class="form-group">
+					<label >Especialidades</label> 
+						<select type="text" name="Especialidad" class="form-control">
+							<% for (Especialidad esp : listaEsp) {%>
+							<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+							<%}%>
+						</select>
+					</div>
+					<div class="form-group">
+					<label>Dia de atencion</label> 
+						<select type="text" name="dia" class="form-control">
+							<% for (DiaSemana dia : listaDia) { %>
+							<option value="<%=dia.getCodigo()%>"><%=dia.getDescripcion()%></option>
+							<%}%>
+						</select>
+					</div>
+					<div class="form-group">
+					<label>Hora Inicio</label> 
+						<select type="text" name="horaInicio" class="form-control">
+							  	<option value="8">8:00</option>
+    						 	<option value="9">9:00</option>
+    							<option value="10">10:00</option>
+    							<option value="11">11:00</option>
+    							<option value="12">12:00</option>
+    							<option value="13">13:00</option>
+    							<option value="14">14:00</option>
+    							<option value="15">15:00</option>
+    							<option value="16">16:00</option>
+    							<option value="17">17:00</option>
+    							<option value="18">18:00</option>
+    							<option value="19">19:00</option>
+    							<option value="20">20:00</option>
+    							<option value="12">21:00</option>
+						</select>
+					</div>
+					<div class="form-group">
+					<label>Hora Fin</label> 
+						<select type="text" name="horaFin" class="form-control">
+							  	<option value="8">8:00</option>
+    						 	<option value="9">9:00</option>
+    							<option value="10">10:00</option>
+    							<option value="11">11:00</option>
+    							<option value="12">12:00</option>
+    							<option value="13">13:00</option>
+    							<option value="14">14:00</option>
+    							<option value="15">15:00</option>
+    							<option value="16">16:00</option>
+    							<option value="17">17:00</option>
+    							<option value="18">18:00</option>
+    							<option value="19">19:00</option>
+    							<option value="20">20:00</option>
+    							<option value="12">21:00</option>
+						</select>
+					</div>
+				</div>
+
 				<div class="submit">
 					<input type="submit" name="btnEnviar-empleados" value="Enviar"
 						class="btn btn-light"></input>
 				</div>
 			</form>
+			</div>
 		</div>
 	</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
-const box = document.getElementById('especialidades');
-const boxEspecialidades = document.getElementById('especialidadesbox');
+const box = document.getElementById('show-this');
 
 function handleRadioClick() {
   if (document.getElementById('show').checked) {
     box.style.display = 'block';
-    boxEspecialidades.style.display = 'block';
   } else {
     box.style.display = 'none';
-    boxEspecialidades.style.display = 'none';
   }
 }
 

@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import negocio.DiaSemanaNegocio;
 import negocio.EspecialidadNegocio;
 import negocio.NacionalidadNegocio;
 import negocio.ProvinciaNegocio;
+import negocioImpl.DiaSemanaNegocioImpl;
 import negocioImpl.EspecialidadNegocioImpl;
 import negocioImpl.NacionalidadNegocioImpl;
 import negocioImpl.ProvinciaNegocioImpl;
@@ -25,6 +27,7 @@ public class servletEmpleados extends HttpServlet {
 	ProvinciaNegocio negProv = new ProvinciaNegocioImpl();
 	NacionalidadNegocio negNac = new NacionalidadNegocioImpl();
 	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
+	DiaSemanaNegocio negDia = new DiaSemanaNegocioImpl();
    
     public servletEmpleados() {
         super();
@@ -46,6 +49,7 @@ public class servletEmpleados extends HttpServlet {
 				request.setAttribute("listaProv", negProv.obtenerProvincias());
 				request.setAttribute("listaNac", negNac.obtenerNacionalidades());
 				request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
+				request.setAttribute("listaDias", negDia.obtenerDiaSemana());
 				dispatcher = "/AltaEmpleados.jsp";
 				break;
 			case "1":
