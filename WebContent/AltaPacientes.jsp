@@ -180,7 +180,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
    <input type="text" name="telefono" required minlength="6" maxlength="15"></input>
     </div>
     <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
+     <input type="submit" class="btn btn-light" name="btnEnviar-pacientes" value="Enviar" ></input></br>
 </div>
     </div>
 </form>

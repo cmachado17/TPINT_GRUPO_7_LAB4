@@ -1,3 +1,9 @@
+<%@page import="entidad.Paciente"%>
+<%@page import="entidad.Especialidad"%>
+<%@page import="entidad.Provincia"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -85,20 +91,43 @@
 	<div class="container">
 		<div class="p-3 contenedor-principal">
 			<h2 class="tituloForm">Alta de Empleados</h2>
+			<%
+		List<Provincia> listaP = new ArrayList<Provincia>();
+
+		if (request.getAttribute("listaProv") != null) {
+			listaP = (List<Provincia>) request.getAttribute("listaProv");
+		}
+		
+		List<Nacionalidad> listaN = new ArrayList<Nacionalidad>();
+
+		if (request.getAttribute("listaNac") != null) {
+			listaN = (List<Nacionalidad>) request.getAttribute("listaNac");
+		}
+		
+		List<Especialidad> listaEsp = new ArrayList<Especialidad>();
+		
+		if (request.getAttribute("listaEsp") != null) {
+			listaEsp = (List<Especialidad>) request.getAttribute("listaEsp");
+			}
+%>
+			
 			</br>
 			<form method="post" action="ServletHTML">
 				<div class="formulario">
 					<label>DNI</label> <input type="number" name="DNI" required></input>
 					<label>Nombre</label> <input type="text" name="nombre" required></input>
 					<label>Apellido</label> <input type="text" name="apellido" required></input>
-					<label>Sexo</label> <select name="sexo" required>
-						<option value="1">Hombre</option>
-						<option value="2">Mujer</option>
-					</select> <label>Nacionalidad</label> <select name="nacionalidad" required>
-						<!-- Se cargan desde la BD -->
-						<option value="1">Argentina</option>
-						<option value="2">Chile</option>
-						<option value="2">Uruguay</option>
+					<label>Sexo</label>     <select name="sexo" required>
+    	<option value="F">MUJER</option>
+    	<option value="M">HOMBRE</option>
+    </select> <label>Nacionalidad</label> <select name="nacionalidad" required>
+  <%
+	for (Nacionalidad n : listaN) {
+%>
+	<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
+<%
+	}
+	%>
 					</select> 
 					 <label>Fecha Nac.</label> <input type="date"
 						name="fechaNacimiento"></input> 
@@ -107,7 +136,15 @@
 						 <label>Localidad</label>
 					<input type="text" name="localidad" required></input>
 					 <label>Provincia</label>
-					<input type="text" name="provincia" required></input> 
+					<select type="text" name="provincia" required>
+						<%
+	for (Provincia p : listaP) {
+%>
+	<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
+<%
+	}
+	%>
+					</select> 
 					<label>Email</label>
 					<input type="email" name="Email"></input> 
 					<label>Tel. fijo</label>
@@ -116,15 +153,24 @@
 						type="tel" name="Celular"></input>
 						 <label>Tipo de Usuario</label>
 					<ul>
-						<td><input type="checkbox" name="Medico"></input> Médico</td>
-						<td><input type="checkbox" name="Admin"></input>
-							Administrador</td>
+						<td><input type="radio" id="show" name="tipousuario"></input> Médico</td>
+						<td><input type="radio" id="Hided" name="tipousuario"></input>Administrador</td>
 					</ul>
-					<label>Especialidades</label> 
-					<input type="text" name="Especialidad"></input>
+			
+						<label id="especialidades" style="display:none" >Especialidades</label> 
+						<select type="text" name="Especialidad" id="especialidadesbox" style="display:none">
+													<%
+	for (Especialidad esp : listaEsp) {
+%>
+	<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+<%
+	}
+	%>
+						</select>
+				
 				</div>
 				<div class="submit">
-					<input type="submit" name="btnEnviar" value="Enviar"
+					<input type="submit" name="btnEnviar-empleados" value="Enviar"
 						class="btn btn-light"></input>
 				</div>
 			</form>
@@ -132,4 +178,23 @@
 	</div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script>
+const box = document.getElementById('especialidades');
+const boxEspecialidades = document.getElementById('especialidadesbox');
+
+function handleRadioClick() {
+  if (document.getElementById('show').checked) {
+    box.style.display = 'block';
+    boxEspecialidades.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+    boxEspecialidades.style.display = 'none';
+  }
+}
+
+const radioButtons = document.querySelectorAll('input[name="tipousuario"]');
+radioButtons.forEach(radio => {
+  radio.addEventListener('click', handleRadioClick);
+});
+</script>
 </html>

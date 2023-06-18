@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.PacienteDaoImpl;
+import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Paciente;
 import entidad.Provincia;
@@ -31,7 +32,7 @@ public class ServletHTML extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int filas=0;
 
-		if(request.getParameter("btnEnviar")!=null)
+		if(request.getParameter("btnEnviar-pacientes")!=null)
 		{
 			//boolean camposCompletos=true;
 			
@@ -75,6 +76,23 @@ public class ServletHTML extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaPacientes.jsp");
 			rd.forward(request, response);
 		}
+		
+		/*if(request.getParameter("btnEnviar-empleados")!=null) {
+			Medico medico = new Medico();
+			
+			medico.setDni(Integer.parseInt(request.getParameter("DNI")));
+			medico.setNombre(request.getParameter("nombre"));
+			medico.setApellido(request.getParameter("apellido"));
+			medico.setSexo(request.getParameter("sexo"));
+			medico.setCodNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+			medico.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+			medico.setDireccion(request.getParameter("direccion"));
+			medico.setLocalidad(request.getParameter("localidad"));
+			medico.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+			medico.setEmail(request.getParameter("email"));
+			medico.setTelefono(request.getParameter("telefono"));
+			medico.setEstado(true);
+		}*/
 
 	}
 }

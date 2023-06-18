@@ -1,3 +1,6 @@
+.hidden {
+    display: none;
+}
 table {
     border-collapse: collapse;
     width: 100%;
@@ -122,6 +125,9 @@ tr:nth-child(even)
 
 	div.formulario label       { text-align:right; color:white; font-family: 'Kanit', sans-serif;}
 	div.formulario label:after { content: ":"; }
+	
+	div.formulario div label       { text-align:right; color:white; font-family: 'Kanit', sans-serif;}
+	div.formulario div label:after { content: ":"; }
 	
 	.submit{
 	margin-top: 20px;

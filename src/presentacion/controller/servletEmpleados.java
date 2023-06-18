@@ -9,12 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import negocio.EspecialidadNegocio;
+import negocio.NacionalidadNegocio;
+import negocio.ProvinciaNegocio;
+import negocioImpl.EspecialidadNegocioImpl;
+import negocioImpl.NacionalidadNegocioImpl;
+import negocioImpl.ProvinciaNegocioImpl;
+
 
 @WebServlet("/servletEmpleados")
 public class servletEmpleados extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
+	ProvinciaNegocio negProv = new ProvinciaNegocioImpl();
+	NacionalidadNegocio negNac = new NacionalidadNegocioImpl();
+	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
    
     public servletEmpleados() {
         super();
@@ -32,6 +42,10 @@ public class servletEmpleados extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
+				//Se carga la lista de provincias y nacionalidades
+				request.setAttribute("listaProv", negProv.obtenerProvincias());
+				request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+				request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
 				dispatcher = "/AltaEmpleados.jsp";
 				break;
 			case "1":
