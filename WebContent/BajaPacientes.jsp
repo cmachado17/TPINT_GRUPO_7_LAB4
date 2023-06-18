@@ -16,6 +16,12 @@
 
 
 </head>
+    <%
+       if(session.getAttribute("Sesion") == null){ 
+    	   response.sendRedirect("Home.jsp"); 
+       }
+       else{
+      %>
 <body>
 
 <div class="encabezado">
@@ -106,4 +112,5 @@
 </div>
 
 </body>
+<% } %>
 </html>

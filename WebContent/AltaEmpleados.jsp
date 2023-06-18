@@ -25,6 +25,12 @@
 <title>Alta Empleados</title>
 </head>
 <body>
+<%
+       if(session.getAttribute("Sesion") == null){ 
+    	   response.sendRedirect("Home.jsp"); 
+       }
+       else{
+      %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="Principal.jsp"><i class="far fa-hospital px-2"></i>Sistema Clinica</a>
@@ -266,5 +272,6 @@ const radioButtons = document.querySelectorAll('input[name="tipousuario"]');
 radioButtons.forEach(radio => {
   radio.addEventListener('click', handleRadioClick);
 });
+<% } %>
 </script>
 </html>

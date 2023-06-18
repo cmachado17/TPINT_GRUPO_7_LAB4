@@ -11,6 +11,12 @@
 </style>
 <title>Baja Empleados</title>
 </head>
+    <%
+       if(session.getAttribute("Sesion") == null){ 
+    	   response.sendRedirect("Home.jsp"); 
+       }
+       else{
+      %>
 <body>
 <div class="encabezado">
 <div class="sesion">
@@ -99,4 +105,5 @@
 </div>
 </div>
 </body>
+<% } %>
 </html>

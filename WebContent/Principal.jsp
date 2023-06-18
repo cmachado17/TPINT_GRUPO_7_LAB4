@@ -23,6 +23,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <%
+       if(session.getAttribute("Sesion") == null){ 
+    	   response.sendRedirect("Home.jsp"); 
+       }
+       else{
+      %>
+      
      <% if(Integer.parseInt(session.getAttribute("tipoUsuario").toString()) == 1){ %>
      	<ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item dropdown">
@@ -86,7 +93,7 @@
 		<img class="imagen" src="imagenInicio2.jpg">
 	</div>
 </div>
-
+<% } %>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
