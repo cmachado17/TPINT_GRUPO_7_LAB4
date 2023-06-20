@@ -68,69 +68,59 @@
 
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	<div class="container">
-		<a class="navbar-brand" href="Principal.jsp"><i
-			class="far fa-hospital px-2"></i>Sistema Clinica</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-			data-bs-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> <span
-						class="fa fa-home"></span>Pacientes
-				</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a href="servletPacientes?Param=0" class="dropdown-item">Alta
-								Pacientes</a></li>
-						<li><a href="servletPacientes?Param=3" class="dropdown-item">Listado
-								Pacientes</a></li>
-					</ul></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> <span
-						class="fa fa-home"></span>Empleados
-				</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a href="servletEmpleados?Param=0" class="dropdown-item">Alta
-								Empleados</a></li>
-						<li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado
-								Empleados</a></li>
-					</ul></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" role="button"
-					data-bs-toggle="dropdown" aria-expanded="false"> <span
-						class="fa fa-home"></span>Turnos
-				</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a href="servletTurnos?Param=0" class="dropdown-item">Alta
-								Turno</a></li>
-						<li><a href="servletTurnos?Param=1" class="dropdown-item">Listado
-								Turnos</a></li>
-					</ul></li>
-			</ul>
-			<div class="text-light pt-2">
-				 <% if(session.getAttribute("Sesion") != null){ %>
-      	<p><%= session.getAttribute("Sesion") %></p>
-      	<a href="servletUsuarios?logout=1">Logout</a>
-      <%}else{ %>
-      	<p>No logeado</p>
-      	<%} %>
-			</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+	<a class="navbar-brand" href="Principal.jsp"><i	class="far fa-hospital px-2"></i>Sistema Clinica</a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			<li class="nav-item dropdown">
+		      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+				<span class="fa fa-home"></span>Pacientes
+			  </a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a href="servletPacientes?Param=0" class="dropdown-item">Alta Pacientes</a></li>
+					<li><a href="servletPacientes?Param=3" class="dropdown-item">Listado Pacientes</a></li>
+				</ul>
+			</li>
+			<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+				<span class="fa fa-home"></span>Empleados
+			</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a href="servletEmpleados?Param=0" class="dropdown-item">Alta Empleados</a></li>
+					<li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado Empleados</a></li>
+				</ul>
+			</li>
+			<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+				<span class="fa fa-home"></span>Turnos
+			</a>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<li><a href="servletTurnos?Param=0" class="dropdown-item">Alta Turno</a></li>
+					<li><a href="servletTurnos?Param=1" class="dropdown-item">Listado Turnos</a></li>
+				</ul>
+			</li>
+		</ul>
+		<div class="text-light pt-2">
+			 <% if(session.getAttribute("Sesion") != null){ %>
+     	<p><%= session.getAttribute("Sesion") %></p>
+     	<a href="servletUsuarios?logout=1">Logout</a>
+     <%}else{ %>
+     	<p>No logueado</p>
+     	<%} %>
 		</div>
 	</div>
-	</nav>
+</div>
+</nav>
 
 
 	<div class="container">
 		<div class="p-3 contenedor-principal">
 
-			<h2 class="tituloForm">Modificacion Paciente</h2>
+			<h2 class="tituloForm">Modificacion de Pacientes</h2>
 
 		<%	List<Provincia> listaP = new ArrayList<Provincia>();
 
@@ -148,42 +138,44 @@
 		
 		if(request.getAttribute("PacienteModificable") != null) {
 			paciente = (Paciente)request.getAttribute("PacienteModificable");%>
-			
-			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)">
-				<div class="formulario">
-					<label>DNI</label> <input type="number" name="DNI" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
-					<label>Nombre</label> <input type="text" name="nombre" required value="<%=paciente.getNombre() %>"></input>
-					<label>Apellido</label> <input type="text" name="apellido" required value="<%=paciente.getApellido() %>"></input>
-					<label>Sexo</label> <select name="sexo" required >
+
+	<div class="d-flex justify-content-center text-light">				
+			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
+				<div class="form-group">
+					<label>DNI</label> <input type="number" name="DNI" class="form-control" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
+					<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20" class="form-control" required value="<%=paciente.getNombre() %>"></input>
+					<label>Apellido</label> <input type="text" name="apellido" minlength="3" maxlength="30" class="form-control" required value="<%=paciente.getApellido() %>"></input>
+					<label>Sexo</label> <select name="sexo" class="form-select" required >
 						<option value="M" <% if (paciente.getSexo() == "M") {%>selected <%}%>>M</option>
 						<option value="F" <% if (paciente.getSexo()  == "F") {%>selected <%}%>>F</option>
-					</select> <label>Nacionalidad</label> <select name="nacionalidad" required>
+					</select> <label>Nacionalidad</label> <select name="nacionalidad" class="form-select custom-select" required>
 						<!-- Se cargan desde la BD -->
 					<%for (Nacionalidad n : listaN) {%>
-	<option value="<%=n.getCodigo()%>" <% if (paciente.getCodNacionalidad().getCodigo()== n.getCodigo()) {%>selected <%}%>><%=n.getDescripcion()%></option>
+						<option value="<%=n.getCodigo()%>" <% if (paciente.getCodNacionalidad().getCodigo()== n.getCodigo()) {%>selected <%}%>><%=n.getDescripcion()%></option>
 					<%}%>
 		
 					</select> <label>Fecha</label> 
-					<input type="date" name="fechaNacimiento" required value="<%=paciente.getFechaNacimiento()%>"></input>
+					<input type="date" name="fechaNacimiento" required value="<%=paciente.getFechaNacimiento()%>" class="form-control"></input>
 					<label>Direccion</label> 
-					<input type="text" name="direccion" required value="<%=paciente.getDireccion() %>"></input>
+					<input type="text" name="direccion" minlength="3" maxlength="40" required value="<%=paciente.getDireccion() %>" class="form-control"></input>
 					<label>Localidad</label> 
-					<input type="text" name="localidad" required value="<%=paciente.getLocalidad()%>"></input> 
+					<input type="text" name="localidad" minlength="3" maxlength="20" required value="<%=paciente.getLocalidad()%>" class="form-control"></input> 
 					<label>Provincia</label>
-					 	<select name="provincia" required>
-<%for (Provincia p : listaP) {%>
-	<option value="<%=p.getCodigo()%>" <% if (paciente.getProvincia().getCodigo()== p.getCodigo()) {%>selected <%}%>><%=p.getDescripcion()%></option>
-<%}%>
-	</select> 
+					 	<select type="text" name="provincia" required class="form-select">
+						<%for (Provincia p : listaP) {%>
+							<option value="<%=p.getCodigo()%>" <% if (paciente.getProvincia().getCodigo()== p.getCodigo()) {%>selected <%}%>><%=p.getDescripcion()%></option>
+						<%}%>
+						</select> 
 					<label>Email</label>
-					<input type="email" name="Email" value="<%=paciente.getEmail() %>"></input> 
+					<input type="email" name="Email" minlength="3" maxlength="40" required value="<%=paciente.getEmail() %>" class="form-control"></input> 
 					<label>Tel. fijo</label>
-					<input type="tel" name="Telefono" value="<%=paciente.getTelefono() %>"></input> 
+					<input type="tel" name="Telefono" minlength="6" maxlength="15" required value="<%=paciente.getTelefono() %>" class="form-control"></input> 
 				</div>
 				<div class="submit">
 					<input type="submit" class="btn btn-light" name="btnModificar"></input></br>
 				</div>
 			</form>
+		</div>
 <%} %>
 		</div>
 	</div>

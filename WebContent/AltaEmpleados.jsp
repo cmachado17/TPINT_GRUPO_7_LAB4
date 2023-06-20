@@ -32,7 +32,6 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 });
 </script>
 
-
 <title>Alta Empleados</title>
 </head>
 <body>
@@ -122,13 +121,13 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 	int filas =0;
 	String mensaje = "";
 
-	if(request.getAttribute("insercionMedico")!=null){
-		filas=Integer.parseInt(request.getAttribute("insercionMedico").toString());
+	if(request.getAttribute("insercion")!=null){
+		filas=Integer.parseInt(request.getAttribute("insercion").toString());
 		if(filas!=0) {
-			mensaje= "Medico agregado correctamente!";
+			mensaje= "Empleado agregado correctamente!";
 		}
 		else{
-			mensaje = "Error al agregar al medico.";
+			mensaje = "Error al agregar al empleado.";
 		}
 	}
 	
@@ -165,74 +164,67 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		}
 %>
 <div class="d-flex justify-content-center text-light">
-
 			<form method="post" action="servletEmpleados" class="w-75">
 				<div class="form-group">
-				<label>DNI</label> <input type="number" name="DNI" class="form-control" required></input>
+				<label>DNI</label> <input type="number" name="DNI"  min="1111111" max="99999999" class="form-control" required></input>
 				</div>
 				<div class="form-group">
-				<label>Nombre</label> <input type="text" name="nombre"  class="form-control"required></input>
+				<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20"  class="form-control"required></input>
 				</div>
 				<div class="form-group">
-				<label>Apellido</label> <input type="text" name="apellido" class="form-control" required></input>
+				<label>Apellido</label> <input type="text" name="apellido"  minlength="3" maxlength="30" class="form-control" required></input>
 				</div>
 				<div class="form-group">
 					<label>Sexo</label>    
-				 	<select name="sexo" required class="form-control">
+				 	<select name="sexo" required class="form-select">
     					<option value="F">MUJER</option>
     					<option value="M">HOMBRE</option>
    		 			</select> 
 				</div>
 				<div class="form-group">
 					<label>Nacionalidad</label> 
-   		 			<select name="nacionalidad" required class="form-control custom-select">
+   		 			<select name="nacionalidad" required class="form-select custom-select">
   						<%for (Nacionalidad n : listaN) {%>
   						<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
 						<%}%>
 					</select> 
 				</div>
 				<div class="form-group">
-				 <label>Fecha Nac.</label> <input type="date"
-						name="fechaNacimiento" class="form-control" required></input> 
+				 <label>Fecha Nac.</label> <input type="date" name="fechaNacimiento" required class="form-control"></input> 
 				</div>
 				<div class="form-group">
-				<label>Direccion</label> 
-						<input type="text" name="direccion" required class="form-control"></input>
+				<label>Direccion</label> <input type="text" name="direccion" minlength="3" maxlength="40"  required class="form-control"></input>
 				</div>
 				<div class="form-group">
-				 <label>Localidad</label>
-					<input type="text" name="localidad" required class="form-control"></input>
+				<label>Localidad</label><input type="text" name="localidad" minlength="3" maxlength="20" required class="form-control"></input>
 				</div>
 				<div class="form-group">
 					 <label>Provincia</label>
-					<select type="text" name="provincia" required class="form-control">
+					<select type="text" name="provincia" required class="form-select">
 						<%for (Provincia p : listaP) {%>
 						<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
 						<%}%>
 					</select> 
 				</div>
 				<div class="form-group">
-				<label>Email</label>
-					<input type="email" name="Email" class="form-control" required></input> 
+				<label>Email</label> <input type="email" name="email"  minlength="3" maxlength="40" required class="form-control"></input> 
 				</div>
 				<div class="form-group">
-				<label>Tel. fijo</label>
-					<input type="tel" name="Telefono" class="form-control" required></input> 
+				<label>Telefono</label> <input type="tel" name="telefono" minlength="6" maxlength="15" required class="form-control"></input> 
 				</div>
-
 					<label>Tipo de Usuario</label>
 						<div class="form-check">
-							<input type="radio" id="show" name="tipousuario" class="form-check-input" required></input> 
+							<input type="radio" id="show" name="tipousuario" value=2 class="form-check-input"></input> 
 							<label class="form-check-label">Médico</label>
 						</div>
 						<div class="form-check">
-							<input type="radio" id="Hided" name="tipousuario" class="form-check-input" required></input>
+							<input type="radio" id="Hided" name="tipousuario" value=1 class="form-check-input"></input>
 							<label class="form-check-label">Administrador</label>
 						</div>
 				<div id="show-this" style="display:none">
 					<div class="form-group">
 					<label >Especialidades</label> 
-						<select type="text" name="Especialidad" class="form-control">
+						<select type="text" name="especialidad" class="form-select">
 							<% for (Especialidad esp : listaEsp) {%>
 							<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
 							<%}%>
@@ -240,7 +232,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 					</div>
 					<div class="form-group">
 					<label>Dia de atencion</label> 
-						<select type="text" name="dia" class="form-control">
+						<select type="text" name="dia" class="form-select">
 							<% for (DiaSemana dia : listaDia) { %>
 							<option value="<%=dia.getCodigo()%>"><%=dia.getDescripcion()%></option>
 							<%}%>

@@ -143,58 +143,63 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		}
 %>
 
-<form method="post" action="ServletHTML" class="my-4">
-<div class="formulario">
-    <label>DNI</label>
-    <input type="number" name="DNI" placeholder="Escriba el DNI"  min="1111111" max="99999999" required></input>
-        <label>Nombre</label>
-    <input type="text" name="nombre" placeholder="Escriba el nombre"  required minlength="3" maxlength="20"></input>
-        <label>Apellido</label>
-    <input type="text" name="apellido" placeholder="Escriba el apellido" required minlength="2" maxlength="30"></input>
-        <label>Sexo</label>
-    <select name="sexo" required>
-    	<option value="F">F</option>
-    	<option value="M">M</option>
-    </select>
-         <label>Nacionalidad</label>
-   <select name="nacionalidad" required>
-  <%
-	for (Nacionalidad n : listaN) {
-%>
-	<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
-<%
-	}
-	%>
-    </select>
-        <label>Fecha</label>
-    <input type="date" name="fechaNacimiento" required></input>
-        <label>Direccion</label>
-    <input type="text" name="direccion" placeholder="Av. Siempreviva 742" required minlength="1" maxlength="40"></input>
-        <label>Localidad</label>
-    <input type="text" name="localidad" placeholder="Springfield" required minlength="3" maxlength="20"></input>
-    <label>Provincia</label>
-	<select name="provincia" required>
-<%
-	for (Provincia p : listaP) {
-%>
-	<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
-<%
-	}
-	%>
-	</select>   
-       <label>Email</label>
-     <input type="email" name="email" placeholder="ejemplo@clinica.com" required minlength="3" maxlength="40"></input>
-       <label>Telefono</label>
-   <input type="text" name="telefono" required minlength="6" maxlength="15"></input>
-    </div>
-    <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnEnviar-pacientes" value="Enviar" ></input></br>
-</div>
-    </div>
-</form>
-</div>
-</div>
-
+			<div class="d-flex justify-content-center text-light">
+				<form method="post" action="servletPacientes" class="w-75">
+					<div class="form-group">
+					<label>DNI</label> <input type="number" name="DNI"  min="1111111" max="99999999" class="form-control" required></input>
+					</div>
+					<div class="form-group">
+					<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20"  class="form-control"required></input>
+					</div>
+					<div class="form-group">
+					<label>Apellido</label> <input type="text" name="apellido" minlength="3" maxlength="30" class="form-control" required></input>
+					</div>
+					<div class="form-group">
+						<label>Sexo</label>    
+					 	<select name="sexo" required class="form-select">
+	    					<option value="F">MUJER</option>
+	    					<option value="M">HOMBRE</option>
+	   		 			</select> 
+					</div>
+					<div class="form-group">
+						<label>Nacionalidad</label> 
+	   		 			<select name="nacionalidad" required class="form-select custom-select">
+	  						<%for (Nacionalidad n : listaN) {%>
+	  						<option value="<%=n.getCodigo()%>"><%=n.getDescripcion()%></option>
+							<%}%>
+						</select> 
+					</div>
+					<div class="form-group">
+					 <label>Fecha Nac.</label> <input type="date" name="fechaNacimiento" required class="form-control" ></input> 
+					</div>
+					<div class="form-group">
+					<label>Direccion</label> <input type="text" name="direccion" minlength="3" maxlength="40" required class="form-control"></input>
+					</div>
+					<div class="form-group">
+					 <label>Localidad</label> <input type="text" name="localidad" minlength="3" maxlength="20" required class="form-control"></input>
+					</div>
+					<div class="form-group">
+						 <label>Provincia</label>
+						<select type="text" name="provincia" required class="form-select">
+							<%for (Provincia p : listaP) {%>
+							<option value="<%=p.getCodigo()%>"><%=p.getDescripcion()%></option>
+							<%}%>
+						</select> 
+					</div>
+					<div class="form-group">
+					<label>Email</label> <input type="email" name="email" minlength="3" maxlength="40" required class="form-control"></input> 
+					</div>
+					<div class="form-group">
+					<label>Telefono</label> <input type="tel" name="telefono" minlength="6" maxlength="15" required class="form-control"></input> 
+					</div>
+	
+				    <div class="submit">
+				     <input type="submit" class="btn btn-light" name="btnEnviar-pacientes" value="Enviar" ></input></br>
+					</div>
+				</form>
+	   		</div>
+  		</div>
+	</div>
 </body>
 <% } %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

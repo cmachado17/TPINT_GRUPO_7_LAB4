@@ -149,7 +149,49 @@ public class servletPacientes extends HttpServlet {
 			rd.forward(request, response);
 		}
 		
-		
+		int filas=0;
+		if(request.getParameter("btnEnviar-pacientes")!=null)
+		{			
+			int dni = Integer.parseInt(request.getParameter("DNI"));
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellido");
+			String sexo = request.getParameter("sexo");
+			Nacionalidad codNacionalidad = new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
+			String fecha = request.getParameter("fechaNacimiento").toString();
+			String direccion = request.getParameter("direccion");
+			String localidad = request.getParameter("localidad");
+			Provincia provincia = new Provincia (Integer.parseInt(request.getParameter("provincia")));
+			String email = request.getParameter("email");
+			String telefono = request.getParameter("telefono");
+			
+			Paciente paciente = new Paciente();
+			paciente.setDni(dni);
+			paciente.setNombre(nombre);
+			paciente.setApellido(apellido);
+			paciente.setSexo(sexo);
+			paciente.setCodNacionalidad(codNacionalidad);
+			paciente.setFechaNacimiento(fecha);
+			paciente.setDireccion(direccion);
+			paciente.setLocalidad(localidad);
+			paciente.setProvincia(provincia);
+			paciente.setEmail(email);
+			paciente.setTelefono(telefono);
+			paciente.setEstado(true);
+			
+			PacienteDaoImpl pacienteDao = new PacienteDaoImpl();
+			
+			if(!pacienteDao.insert(paciente)) {
+				filas=0;			
+			}
+			else {
+				filas=1;
+			}
+
+			//REQUEST DISPATCHER
+			request.setAttribute("insercion", filas);
+			RequestDispatcher rd = request.getRequestDispatcher("/AltaPacientes.jsp");
+			rd.forward(request, response);
+		}
 
 	}
 
@@ -157,5 +199,4 @@ public class servletPacientes extends HttpServlet {
 		
 		doGet(request, response);
 	}
-
 }

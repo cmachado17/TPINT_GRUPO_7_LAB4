@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import daoImpl.EmpleadoDaoImpl;
 import daoImpl.MedicoDaoImpl;
+import entidad.Administrador;
 import entidad.DiaSemana;
 import entidad.Especialidad;
 import entidad.Medico;
@@ -86,43 +88,77 @@ public class servletEmpleados extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int filas = 0;
 		
-		if(request.getParameter("btnEnviar-empleados")!=null) {
-			Medico medico = new Medico();
+		if(request.getParameter("btnEnviar-empleados")!=null) 
+		{
+			int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
 			
-			medico.setDni(Integer.parseInt(request.getParameter("DNI")));
-			medico.setNombre(request.getParameter("nombre"));
-			medico.setApellido(request.getParameter("apellido"));
-			medico.setSexo(request.getParameter("sexo"));
-			medico.setCodNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
-			medico.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-			medico.setDireccion(request.getParameter("direccion"));
-			medico.setLocalidad(request.getParameter("localidad"));
-			medico.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
-			medico.setEmail(request.getParameter("Email"));
-			medico.setTelefono(request.getParameter("Telefono"));
-			medico.setEstado(true);
-			medico.setEspecialidad(new Especialidad(Integer.parseInt(request.getParameter("Especialidad"))));
-			medico.setDiaAtencion(new DiaSemana(Integer.parseInt(request.getParameter("dia"))));
-			medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
-			medico.setHorarioFinAtencion(request.getParameter("horaFin"));
-		
-		MedicoDaoImpl medicoDao = new MedicoDaoImpl();
-		
-		if(!medicoDao.insert(medico)) {
-			filas=0;			
-		}
-		else {
-			filas=1;
-		}
+			if(tipoUsuario==1) {
+				
+				Administrador administrador = new Administrador();
+				administrador.setDni(Integer.parseInt(request.getParameter("DNI")));
+				administrador.setNombre(request.getParameter("nombre"));
+				administrador.setApellido(request.getParameter("apellido"));
+				administrador.setSexo(request.getParameter("sexo"));
+				administrador.setCodNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+				administrador.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+				administrador.setDireccion(request.getParameter("direccion"));
+				administrador.setLocalidad(request.getParameter("localidad"));
+				administrador.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+				administrador.setEmail(request.getParameter("email"));
+				administrador.setTelefono(request.getParameter("telefono"));
+				administrador.setEstado(true);
+				
+				EmpleadoDaoImpl empleadoDao = new EmpleadoDaoImpl();
+				
+				if(empleadoDao.insert(administrador)) {
+					filas=1;			
+				}
+			}
+			
+			if(tipoUsuario==2) {
+				
+				//ESTA PARTE INSERTA UN NUEVO MÉDICO EN LA TABLA MÉDICOS
+				Medico medico = new Medico();
+				medico.setDni(Integer.parseInt(request.getParameter("DNI")));
+				medico.setNombre(request.getParameter("nombre"));
+				medico.setApellido(request.getParameter("apellido"));
+				medico.setSexo(request.getParameter("sexo"));
+				medico.setCodNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+				medico.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+				medico.setDireccion(request.getParameter("direccion"));
+				medico.setLocalidad(request.getParameter("localidad"));
+				medico.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+				medico.setEmail(request.getParameter("email"));
+				medico.setTelefono(request.getParameter("telefono"));
+				medico.setEstado(true);
+				
+				
+				//ESTA PARTE INSERTA UN NUEVO MEDICO POR ESPECIALIDAD
+				medico.setEspecialidad(new Especialidad (Integer.parseInt(request.getParameter("especialidad"))));
+				medico.setDiaAtencion(new DiaSemana(Integer.parseInt(request.getParameter("dia"))));		
+				medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
+				medico.setHorarioFinAtencion(request.getParameter("horaInicio"));
+				
+				EmpleadoDaoImpl empleadoDao = new EmpleadoDaoImpl();
+				
+				if(empleadoDao.insert(medico)) {
+					if(empleadoDao.insertMedicosPorEspecilidad(medico)) {				
+						filas=1;			
+					}
+					else {
+						empleadoDao.delete(medico.getDni());
+						filas=0;
+					}
+				}
+				
+			}
 
-		//REQUEST DISPATCHER
-		request.setAttribute("insercionMedico", filas);
-		RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
-		rd.forward(request, response);
+			//REQUEST DISPATCHER
+			request.setAttribute("insercion", filas);
+			RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
+			rd.forward(request, response);
 		}
 	}
-
 }
