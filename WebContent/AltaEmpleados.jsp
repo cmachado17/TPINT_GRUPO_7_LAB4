@@ -31,6 +31,28 @@
        }
        else{
       %>
+      
+      
+    	<%
+	int filas =0;
+	String mensaje = "";
+
+	if(request.getAttribute("insercion")!=null){
+		filas=Integer.parseInt(request.getAttribute("insercion").toString());
+		if(filas!=0) {
+			mensaje= "Medico agregado correctamente!";
+		}
+		else{
+			mensaje = "Error al agregar al medico.";
+		}
+	}
+	
+	
+%>  
+      
+      
+      
+      
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="Principal.jsp"><i class="far fa-hospital px-2"></i>Sistema Clinica</a>
@@ -123,7 +145,8 @@
 		}
 %>
 <div class="d-flex justify-content-center text-light">
-			<form method="post" action="ServletHTML" class="w-75">
+
+			<form method="post" action="servletEmpleados" class="w-75">
 				<div class="form-group">
 				<label>DNI</label> <input type="number" name="DNI" class="form-control" required></input>
 				</div>
@@ -150,7 +173,7 @@
 				</div>
 				<div class="form-group">
 				 <label>Fecha Nac.</label> <input type="date"
-						name="fechaNacimiento" class="form-control"></input> 
+						name="fechaNacimiento" class="form-control" required></input> 
 				</div>
 				<div class="form-group">
 				<label>Direccion</label> 
@@ -170,24 +193,24 @@
 				</div>
 				<div class="form-group">
 				<label>Email</label>
-					<input type="email" name="Email" class="form-control"></input> 
+					<input type="email" name="Email" class="form-control" required></input> 
 				</div>
 				<div class="form-group">
 				<label>Tel. fijo</label>
-					<input type="tel" name="Telefono" class="form-control"></input> 
+					<input type="tel" name="Telefono" class="form-control" required></input> 
 				</div>
 				<div class="form-group">
 					<label>Celular</label> <input
-						type="tel" name="Celular" class="form-control"></input>
+						type="tel" name="Celular" class="form-control" required></input>
 				</div>
 
 					<label>Tipo de Usuario</label>
 						<div class="form-check">
-							<input type="radio" id="show" name="tipousuario" class="form-check-input"></input> 
+							<input type="radio" id="show" name="tipousuario" class="form-check-input" required></input> 
 							<label class="form-check-label">Médico</label>
 						</div>
 						<div class="form-check">
-							<input type="radio" id="Hided" name="tipousuario" class="form-check-input"></input>
+							<input type="radio" id="Hided" name="tipousuario" class="form-check-input" required></input>
 							<label class="form-check-label">Administrador</label>
 						</div>
 				<div id="show-this" style="display:none">
@@ -252,6 +275,7 @@
 						class="btn btn-light"></input>
 				</div>
 			</form>
+			
 			</div>
 		</div>
 	</div>
@@ -274,4 +298,6 @@ radioButtons.forEach(radio => {
 });
 <% } %>
 </script>
+
+
 </html>

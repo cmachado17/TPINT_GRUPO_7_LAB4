@@ -9,6 +9,10 @@ public class Especialidad {
 		
 	}
 	
+	public Especialidad(int codigo) {
+	this.codigo = codigo;		
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}

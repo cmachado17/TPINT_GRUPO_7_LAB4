@@ -1,20 +1,19 @@
 package entidad;
 
-import java.sql.Time;
-
 public class Medico extends Persona {
 
 	private Especialidad especialidad;
 	private DiaSemana diaAtencion;
-	private Time horarioInicioAtencion;
-	private Time horarioFinAtencion;
+	private String horarioInicioAtencion;
+	private String horarioFinAtencion;
 	
 	public Medico() {
 		super();
 	}
+	
 
-	public Medico(Especialidad especialidad, DiaSemana diaAtencion, Time horarioInicioAtencion,
-			Time horarioFinAtencion) {
+	public Medico(Especialidad especialidad, DiaSemana diaAtencion, String horarioInicioAtencion,
+			String horarioFinAtencion) {
 		super();
 		this.especialidad = especialidad;
 		this.diaAtencion = diaAtencion;
@@ -38,19 +37,19 @@ public class Medico extends Persona {
 		this.diaAtencion = diaAtencion;
 	}
 
-	public Time getHorarioInicioAtencion() {
+	public String getHorarioInicioAtencion() {
 		return horarioInicioAtencion;
 	}
 
-	public void setHorarioInicioAtencion(Time horarioInicioAtencion) {
+	public void setHorarioInicioAtencion(String horarioInicioAtencion) {
 		this.horarioInicioAtencion = horarioInicioAtencion;
 	}
 
-	public Time getHorarioFinAtencion() {
+	public String getHorarioFinAtencion() {
 		return horarioFinAtencion;
 	}
 
-	public void setHorarioFinAtencion(Time horarioFinAtencion) {
+	public void setHorarioFinAtencion(String horarioFinAtencion) {
 		this.horarioFinAtencion = horarioFinAtencion;
 	}
 

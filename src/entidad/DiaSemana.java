@@ -9,6 +9,10 @@ public class DiaSemana {
 		
 	}
 	
+	public DiaSemana(int codigo) {
+		this.codigo = codigo;
+	}
+	
 	public DiaSemana(int codigo, String descripcion) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;
