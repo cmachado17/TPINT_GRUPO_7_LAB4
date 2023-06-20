@@ -11,8 +11,6 @@ import entidad.Medico;
 
 public class MedicoDaoImpl implements MedicoDao{
 
-	//private static final String insert  = "INSERT INTO empleados (DNI, NOMBRE, APELLIDO, SEXO, COD_NACIONALIDAD, FECHA_NAC, DIRECCION, LOCALIDAD, PROVINCIA, EMAIL, TELEFONO, ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String insertMedicoXEspecialidad  = "INSERT INTO medico_por_especialidad (DNI, COD_ESPECIALIDAD, DIASEMANA, HORAINICIO, HORAFIN, ESTADO) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String insert  = "CALL INSERTMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	
 	@Override
@@ -62,40 +60,7 @@ public class MedicoDaoImpl implements MedicoDao{
 		return isOk;
 	}
 	
-	@Override
-	public boolean insertMedicoXEspecilidad(Medico medico) {
-		Connection conexion = null;
-		conexion=Conexion.getConexion().getSQLConexion();
-		
-		boolean isOk = false;
-		
-		try
-		{		
-			PreparedStatement statement = conexion.prepareStatement(insertMedicoXEspecialidad);
-			statement.setInt(1, medico.getDni());
-			statement.setInt(2, medico.getEspecialidad().getCodigo());
-			statement.setInt(3, medico.getDiaAtencion().getCodigo());
-			statement.setString(4, medico.getHorarioInicioAtencion());
-			statement.setString(5, medico.getHorarioFinAtencion());
-			statement.setBoolean(6, medico.getEstado());
-			if(statement.executeUpdate() > 0)
-			{
-				conexion.commit();
-				isOk = true;
-			}
-		} 
-		catch (SQLException e) 
-		{
-			e.printStackTrace();
-			try {
-				conexion.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}
-		}
-		
-		return isOk;
-	}
+
 
 	@Override
 	public boolean delete(int dni) {

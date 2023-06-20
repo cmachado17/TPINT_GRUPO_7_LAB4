@@ -101,12 +101,12 @@ public class servletEmpleados extends HttpServlet {
 			medico.setDireccion(request.getParameter("direccion"));
 			medico.setLocalidad(request.getParameter("localidad"));
 			medico.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
-			medico.setEmail(request.getParameter("email"));
-			medico.setTelefono(request.getParameter("telefono"));
+			medico.setEmail(request.getParameter("Email"));
+			medico.setTelefono(request.getParameter("Telefono"));
 			medico.setEstado(true);
 			medico.setEspecialidad(new Especialidad(Integer.parseInt(request.getParameter("Especialidad"))));
 			medico.setDiaAtencion(new DiaSemana(Integer.parseInt(request.getParameter("dia"))));
-			medico.setHorarioInicioAtencion(request.getParameter("horaIncio"));
+			medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
 			medico.setHorarioFinAtencion(request.getParameter("horaFin"));
 		
 		MedicoDaoImpl medicoDao = new MedicoDaoImpl();
@@ -119,7 +119,7 @@ public class servletEmpleados extends HttpServlet {
 		}
 
 		//REQUEST DISPATCHER
-		request.setAttribute("insercion", filas);
+		request.setAttribute("insercionMedico", filas);
 		RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
 		rd.forward(request, response);
 		}

@@ -17,11 +17,6 @@ public class MedicoNegocioImpl implements MedicoNegocio{
 	}
 
 	@Override
-	public boolean insertMedicoXEspecilidad(Medico medico) {
-		return mDao.insertMedicoXEspecilidad(medico);
-	}
-
-	@Override
 	public boolean delete(int dni) {
 		// TODO Auto-generated method stub
 		return false;

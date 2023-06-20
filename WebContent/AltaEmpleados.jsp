@@ -33,22 +33,7 @@
       %>
       
       
-    	<%
-	int filas =0;
-	String mensaje = "";
-
-	if(request.getAttribute("insercion")!=null){
-		filas=Integer.parseInt(request.getAttribute("insercion").toString());
-		if(filas!=0) {
-			mensaje= "Medico agregado correctamente!";
-		}
-		else{
-			mensaje = "Error al agregar al medico.";
-		}
-	}
-	
-	
-%>  
+    	
       
       
       
@@ -118,7 +103,30 @@
 
 	<div class="container">
 		<div class="p-3 contenedor-principal">
+
 			<h2 class="tituloForm">Alta de Empleados</h2>
+			
+					<%
+	int filas =0;
+	String mensaje = "";
+
+	if(request.getAttribute("insercionMedico")!=null){
+		filas=Integer.parseInt(request.getAttribute("insercionMedico").toString());
+		if(filas!=0) {
+			mensaje= "Medico agregado correctamente!";
+		}
+		else{
+			mensaje = "Error al agregar al medico.";
+		}
+	}
+	
+	
+%>  
+			
+			
+			
+			
+			
 			<%
 		List<Provincia> listaP = new ArrayList<Provincia>();
 
@@ -198,10 +206,6 @@
 				<div class="form-group">
 				<label>Tel. fijo</label>
 					<input type="tel" name="Telefono" class="form-control" required></input> 
-				</div>
-				<div class="form-group">
-					<label>Celular</label> <input
-						type="tel" name="Celular" class="form-control" required></input>
 				</div>
 
 					<label>Tipo de Usuario</label>
