@@ -12,6 +12,10 @@ import entidad.Medico;
 public class MedicoDaoImpl implements MedicoDao{
 
 	private static final String insert  = "CALL INSERTMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String delete  = "UPDATE Empleados SET ESTADO=0 WHERE Dni = ?";
+	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI where M.COD_ESPECIALIDAD=2 and E.ESTADO= 1";
+	private static final String update  = "UPDATE E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI where E.DNI = ?"
+;
 	
 	@Override
 	public boolean insert(Medico medico) {
@@ -64,8 +68,24 @@ public class MedicoDaoImpl implements MedicoDao{
 
 	@Override
 	public boolean delete(int dni) {
-		// TODO Auto-generated method stub
-		return false;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try 
+		{
+			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, dni);
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isOk;
 	}
 
 	@Override
@@ -79,6 +99,43 @@ public class MedicoDaoImpl implements MedicoDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	
+	
+	
+	
+	/*
+	@Override
+	
+	public ArrayList<Medico> readAll() {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ArrayList<M> medicos = new ArrayList<Medico>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(readall);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{							
+				Medico medico = new Medico();
+				medico.setDni(resultSet.getInt("DNI"));
+				medico.setNombre(resultSet.getString("NOMBRE"));
+				medico.setApellido(resultSet.getString("APELLIDO"));
+				medico.setSexo(resultSet.getString("SEXO"));
+				medico.setEmail(resulSetString("EMAIL"));
+				;
+				
+				medicos.add(medico);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return pacientes;
+	}
+	*/
 
 	
 }
