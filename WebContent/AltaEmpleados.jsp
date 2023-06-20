@@ -22,6 +22,17 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {			//script para hacer que el cartel de "Paciente agregado correctamente" se desvanezca a los 3 seg luego de aparecer
+    setTimeout(function() {
+        $(".content").fadeOut(1500);
+    },3000);
+});
+</script>
+
+
 <title>Alta Empleados</title>
 </head>
 <body>
@@ -124,7 +135,7 @@
 	
 %>  
 			
-			
+<div class="content" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
 			
 			
 			
