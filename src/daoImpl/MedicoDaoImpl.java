@@ -14,7 +14,7 @@ public class MedicoDaoImpl implements MedicoDao{
 	private static final String insert  = "CALL INSERTMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String delete  = "UPDATE Empleados SET ESTADO=0 WHERE Dni = ?";
 	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI where M.COD_ESPECIALIDAD=2 and E.ESTADO= 1";
-	private static final String update  = "UPDATE E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI where E.DNI = ?"
+	private static final String update  = "CALL EDITMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 ;
 	
 	@Override
@@ -99,10 +99,6 @@ public class MedicoDaoImpl implements MedicoDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
-	
-	
 	
 	/*
 	@Override
