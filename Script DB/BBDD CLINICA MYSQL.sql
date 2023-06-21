@@ -283,3 +283,53 @@ BEGIN
 
 END //
 delimiter ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE INSERTTURNOS(
+  IN p_dni INT,
+  IN p_dia_atencion INT,
+  IN p_hora_inicio VARCHAR(25),
+  IN p_hora_fin VARCHAR(25),
+  IN p_especialidad INT
+)
+BEGIN
+  DECLARE dia VARCHAR(50);
+  DECLARE horario TIME;
+  DECLARE fecha_actual DATETIME;
+  DECLARE contador INT DEFAULT 0;
+  
+  -- Obtiene la fecha actual
+  SET fecha_actual = NOW();
+
+  -- Define el día como "hoy"
+  SET dia = DATE_FORMAT(fecha_actual, '%Y-%m-%d');
+
+  -- Genera los turnos para los próximos 30 días
+  WHILE contador < 30 DO
+    -- Verifica si el día actual coincide con el día de atención
+    IF WEEKDAY(dia) = p_dia_atencion THEN
+      -- Define el horario de inicio como la hora proporcionada
+      SET horario = STR_TO_DATE(p_hora_inicio, '%H:%i:%s');
+
+      WHILE horario <= STR_TO_DATE(p_hora_fin, '%H:%i:%s') DO
+      INSERT INTO turnos (DNIMEDICO, dia, horario, Cod_paciente, cod_especialidad, cod_estado_turno, estado)
+        VALUES (p_dni, dia, horario, NULL, p_especialidad, 1, 1);
+
+        -- Agrega una hora al horario
+        SET horario = ADDTIME(horario, '01:00:00');
+      END WHILE;
+    END IF;
+
+    -- Agrega un día al día actual
+    SET dia = DATE_ADD(dia, INTERVAL 1 DAY);
+    SET contador = contador + 1;
+  END WHILE;
+
+END //
+
+DELIMITER ;
+
+
+

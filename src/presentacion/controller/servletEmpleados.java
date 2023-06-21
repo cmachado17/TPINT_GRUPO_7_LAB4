@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.EmpleadoDaoImpl;
 import daoImpl.MedicoDaoImpl;
+import daoImpl.TurnoDaoImpl;
 import entidad.Administrador;
 import entidad.DiaSemana;
 import entidad.Especialidad;
@@ -145,7 +146,10 @@ public class servletEmpleados extends HttpServlet {
 				
 				if(empleadoDao.insert(medico)) {
 					if(empleadoDao.insertMedicosPorEspecilidad(medico)) {				
-						filas=1;			
+						filas=1;		
+						TurnoDaoImpl turnoDao = new TurnoDaoImpl();
+						turnoDao.insert(medico);
+						
 					}
 					else {
 						empleadoDao.delete(medico.getDni());
