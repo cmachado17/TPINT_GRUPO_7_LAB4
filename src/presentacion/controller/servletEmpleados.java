@@ -140,7 +140,7 @@ public class servletEmpleados extends HttpServlet {
 				medico.setEspecialidad(new Especialidad (Integer.parseInt(request.getParameter("especialidad"))));
 				medico.setDiaAtencion(new DiaSemana(Integer.parseInt(request.getParameter("dia"))));		
 				medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
-				medico.setHorarioFinAtencion(request.getParameter("horaInicio"));
+				medico.setHorarioFinAtencion(request.getParameter("horaFin"));
 				
 				EmpleadoDaoImpl empleadoDao = new EmpleadoDaoImpl();
 				
