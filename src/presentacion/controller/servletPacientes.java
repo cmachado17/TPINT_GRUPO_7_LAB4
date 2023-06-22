@@ -74,7 +74,6 @@ public class servletPacientes extends HttpServlet {
 			String dispatcher="/ModificacionPacientes.jsp";
 			
 			PacienteNegocio pacienteNegocio = new PacienteNegocioImpl();
-			//Paciente paciente = new Paciente();
 			
 			request.setAttribute("PacienteModificable", pacienteNegocio.buscarPaciente(request.getParameter("txtDni")));
 			//Se carga la lista de provincias y nacionalidades
@@ -118,7 +117,7 @@ public class servletPacientes extends HttpServlet {
 			paciente.setLocalidad(localidad);
 			paciente.setEmail(email);
 			paciente.setTelefono(telefono);
-			paciente.setCodNacionalidad(nacionalidad);
+			paciente.setNacionalidad(nacionalidad);
 			paciente.setProvincia(provincia);
 			
 			
@@ -169,7 +168,7 @@ public class servletPacientes extends HttpServlet {
 			paciente.setNombre(nombre);
 			paciente.setApellido(apellido);
 			paciente.setSexo(sexo);
-			paciente.setCodNacionalidad(codNacionalidad);
+			paciente.setNacionalidad(codNacionalidad);
 			paciente.setFechaNacimiento(fecha);
 			paciente.setDireccion(direccion);
 			paciente.setLocalidad(localidad);

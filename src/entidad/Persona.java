@@ -5,7 +5,7 @@ public class Persona {
 	private String Nombre;
 	private String Apellido;
 	private String Sexo;
-	private Nacionalidad CodNacionalidad;		
+	private Nacionalidad Nacionalidad;		
 	private String FechaNacimiento;
 	private String Direccion;
 	private String Localidad;
@@ -50,12 +50,12 @@ public class Persona {
 		Sexo = sexo;
 	}
 
-	public Nacionalidad getCodNacionalidad() {
-		return CodNacionalidad;
+	public Nacionalidad getNacionalidad() {
+		return Nacionalidad;
 	}
 
-	public void setCodNacionalidad(Nacionalidad codNacionalidad) {
-		CodNacionalidad = codNacionalidad;
+	public void setNacionalidad(Nacionalidad nacionalidad) {
+		Nacionalidad = nacionalidad;
 	}
 
 	public String getFechaNacimiento() {
@@ -117,7 +117,7 @@ public class Persona {
 	@Override
 	public String toString() {
 		return "Persona [Dni=" + Dni + ", Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo=" + Sexo
-				+ ", CodNacionalidad=" + CodNacionalidad + ", FechaNacimiento=" + FechaNacimiento + ", Direccion="
+				+ ", CodNacionalidad=" + Nacionalidad + ", FechaNacimiento=" + FechaNacimiento + ", Direccion="
 				+ Direccion + ", Localidad=" + Localidad + ", Provincia=" + Provincia + ", Email=" + Email
 				+ ", Telefono=" + Telefono + ", Estado=" + Estado + "]";
 	}

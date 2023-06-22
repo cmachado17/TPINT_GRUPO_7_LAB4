@@ -30,8 +30,7 @@ public class MedicoNegocioImpl implements MedicoNegocio{
 
 	@Override
 	public ArrayList<Medico> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return mDao.readAll();
 	}
 
 }

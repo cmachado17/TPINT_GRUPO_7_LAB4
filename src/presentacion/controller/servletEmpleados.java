@@ -1,6 +1,7 @@
 package presentacion.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.EmpleadoDaoImpl;
 import daoImpl.MedicoDaoImpl;
+import daoImpl.PacienteDaoImpl;
 import daoImpl.TurnoDaoImpl;
 import entidad.Administrador;
 import entidad.DiaSemana;
@@ -20,10 +22,12 @@ import entidad.Nacionalidad;
 import entidad.Provincia;
 import negocio.DiaSemanaNegocio;
 import negocio.EspecialidadNegocio;
+import negocio.MedicoNegocio;
 import negocio.NacionalidadNegocio;
 import negocio.ProvinciaNegocio;
 import negocioImpl.DiaSemanaNegocioImpl;
 import negocioImpl.EspecialidadNegocioImpl;
+import negocioImpl.MedicoNegocioImpl;
 import negocioImpl.NacionalidadNegocioImpl;
 import negocioImpl.ProvinciaNegocioImpl;
 
@@ -68,6 +72,9 @@ public class servletEmpleados extends HttpServlet {
 				dispatcher = "/ModificacionEmpleados.jsp";
 				break;
 			case "3":	
+				MedicoNegocio medidoNegocio = new MedicoNegocioImpl();
+				ArrayList<Medico> listaMedicos = medidoNegocio.readAll();
+				request.setAttribute("listaMedicos", listaMedicos);	
 				dispatcher = "/ListadoEmpleados.jsp";
 				break;
 			default:
@@ -85,6 +92,15 @@ public class servletEmpleados extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+		
+		
+		if(request.getParameter("btnEliminar")!=null) {			
+			MedicoDaoImpl meDaoImpl = new MedicoDaoImpl();			
+			int dni = Integer.parseInt(request.getParameter("txtDni"));			
+			meDaoImpl.delete(dni);	
+			RequestDispatcher rd = request.getRequestDispatcher("/servletEmpleados?Param=3");
+			rd.forward(request, response);
+		}
 		}
 
 	
@@ -102,7 +118,7 @@ public class servletEmpleados extends HttpServlet {
 				administrador.setNombre(request.getParameter("nombre"));
 				administrador.setApellido(request.getParameter("apellido"));
 				administrador.setSexo(request.getParameter("sexo"));
-				administrador.setCodNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+				administrador.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
 				administrador.setFechaNacimiento(request.getParameter("fechaNacimiento"));
 				administrador.setDireccion(request.getParameter("direccion"));
 				administrador.setLocalidad(request.getParameter("localidad"));
@@ -126,7 +142,7 @@ public class servletEmpleados extends HttpServlet {
 				medico.setNombre(request.getParameter("nombre"));
 				medico.setApellido(request.getParameter("apellido"));
 				medico.setSexo(request.getParameter("sexo"));
-				medico.setCodNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+				medico.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
 				medico.setFechaNacimiento(request.getParameter("fechaNacimiento"));
 				medico.setDireccion(request.getParameter("direccion"));
 				medico.setLocalidad(request.getParameter("localidad"));

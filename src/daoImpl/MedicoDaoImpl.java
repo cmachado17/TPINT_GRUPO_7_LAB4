@@ -3,17 +3,20 @@ package daoImpl;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.MedicoDao;
+import entidad.Especialidad;
 import entidad.Medico;
+import entidad.Nacionalidad;
 
 public class MedicoDaoImpl implements MedicoDao{
 
 	private static final String insert  = "CALL INSERTMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String delete  = "UPDATE Empleados SET ESTADO=0 WHERE Dni = ?";
-	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI where M.COD_ESPECIALIDAD=2 and E.ESTADO= 1";
+	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, N.DESCRIPCION AS DESC_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD, Esp.DESCRIPCION as DESC_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI inner join nacionalidades as N ON E.COD_NACIONALIDAD = N.CODIGO inner join especialidades as Esp ON M.COD_ESPECIALIDAD = Esp.CODIGO where E.ESTADO= 1;";
 	private static final String update  = "CALL EDITMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 ;
 	
@@ -32,7 +35,7 @@ public class MedicoDaoImpl implements MedicoDao{
 			statement.setString(2, medico.getNombre());
 			statement.setString(3, medico.getApellido());
 			statement.setString(4, medico.getSexo());
-			statement.setInt(5, medico.getCodNacionalidad().getCodigo());
+			statement.setInt(5, medico.getNacionalidad().getCodigo());
 			statement.setString(6, medico.getFechaNacimiento());
 			statement.setString(7, medico.getDireccion());
 			statement.setString(8, medico.getLocalidad());
@@ -94,19 +97,13 @@ public class MedicoDaoImpl implements MedicoDao{
 		return false;
 	}
 
-	@Override
-	public ArrayList<Medico> readAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
-	/*
 	@Override
 	
 	public ArrayList<Medico> readAll() {
 		PreparedStatement statement;
 		ResultSet resultSet; 
-		ArrayList<M> medicos = new ArrayList<Medico>();
+		ArrayList<Medico> medicos = new ArrayList<Medico>();
 		Conexion conexion = Conexion.getConexion();
 		try 
 		{
@@ -119,9 +116,10 @@ public class MedicoDaoImpl implements MedicoDao{
 				medico.setNombre(resultSet.getString("NOMBRE"));
 				medico.setApellido(resultSet.getString("APELLIDO"));
 				medico.setSexo(resultSet.getString("SEXO"));
-				medico.setEmail(resulSetString("EMAIL"));
-				;
-				
+				medico.setEmail(resultSet.getString("FECHA_NAC"));
+				medico.setFechaNacimiento(resultSet.getString("EMAIL"));
+				medico.setNacionalidad(new Nacionalidad(resultSet.getInt("COD_NACIONALIDAD"), resultSet.getString("DESC_NACIONALIDAD")));
+				medico.setEspecialidad(new Especialidad(resultSet.getInt("COD_ESPECIALIDAD"), resultSet.getString("DESC_ESPECIALIDAD")));				
 				medicos.add(medico);
 			}
 		} 
@@ -129,9 +127,9 @@ public class MedicoDaoImpl implements MedicoDao{
 		{
 			e.printStackTrace();
 		}
-		return pacientes;
+		return medicos;
 	}
-	*/
+	
 
 	
 }

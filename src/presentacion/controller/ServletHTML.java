@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.PacienteDaoImpl;
-import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Paciente;
 import entidad.Provincia;
@@ -40,7 +39,7 @@ public class ServletHTML extends HttpServlet {
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
 			String sexo = request.getParameter("sexo");
-			Nacionalidad codNacionalidad = new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
+			Nacionalidad nacionalidad = new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad")));
 			String fecha = request.getParameter("fechaNacimiento");
 			String direccion = request.getParameter("direccion");
 			String localidad = request.getParameter("localidad");
@@ -53,7 +52,7 @@ public class ServletHTML extends HttpServlet {
 			paciente.setNombre(nombre);
 			paciente.setApellido(apellido);
 			paciente.setSexo(sexo);
-			paciente.setCodNacionalidad(codNacionalidad);
+			paciente.setNacionalidad(nacionalidad);
 			paciente.setFechaNacimiento(fecha);
 			paciente.setDireccion(direccion);
 			paciente.setLocalidad(localidad);

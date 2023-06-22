@@ -1,3 +1,5 @@
+<%@page import="entidad.Medico"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,7 +13,6 @@
       %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -25,15 +26,61 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<!-- Agrega los enlaces a DataTables -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+
+
+<!-- Agrega los enlaces a SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#table_id').DataTable();
 	});
 </script>
+
+
+<script>
+    // Función para mostrar el cartel de confirmación
+    function confirmarEliminacion(dni) {
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas eliminar este registro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Eliminar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            	Swal.fire({
+           		 position: 'center',
+           		  icon: 'success',
+           		  title: 'Registro eliminado!',
+           		  showConfirmButton: false,
+           		  timer: 1500
+          		})
+          		 // Redirecciona a la página de servlet
+          		setTimeout(function(){
+          			window.location.href = 'servletEmpleados?btnEliminar=1&txtDni=' + dni;
+					}, 1500);
+            }
+        });
+    }
+</script>
+
+<%
+ArrayList <Medico> listaMedicos = null;
+if(request.getAttribute("listaMedicos") != null){
+	listaMedicos = (ArrayList <Medico>) request.getAttribute("listaMedicos");
+}
+%>
 
 <title>Listado de empleados</title>
 </head>
@@ -101,52 +148,42 @@
 </nav>
 
 
-	<div class="container">
-		<div class="p-3 contenedor-principal">
-<h2 class="tituloForm"> Listado de Empleados </h2> </br>
+<div class="container">
+	<div class="p-3 contenedor-principal">
+	<h2 class="tituloForm"> Listado de Empleados </h2> </br>
 	<table id="table_id" class="display table table-striped bg-light">
 		<thead>
 			<tr>
-				<th scope="col">Legajo</th>
+				<th scope="col">Dni</th>
 				<th scope="col">Nombre</th>
 				<th scope="col">Apellido</th>
 				<th scope="col">Sexo</th>
-				<th scope="col">Nacionalidad</th>
 				<th scope="col">Fecha Nacimiento</th>
 				<th scope="col">Correo electronico</th>
-				<th scope="col">Especialidad</th>
-				
+				<th scope="col">Nacionalidad</th>				
+				<th scope="col">Especialidad</th>				
 				<th></th>
 				<th></th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td scope="row">111111</td>
-				<td>Carlos</td>
-				<td>Luna</td>
-				<td>Hombre</td>
-				<td>Argentina</td>
-				<td>11/08/1980</td>
-				<td>cluna@gmail.com</td>
-				<td>Clinica</td>
-				<!-- Codigo comentado: Observar que utilizo el onClick al servlet y le paso de parámetro el nombre del boton con otros atributos -->
-				<td><input type="submit" value="Eliminar" name="btnEliminar" onclick="window.location.href='servletEmpleados?btnEliminar=1'"/></td>
-				<td><input type="submit" value="Editar" name="btnEditar" onclick="window.location.href='servletEmpleados?btnEditar=1'"/></td>
-			</tr>
-					<tr>
-				<td scope="row">111111</td>
-				<td>Carlos</td>
-				<td>Luna</td>
-				<td>Hombre</td>
-				<td>Argentina</td>
-				<td>11/08/1980</td>
-				<td>cluna@gmail.com</td>
-				<td>Clinica</td>
-				<!-- Codigo comentado: Observar que utilizo el onClick al servlet y le paso de parámetro el nombre del boton con otros atributos -->
-				<td><input type="submit" value="Eliminar" name="btnEliminar" onclick="window.location.href='servletEmpleados?btnEliminar=1'"/></td>
-				<td><input type="submit" value="Editar" name="btnEditar" onclick="window.location.href='servletEmpleados?btnEditar=1'"/></td>
-			</tr>
+		<tbody>	
+			<% if(listaMedicos != null)
+				for(Medico medico : listaMedicos){%>
+				<tr>			
+					<td scope="row"><%= medico.getDni() %> </td>
+					<td scope="row"><%= medico.getNombre() %></td>
+					<td scope="row"><%= medico.getApellido() %></td>
+					<td scope="row"><%= medico.getSexo() %></td>
+					<td scope="row"><%= medico.getFechaNacimiento() %></td>
+					<td scope="row"><%= medico.getEmail() %></td>
+					<td scope="row"><%= medico.getNacionalidad().getDescripcion() %></td>					
+					<td scope="row"><%= medico.getEspecialidad().getDescripcion() %></td>
+					<td><input type="submit" value="Eliminar" name="btnEliminar"
+						onclick="confirmarEliminacion(<%= medico.getDni()%>)" /></td>
+					<td><input type="submit" value="Editar" name="btnEditar"
+						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=medico.getDni() %>'" /></td>
+				</tr>
+			<%} %>					
 		</tbody>
 	</table>
 

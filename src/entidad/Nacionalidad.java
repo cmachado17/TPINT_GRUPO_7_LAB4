@@ -11,6 +11,7 @@ public class Nacionalidad {
 	
 	public Nacionalidad(int codigo, String descripcion) {
 		this.codigo = codigo;
+		this.descripcion = descripcion;
 	}
 
 	public Nacionalidad(int codigo) {

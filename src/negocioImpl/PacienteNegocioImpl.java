@@ -17,7 +17,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 		boolean estado=false;
 		if(paciente.getDni()> 0 && paciente.getNombre().trim().length()>0 
 			&& paciente.getApellido().trim().length()>0 && paciente.getSexo().trim().length()>0
-			&& paciente.getCodNacionalidad().getCodigo()>0 && paciente.getFechaNacimiento() != null
+			&& paciente.getNacionalidad().getCodigo()>0 && paciente.getFechaNacimiento() != null
 			&& paciente.getDireccion().trim().length()>0 && paciente.getLocalidad().trim().length()>0
 			&& paciente.getProvincia().getCodigo()>0 && paciente.getEmail().trim().length()>0
 			&& paciente.getTelefono().trim().length()>0)
@@ -42,7 +42,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 		boolean estado=false;
 		if(paciente.getDni()> 0 && paciente.getNombre().trim().length()>0 
 				&& paciente.getApellido().trim().length()>0 && paciente.getSexo().trim().length()>0
-				&& paciente.getCodNacionalidad().getCodigo()>0 && paciente.getFechaNacimiento() != null
+				&& paciente.getNacionalidad().getCodigo()>0 && paciente.getFechaNacimiento() != null
 				&& paciente.getDireccion().trim().length()>0 && paciente.getLocalidad().trim().length()>0
 				&& paciente.getProvincia().getCodigo()>0 && paciente.getEmail().trim().length()>0
 				&& paciente.getTelefono().trim().length()>0)

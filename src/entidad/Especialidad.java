@@ -9,9 +9,15 @@ public class Especialidad {
 		
 	}
 	
-	public Especialidad(int codigo) {
-	this.codigo = codigo;		
+	public Especialidad(int codigo, String descripcion) {
+		this.codigo = codigo;
+		this.descripcion = descripcion;
 	}
+	
+	public Especialidad(int codigo) {
+		this.codigo = codigo;
+	}
+	
 	
 	public int getCodigo() {
 		return codigo;
