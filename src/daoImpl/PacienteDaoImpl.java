@@ -40,7 +40,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(2, paciente.getNombre());
 			statement.setString(3, paciente.getApellido());
 			statement.setString(4, paciente.getSexo());
-			statement.setInt(5, paciente.getCodNacionalidad().getCodigo());
+			statement.setInt(5, paciente.getNacionalidad().getCodigo());
 			statement.setString(6, paciente.getFechaNacimiento());
 			statement.setString(7, paciente.getDireccion());
 			statement.setString(8, paciente.getLocalidad());
@@ -101,7 +101,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			statement.setString(1, paciente.getNombre());
 			statement.setString(2, paciente.getApellido());
 			statement.setString(3, paciente.getSexo());
-			statement.setInt(4, paciente.getCodNacionalidad().getCodigo());
+			statement.setInt(4, paciente.getNacionalidad().getCodigo());
 			statement.setString(5, paciente.getFechaNacimiento());
 			statement.setString(6, paciente.getDireccion());
 			statement.setString(7, paciente.getLocalidad());
@@ -214,7 +214,7 @@ public class PacienteDaoImpl implements PacienteDao{
 				provincia.setCodigo(resultSet.getInt("PRO.CODIGO"));
 				provincia.setDescripcion(resultSet.getString("PRO.DESCRIPCION"));
 				
-				encontrado.setCodNacionalidad(nacionalidad);
+				encontrado.setNacionalidad(nacionalidad);
 				encontrado.setProvincia(provincia);
 			}
 		}

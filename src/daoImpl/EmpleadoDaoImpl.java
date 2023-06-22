@@ -44,7 +44,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 			statement.setString(2, empleado.getNombre());
 			statement.setString(3, empleado.getApellido());
 			statement.setString(4, empleado.getSexo());
-			statement.setInt(5, empleado.getCodNacionalidad().getCodigo());
+			statement.setInt(5, empleado.getNacionalidad().getCodigo());
 			statement.setString(6, empleado.getFechaNacimiento());
 			statement.setString(7, empleado.getDireccion());
 			statement.setString(8, empleado.getLocalidad());
@@ -142,7 +142,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 			statement.setString(1, empleado.getNombre());
 			statement.setString(2, empleado.getApellido());
 			statement.setString(3, empleado.getSexo());
-			statement.setInt(4, empleado.getCodNacionalidad().getCodigo());
+			statement.setInt(4, empleado.getNacionalidad().getCodigo());
 			statement.setString(5, empleado.getFechaNacimiento());
 			statement.setString(6, empleado.getDireccion());
 			statement.setString(7, empleado.getLocalidad());
@@ -255,7 +255,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 				provincia.setCodigo(resultSet.getInt("PRO.CODIGO"));
 				provincia.setDescripcion(resultSet.getString("PRO.DESCRIPCION"));
 				
-				encontrado.setCodNacionalidad(nacionalidad);
+				encontrado.setNacionalidad(nacionalidad);
 				encontrado.setProvincia(provincia);
 			}
 		}
