@@ -16,7 +16,10 @@ public class MedicoDaoImpl implements MedicoDao{
 
 	private static final String insert  = "CALL INSERTMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String delete  = "UPDATE Empleados SET ESTADO=0 WHERE Dni = ?";
-	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, N.DESCRIPCION AS DESC_NACIONALIDAD, E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD, Esp.DESCRIPCION as DESC_ESPECIALIDAD FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI inner join nacionalidades as N ON E.COD_NACIONALIDAD = N.CODIGO inner join especialidades as Esp ON M.COD_ESPECIALIDAD = Esp.CODIGO where E.ESTADO= 1;";
+	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, N.DESCRIPCION AS DESC_NACIONALIDAD, "
+			+ "E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD, Esp.DESCRIPCION as DESC_ESPECIALIDAD "
+			+ "FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI inner join nacionalidades as N ON E.COD_NACIONALIDAD = N.CODIGO "
+			+ "inner join especialidades as Esp ON M.COD_ESPECIALIDAD = Esp.CODIGO where E.ESTADO= 1;";
 	private static final String update  = "CALL EDITMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 ;
 	
