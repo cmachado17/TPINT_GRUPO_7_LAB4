@@ -1,3 +1,9 @@
+<%@page import="entidad.DiaSemana"%>
+<%@page import="entidad.Especialidad"%>
+<%@page import="entidad.Provincia"%>
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -88,17 +94,25 @@
   </div>
 </nav>
 
+<% 
+		List<Especialidad> listaEsp = new ArrayList<Especialidad>();
+		
+		if (request.getAttribute("listaEsp") != null) {
+			listaEsp = (List<Especialidad>) request.getAttribute("listaEsp");
+		}
+%>
+
 	<div class="container">
 		<div class="p-3 contenedor-principal">
 			<h2 class="tituloForm"> Asignar turnos </h2> </br>
 
-			<form method="post" action="ServletHTML">
+			<form method="post" action="servletTurnos">
 				<div class="formulario">
 					<label>Especialidad</label>
-					<select  name="especialidad"> 
-						<option value="1">Cardiologia</option>
-						<option value="2">Clinica</option>
-						<option value="3">Nutricion</option>
+					<select  name="especialidad" type="text" class="form-select"> 
+					<% for (Especialidad esp : listaEsp) {%>
+							<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+							<%}%>
 					</select>
 						<label>Medico</label>
 					<select  name="medico"> 

@@ -9,10 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import negocio.EspecialidadNegocio;
+import negocioImpl.EspecialidadNegocioImpl;
+
 @WebServlet("/servletTurnos")
 public class servletTurnos extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-       
+    
+	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
+	
     public servletTurnos() {
         super();
     }
@@ -28,6 +34,7 @@ public class servletTurnos extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
+				request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
 				dispatcher = "/AsignarTurnos.jsp";
 				break;
 			case "1":
