@@ -138,6 +138,7 @@
 		
 		if(request.getAttribute("PacienteModificable") != null) {
 			paciente = (Paciente)request.getAttribute("PacienteModificable");%>
+			
 
 	<div class="d-flex justify-content-center text-light">				
 			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">

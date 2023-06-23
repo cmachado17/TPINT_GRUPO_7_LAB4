@@ -10,4 +10,5 @@ public interface MedicoDao {
 	public boolean delete(int dni);
 	public boolean update(Medico medico);
 	public ArrayList<Medico> readAll();
+	public Medico buscarMedico(String dni);
 }

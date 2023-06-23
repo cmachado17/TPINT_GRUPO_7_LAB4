@@ -20,7 +20,6 @@ import entidad.DiaSemana;
 import entidad.Especialidad;
 import entidad.Medico;
 import entidad.Nacionalidad;
-import entidad.Paciente;
 import entidad.Persona;
 import entidad.Provincia;
 import negocio.DiaSemanaNegocio;
@@ -93,7 +92,14 @@ public class servletEmpleados extends HttpServlet {
 				
 			if(request.getParameter("btnEditar")!=null) {
 				String dispatcher="/ModificacionEmpleados.jsp";
-			
+				
+				request.setAttribute("MedicoModificable", medicoNegocio.buscarMedico(request.getParameter("txtDni")));
+				//Se carga la lista de provincias, nacionalidades, especialidades y horas
+				request.setAttribute("listaProv", negProv.obtenerProvincias());
+				request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+				request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
+				request.setAttribute("listaDias", negDia.obtenerDiaSemana());
+				
 				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 			    rd.forward(request, response);  
 				}
@@ -188,7 +194,6 @@ public class servletEmpleados extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
 			rd.forward(request, response);
 		}
-		
-		
+
 	}
 }

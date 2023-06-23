@@ -8,9 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.MedicoDao;
+import entidad.DiaSemana;
 import entidad.Especialidad;
 import entidad.Medico;
 import entidad.Nacionalidad;
+import entidad.Persona;
+import entidad.Provincia;
 
 public class MedicoDaoImpl implements MedicoDao{
 
@@ -21,6 +24,15 @@ public class MedicoDaoImpl implements MedicoDao{
 			+ "FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI inner join nacionalidades as N ON E.COD_NACIONALIDAD = N.CODIGO "
 			+ "inner join especialidades as Esp ON M.COD_ESPECIALIDAD = Esp.CODIGO where E.ESTADO= 1;";
 	private static final String update  = "CALL EDITMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String buscarMedico  = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO,E.DIRECCION, E.LOCALIDAD, E.COD_NACIONALIDAD, N.DESCRIPCION, E.PROVINCIA, PRO.DESCRIPCION, "
+			+ "E.FECHA_NAC, E.EMAIL, E.TELEFONO, MXE.COD_ESPECIALIDAD, ESP.DESCRIPCION, MXE.DIASEMANA, MXE.HORAINICIO, MXE.HORAFIN, DS.DESCRIPCION "
+			+ "FROM EMPLEADOS AS E "
+			+ "INNER JOIN MEDICO_POR_ESPECIALIDAD AS MXE ON MXE.DNIMEDICO = E.DNI "
+			+ "INNER JOIN NACIONALIDADES AS N ON E.COD_NACIONALIDAD = N.CODIGO "
+			+ "INNER JOIN ESPECIALIDADES AS ESP ON MXE.COD_ESPECIALIDAD = ESP.CODIGO "
+			+ "INNER JOIN PROVINCIAS AS PRO ON PRO.CODIGO = E.PROVINCIA "
+			+ "INNER JOIN DIASEMANA AS DS ON DS.CODIGO = MXE.DIASEMANA "
+			+ "WHERE E.ESTADO = 1 AND E.DNI = ?"
 ;
 	
 	@Override
@@ -132,7 +144,57 @@ public class MedicoDaoImpl implements MedicoDao{
 		}
 		return medicos;
 	}
-	
 
+
+
+	@Override
+	public Medico buscarMedico(String dni) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		Medico encontrado = new Medico();
+		Nacionalidad nacionalidad = new Nacionalidad();
+		Provincia provincia = new Provincia();
+		Especialidad especialidad = new Especialidad();
+		DiaSemana diaSemana = new DiaSemana();
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(buscarMedico);
+			statement.setInt(1,Integer.parseInt(dni));
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				encontrado.setDni(resultSet.getInt("E.DNI"));
+				encontrado.setNombre(resultSet.getString("E.NOMBRE"));
+				encontrado.setApellido(resultSet.getString("E.APELLIDO"));
+				encontrado.setSexo(resultSet.getString("E.SEXO"));
+				encontrado.setFechaNacimiento(resultSet.getString("E.FECHA_NAC"));
+				encontrado.setDireccion(resultSet.getString("E.DIRECCION"));
+				encontrado.setLocalidad(resultSet.getString("E.LOCALIDAD"));
+				encontrado.setEmail(resultSet.getString("E.EMAIL"));
+				encontrado.setTelefono(resultSet.getString("E.TELEFONO"));
+				encontrado.setHorarioInicioAtencion(resultSet.getString("MXE.HORAINICIO"));
+				encontrado.setHorarioFinAtencion(resultSet.getString("MXE.HORAFIN"));
+				
+				nacionalidad.setCodigo(resultSet.getInt("E.COD_NACIONALIDAD"));
+				nacionalidad.setDescripcion(resultSet.getString("N.DESCRIPCION"));
+				provincia.setCodigo(resultSet.getInt("E.PROVINCIA"));
+				provincia.setDescripcion(resultSet.getString("PRO.DESCRIPCION"));
+				especialidad.setCodigo(resultSet.getInt("MXE.COD_ESPECIALIDAD"));
+				especialidad.setDescripcion(resultSet.getString("ESP.DESCRIPCION"));
+				diaSemana.setCodigo(resultSet.getInt("MXE.DIASEMANA"));
+				diaSemana.setDescripcion(resultSet.getString("DS.DESCRIPCION"));
+				
+				encontrado.setNacionalidad(nacionalidad);
+				encontrado.setProvincia(provincia);
+				encontrado.setEspecialidad(especialidad);
+				encontrado.setDiaAtencion(diaSemana);
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return encontrado;
+		}
+	}
 	
-}

@@ -33,4 +33,9 @@ public class MedicoNegocioImpl implements MedicoNegocio{
 		return mDao.readAll();
 	}
 
+	@Override
+	public Medico buscarMedico(String dni) {
+		return mDao.buscarMedico(dni);
+	}
+
 }
