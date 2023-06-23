@@ -106,16 +106,16 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 <div class="container"> 
 
 <%
-	int filas =0;
+	
 	String mensaje = "";
 
 	if(request.getAttribute("insercion")!=null){
-		filas=Integer.parseInt(request.getAttribute("insercion").toString());
-		if(filas!=0) {
-			mensaje= "Paciente agregado correctamente!";
-		}
-		else{
-			mensaje = "Error al agregar al paciente.";
+		int filas=Integer.parseInt(request.getAttribute("insercion").toString());
+		if(filas==2) {
+			mensaje="Paciente agregado correctamente!";
+		
+		}else if(filas ==1){
+			mensaje="Error al agregar al paciente.";
 		}
 	}
 	
@@ -144,7 +144,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 %>
 
 			<div class="d-flex justify-content-center text-light">
-				<form method="post" action="servletPacientes" class="w-75">
+				<form method="post" action="servletPacientes?Param=0" class="w-75">
 					<div class="form-group">
 					<label>DNI</label> <input type="number" name="DNI"  min="1111111" max="99999999" class="form-control" required></input>
 					</div>

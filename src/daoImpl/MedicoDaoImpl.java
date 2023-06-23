@@ -119,8 +119,8 @@ public class MedicoDaoImpl implements MedicoDao{
 				medico.setNombre(resultSet.getString("NOMBRE"));
 				medico.setApellido(resultSet.getString("APELLIDO"));
 				medico.setSexo(resultSet.getString("SEXO"));
-				medico.setEmail(resultSet.getString("FECHA_NAC"));
-				medico.setFechaNacimiento(resultSet.getString("EMAIL"));
+				medico.setFechaNacimiento(resultSet.getString("FECHA_NAC"));
+				medico.setEmail(resultSet.getString("EMAIL"));
 				medico.setNacionalidad(new Nacionalidad(resultSet.getInt("COD_NACIONALIDAD"), resultSet.getString("DESC_NACIONALIDAD")));
 				medico.setEspecialidad(new Especialidad(resultSet.getInt("COD_ESPECIALIDAD"), resultSet.getString("DESC_ESPECIALIDAD")));				
 				medicos.add(medico);

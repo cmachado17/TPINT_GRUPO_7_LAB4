@@ -152,7 +152,10 @@ if(request.getAttribute("listaPacientes") != null){
 
 			<h2 class="tituloForm">Listado de Pacientes</h2>
 			</br>
+			</br>
+			
 			<table id="table_id" class="display table table-striped bg-light">
+			
 				<thead>
 					<tr>
 						<th scope="col">Dni</th>
@@ -169,9 +172,9 @@ if(request.getAttribute("listaPacientes") != null){
 							<td scope="row"><%=paciente.getDni() %> </td>
 							<td scope="row"><%= paciente.getNombre() %></td>
 							<td scope="row"><%= paciente.getApellido() %></td>
-							<td><input type="submit" value="Eliminar" name="btnEliminar"
+							<td><input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
 								onclick="confirmarEliminacion(<%= paciente.getDni()%>)" /></td>
-							<td><input type="submit" value="Editar" name="btnEditar"
+							<td><input class="btn-light"  type="submit" value="Editar" name="btnEditar"
 								onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
 						</tr>
 					<%} %>					

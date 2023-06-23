@@ -7,10 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.EmpleadoDao;
-import dao.PacienteDao;
 import entidad.Medico;
 import entidad.Nacionalidad;
-import entidad.Paciente;
 import entidad.Persona;
 import entidad.Provincia;
 
@@ -23,7 +21,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	private static final String update  = "UPDATE empleados SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
 		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefono = ? WHERE Dni = ?";
 	private static final String dniExiste= "SELECT * FROM empleados WHERE Dni = ?";
-	private static final String buscarPaciente= "SELECT empl.DNI, empl.Nombre, empl.Apellido, empl.Sexo"
+	private static final String buscarEmpleado= "SELECT empl.DNI, empl.Nombre, empl.Apellido, empl.Sexo"
 			+ ", empl.FECHA_NAC, empl.DIRECCION, empl.LOCALIDAD, empl.EMAIL, empl.TELEFONO, PRO.CODIGO, PRO.DESCRIPCION,"
 			+ "NAC.CODIGO, NAC.DESCRIPCION FROM empleados empl "
 			+ "INNER JOIN PROVINCIAS PRO ON PRO.CODIGO = empl.PROVINCIA "
@@ -72,7 +70,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	}
 
 	@Override
-	public boolean insertMedicosPorEspecilidad(Medico medico) {
+	public boolean insertMedicosPorEspecialidad(Medico medico) {
 		
 		Connection conexion = null;
 		conexion=Conexion.getConexion().getSQLConexion();
@@ -181,10 +179,14 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
 			{
-				Persona empleado = new Paciente();
+				Persona empleado = new Persona();
 				empleado.setDni(resultSet.getInt("DNI"));
 				empleado.setNombre(resultSet.getString("NOMBRE"));
 				empleado.setApellido(resultSet.getString("APELLIDO"));
+				empleado.setSexo(resultSet.getString("SEXO"));
+				empleado.setEmail(resultSet.getString("FECHA_NAC"));
+				empleado.setFechaNacimiento(resultSet.getString("EMAIL"));
+				empleado.setTelefono(resultSet.getString("TELEFONO"));
 				empleados.add(empleado);
 			}
 		} 
@@ -196,17 +198,17 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	}
 
 	@Override
-	public int dniNoExiste(Persona persona) {
+	public int dniNoExiste(Persona empleado) {
 		PreparedStatement statement;
 		ResultSet resultSet; 
-		Paciente encontrado = new Paciente();
+		Persona encontrado = new Persona();
 		int filas=0;
 		
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try 
 		{
 			statement = conexion.prepareStatement(dniExiste);
-			statement.setInt(1,persona.getDni());
+			statement.setInt(1,empleado.getDni());
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {
 
@@ -225,17 +227,17 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	
 
 	@Override
-	public Paciente BuscarEmpleado(String dni) {
+	public Persona BuscarEmpleado(String dni) {
 		PreparedStatement statement;
 		ResultSet resultSet; 
-		Paciente encontrado = new Paciente();
+		Persona encontrado = new Persona();
 		Nacionalidad nacionalidad = new Nacionalidad();
 		Provincia provincia = new Provincia();
 		
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		try 
 		{
-			statement = conexion.prepareStatement(buscarPaciente);
+			statement = conexion.prepareStatement(buscarEmpleado);
 			statement.setInt(1,Integer.parseInt(dni));
 			resultSet = statement.executeQuery();
 			if(resultSet.next()) {

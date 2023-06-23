@@ -151,7 +151,7 @@
 					</select> <label>Nacionalidad</label> <select name="nacionalidad" class="form-select custom-select" required>
 						<!-- Se cargan desde la BD -->
 					<%for (Nacionalidad n : listaN) {%>
-						<option value="<%=n.getCodigo()%>" <% if (paciente.getCodNacionalidad().getCodigo()== n.getCodigo()) {%>selected <%}%>><%=n.getDescripcion()%></option>
+						<option value="<%=n.getCodigo()%>" <% if (paciente.getNacionalidad().getCodigo()    == n.getCodigo()) {%>selected <%}%>><%=n.getDescripcion()%></option>
 					<%}%>
 		
 					</select> <label>Fecha</label> 

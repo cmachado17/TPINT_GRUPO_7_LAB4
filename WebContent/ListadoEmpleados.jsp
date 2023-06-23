@@ -1,5 +1,7 @@
 <%@page import="entidad.Medico"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Persona"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -75,15 +77,16 @@
     }
 </script>
 
-<%
-ArrayList <Medico> listaMedicos = null;
-if(request.getAttribute("listaMedicos") != null){
-	listaMedicos = (ArrayList <Medico>) request.getAttribute("listaMedicos");
-}
-%>
+
 
 <title>Listado de empleados</title>
 </head>
+<%
+	ArrayList <Medico> listaEmpleados = null;
+	if(request.getAttribute("listaEmpleados") != null){
+		listaEmpleados = (ArrayList <Medico>) request.getAttribute("listaEmpleados");
+	}
+%>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
@@ -148,6 +151,11 @@ if(request.getAttribute("listaMedicos") != null){
 </nav>
 
 
+
+
+
+
+
 <div class="container">
 	<div class="p-3 contenedor-principal">
 	<h2 class="tituloForm"> Listado de Empleados </h2> </br>
@@ -158,30 +166,32 @@ if(request.getAttribute("listaMedicos") != null){
 				<th scope="col">Nombre</th>
 				<th scope="col">Apellido</th>
 				<th scope="col">Sexo</th>
-				<th scope="col">Fecha Nacimiento</th>
-				<th scope="col">Correo electronico</th>
-				<th scope="col">Nacionalidad</th>				
-				<th scope="col">Especialidad</th>				
+				<th scope="col">Email</th>
+				<th scope="col">fecha nacimiento</th>
+				<th scope="col">Nacionalidad</th>		
+				<th scope="col">Especialidad</th>					
 				<th></th>
 				<th></th>
 			</tr>
 		</thead>
 		<tbody>	
-			<% if(listaMedicos != null)
-				for(Medico medico : listaMedicos){%>
+			<% 
+				if(listaEmpleados != null)
+				for(Medico empleado : listaEmpleados){%>
 				<tr>			
-					<td scope="row"><%= medico.getDni() %> </td>
-					<td scope="row"><%= medico.getNombre() %></td>
-					<td scope="row"><%= medico.getApellido() %></td>
-					<td scope="row"><%= medico.getSexo() %></td>
-					<td scope="row"><%= medico.getFechaNacimiento() %></td>
-					<td scope="row"><%= medico.getEmail() %></td>
-					<td scope="row"><%= medico.getNacionalidad().getDescripcion() %></td>					
-					<td scope="row"><%= medico.getEspecialidad().getDescripcion() %></td>
+					<td scope="row"><%= empleado.getDni() %> </td>
+					<td scope="row"><%= empleado.getNombre() %></td>
+					<td scope="row"><%= empleado.getApellido() %></td>
+					<td scope="row"><%= empleado.getSexo() %></td>
+					<td scope="row"><%= empleado.getEmail()     %></td>
+					<td scope="row"><%= empleado.getFechaNacimiento()     %></td>	
+					<td scope="row"><%= empleado.getNacionalidad().getDescripcion()    %></td>
+					<td scope="row"><%= empleado.getEspecialidad().getDescripcion()    %></td>			
+					
 					<td><input type="submit" value="Eliminar" name="btnEliminar"
-						onclick="confirmarEliminacion(<%= medico.getDni()%>)" /></td>
+						onclick="confirmarEliminacion(<%= empleado.getDni()%>)" /></td>
 					<td><input type="submit" value="Editar" name="btnEditar"
-						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=medico.getDni() %>'" /></td>
+						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=empleado.getDni() %>'" /></td>
 				</tr>
 			<%} %>					
 		</tbody>

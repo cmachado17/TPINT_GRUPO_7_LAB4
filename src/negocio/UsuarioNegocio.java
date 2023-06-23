@@ -1,8 +1,8 @@
-package dao;
+package negocio;
 
 import entidad.Usuario;
 
-public interface UsuarioDao {
-	
+public interface UsuarioNegocio {
+
 	public Usuario Login(Usuario usuario);
 }

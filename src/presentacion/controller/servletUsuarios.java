@@ -11,16 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import daoImpl.UsuarioDaoImpl;
 import entidad.Usuario;
+import negocio.UsuarioNegocio;
+import negocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/servletUsuarios")
 public class servletUsuarios extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-       
+    
+	UsuarioNegocio negUs = new UsuarioNegocioImpl();
 
     public servletUsuarios() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,14 +45,13 @@ public class servletUsuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if (request.getParameter("btnIngresar-login") != null) {
-			UsuarioDaoImpl uDao = new UsuarioDaoImpl();
 			
 			Usuario u = new Usuario();
 			
 			u.setDni(Integer.parseInt(request.getParameter("txtUsuario")));
 			u.setClave(request.getParameter("txtClave"));
 			
-			u = uDao.Login(u);
+			u = negUs.Login(u);
 			
 			if(u != null) {		
 				request.getSession().setAttribute("Sesion", u.getDni());

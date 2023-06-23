@@ -61,16 +61,14 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 <%
 	int filas =0;
 	String mensaje = "";
-
+	
 	if(request.getAttribute("estadoLogin")!=null){
 		filas=Integer.parseInt(request.getAttribute("estadoLogin").toString());
 		if(filas==0) {
-			mensaje= "Error al iniciar sesión, datos incorrectos. Intente nuevamente.";
-		}
-
+			mensaje="Error al iniciar sesión, datos incorrectos. Intente nuevamente.";
 	} 
 	
-	
+}
 %>
 <!-- <div style="text-align: center;"> -->
 <%-- 		<%=mensaje %> --%>

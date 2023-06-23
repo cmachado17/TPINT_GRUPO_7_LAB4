@@ -1,12 +1,11 @@
-package dao;
+package negocio;
 
 import java.util.ArrayList;
 
 import entidad.Medico;
 import entidad.Persona;
 
-
-public interface EmpleadoDao {
+public interface EmpleadoNegocio {
 
 	public boolean insert(Persona empleado);
 	public boolean insertMedicosPorEspecialidad(Medico medico);

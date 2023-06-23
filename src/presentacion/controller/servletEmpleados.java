@@ -2,6 +2,7 @@ package presentacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,13 +20,17 @@ import entidad.DiaSemana;
 import entidad.Especialidad;
 import entidad.Medico;
 import entidad.Nacionalidad;
+import entidad.Paciente;
+import entidad.Persona;
 import entidad.Provincia;
 import negocio.DiaSemanaNegocio;
+import negocio.EmpleadoNegocio;
 import negocio.EspecialidadNegocio;
 import negocio.MedicoNegocio;
 import negocio.NacionalidadNegocio;
 import negocio.ProvinciaNegocio;
 import negocioImpl.DiaSemanaNegocioImpl;
+import negocioImpl.EmpleadoNegocioImpl;
 import negocioImpl.EspecialidadNegocioImpl;
 import negocioImpl.MedicoNegocioImpl;
 import negocioImpl.NacionalidadNegocioImpl;
@@ -36,11 +41,13 @@ import negocioImpl.ProvinciaNegocioImpl;
 public class servletEmpleados extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-       
+    
+	EmpleadoNegocio negEmp = new EmpleadoNegocioImpl();
 	ProvinciaNegocio negProv = new ProvinciaNegocioImpl();
 	NacionalidadNegocio negNac = new NacionalidadNegocioImpl();
 	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
 	DiaSemanaNegocio negDia = new DiaSemanaNegocioImpl();
+	MedicoNegocio medicoNegocio = new MedicoNegocioImpl();
    
     public servletEmpleados() {
         super();
@@ -71,10 +78,9 @@ public class servletEmpleados extends HttpServlet {
 			case "2":
 				dispatcher = "/ModificacionEmpleados.jsp";
 				break;
-			case "3":	
-				MedicoNegocio medidoNegocio = new MedicoNegocioImpl();
-				ArrayList<Medico> listaMedicos = medidoNegocio.readAll();
-				request.setAttribute("listaMedicos", listaMedicos);	
+			case "3":
+				ArrayList<Medico> listaEmpleados = medicoNegocio.readAll();
+				request.setAttribute("listaEmpleados", listaEmpleados);	
 				dispatcher = "/ListadoEmpleados.jsp";
 				break;
 			default:
@@ -85,26 +91,27 @@ public class servletEmpleados extends HttpServlet {
 		    rd.forward(request, response);  
 		    }
 				
-		
-		if(request.getParameter("btnEditar")!=null) {
-			String dispatcher="/ModificacionEmpleados.jsp";
-		
-			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
-		    rd.forward(request, response);  
+			if(request.getParameter("btnEditar")!=null) {
+				String dispatcher="/ModificacionEmpleados.jsp";
+			
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}
+			
+			
+			if(request.getParameter("btnEliminar")!=null) {						
+				int dni = Integer.parseInt(request.getParameter("txtDni"));			
+				negEmp.delete(dni);	
+				RequestDispatcher rd = request.getRequestDispatcher("/servletEmpleados?Param=3");
+				rd.forward(request, response);
 			}
 		
-		
-		if(request.getParameter("btnEliminar")!=null) {			
-			MedicoDaoImpl meDaoImpl = new MedicoDaoImpl();			
-			int dni = Integer.parseInt(request.getParameter("txtDni"));			
-			meDaoImpl.delete(dni);	
-			RequestDispatcher rd = request.getRequestDispatcher("/servletEmpleados?Param=3");
-			rd.forward(request, response);
-		}
 		}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//alta empleado
 		int filas = 0;
 		
 		if(request.getParameter("btnEnviar-empleados")!=null) 
@@ -127,9 +134,7 @@ public class servletEmpleados extends HttpServlet {
 				administrador.setTelefono(request.getParameter("telefono"));
 				administrador.setEstado(true);
 				
-				EmpleadoDaoImpl empleadoDao = new EmpleadoDaoImpl();
-				
-				if(empleadoDao.insert(administrador)) {
+				if(negEmp.insert(administrador)) {
 					filas=1;			
 				}
 			}
@@ -158,17 +163,15 @@ public class servletEmpleados extends HttpServlet {
 				medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
 				medico.setHorarioFinAtencion(request.getParameter("horaFin"));
 				
-				EmpleadoDaoImpl empleadoDao = new EmpleadoDaoImpl();
-				
-				if(empleadoDao.insert(medico)) {
-					if(empleadoDao.insertMedicosPorEspecilidad(medico)) {				
+				if(negEmp.insert(medico)) {
+					if(negEmp.insertMedicosPorEspecialidad(medico)) {				
 						filas=1;		
 						TurnoDaoImpl turnoDao = new TurnoDaoImpl();
 						turnoDao.insert(medico);
 						
 					}
 					else {
-						empleadoDao.delete(medico.getDni());
+						negEmp.delete(medico.getDni());
 						filas=0;
 					}
 				}
@@ -180,5 +183,7 @@ public class servletEmpleados extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
 			rd.forward(request, response);
 		}
+		
+		
 	}
 }
