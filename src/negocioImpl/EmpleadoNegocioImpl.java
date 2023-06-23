@@ -46,6 +46,11 @@ public class EmpleadoNegocioImpl implements EmpleadoNegocio {
 	public Persona BuscarEmpleado(String dni) {
 		return eDao.BuscarEmpleado(dni);
 	}
+
+	@Override
+	public boolean updateMedicosEspecialidad(Medico medico) {
+		return eDao.updateEspecialidadesMedico(medico);
+	}
 	
 	
 

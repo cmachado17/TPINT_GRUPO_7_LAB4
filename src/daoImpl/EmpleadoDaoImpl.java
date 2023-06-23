@@ -16,6 +16,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	
 	private static final String insert  = "INSERT INTO empleados (DNI, NOMBRE, APELLIDO, SEXO, COD_NACIONALIDAD, FECHA_NAC, DIRECCION, LOCALIDAD, PROVINCIA, EMAIL, TELEFONO, ESTADO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String insertMedEspec  = "INSERT INTO medico_por_especialidad (DNIMEDICO, COD_ESPECIALIDAD, DIASEMANA, HORAINICIO, HORAFIN, ESTADO) VALUES (?, ?, ?, ?, ?, ?)";
+	private static final String updateMedEspec  = "UPDATE medico_por_especialidad  SET COD_ESPECIALIDAD = ?, DIASEMANA = ?, HORAINICIO = ?, HORAFIN = ? WHERE DNIMEDICO = ?";
 	private static final String delete  = "UPDATE empleados SET ESTADO=0 WHERE Dni = ?";
 	private static final String readall = "SELECT * FROM empleados where estado = 1";
 	private static final String update  = "UPDATE empleados SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
@@ -266,5 +267,37 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		}
 		return encontrado;
 		}
+
+	@Override
+	public boolean updateEspecialidadesMedico(Medico medico) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try
+		{
+			statement = conexion.prepareStatement(updateMedEspec);
+			
+			statement.setInt(1, medico.getEspecialidad().getCodigo());
+			statement.setInt(2, medico.getDiaAtencion().getCodigo());
+			statement.setString(3, medico.getHorarioInicioAtencion());
+			statement.setString(4, medico.getHorarioFinAtencion());
+			statement.setInt(5, medico.getDni());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return isOk;
+	}
 
 }

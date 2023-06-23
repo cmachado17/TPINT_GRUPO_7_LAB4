@@ -130,10 +130,8 @@
 		}
 		
 %>
-<%= medico.getHorarioInicioAtencion() %>
-<%= medico.getHorarioFinAtencion() %>
 <div class="d-flex justify-content-center text-light">
-			<form method="post" action="ServletHTML">
+			<form method="post" action="servletEmpleados">
 	<div class="form-group">
 				<label>DNI</label> <input type="number" name="DNI"  min="1111111" max="99999999" class="form-control" readonly="readonly" value="<%=medico.getDni()%>" style="background-color: lightgrey;"></input>
 				</div>

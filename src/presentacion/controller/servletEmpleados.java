@@ -194,6 +194,72 @@ public class servletEmpleados extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
 			rd.forward(request, response);
 		}
-
+		
+		if(request.getParameter("btnModificar")!=null) {
+			
+			int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
+			
+			if(tipoUsuario==1) {
+				
+				Administrador administrador = new Administrador();
+				administrador.setDni(Integer.parseInt(request.getParameter("DNI")));
+				administrador.setNombre(request.getParameter("nombre"));
+				administrador.setApellido(request.getParameter("apellido"));
+				administrador.setSexo(request.getParameter("sexo"));
+				administrador.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+				administrador.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+				administrador.setDireccion(request.getParameter("direccion"));
+				administrador.setLocalidad(request.getParameter("localidad"));
+				administrador.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+				administrador.setEmail(request.getParameter("email"));
+				administrador.setTelefono(request.getParameter("telefono"));
+				administrador.setEstado(true);
+				
+				if(negEmp.update(administrador)) {
+					filas=1;			
+				}
+			}
+			
+			if(tipoUsuario==2) {
+			
+			//SETEO EL MEDICO A ACTUALIZAR
+			Medico medico = new Medico();
+			medico.setDni(Integer.parseInt(request.getParameter("DNI")));
+			medico.setNombre(request.getParameter("nombre"));
+			medico.setApellido(request.getParameter("apellido"));
+			medico.setSexo(request.getParameter("sexo"));
+			medico.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+			medico.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+			medico.setDireccion(request.getParameter("direccion"));
+			medico.setLocalidad(request.getParameter("localidad"));
+			medico.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+			medico.setEmail(request.getParameter("email"));
+			medico.setTelefono(request.getParameter("telefono"));
+			medico.setEstado(true);
+			
+			//SETEO EL MEDICO POR ESPECIALIDAD A ACTUALIZAR
+			medico.setEspecialidad(new Especialidad (Integer.parseInt(request.getParameter("especialidad"))));
+			medico.setDiaAtencion(new DiaSemana(Integer.parseInt(request.getParameter("dia"))));		
+			medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
+			medico.setHorarioFinAtencion(request.getParameter("horaFin"));
+			
+			if(negEmp.update(medico)) {
+				if(negEmp.updateMedicosEspecialidad(medico)) {				
+					filas=1;		
+					//tendriamos que borrar todos los turnos?		
+				}
+				else {
+					negEmp.delete(medico.getDni());
+					filas=0;
+				}
+			}
+		}
+			//Redirecciono al listado
+			ArrayList<Medico> listaEmpleados = medicoNegocio.readAll();
+			request.setAttribute("listaEmpleados", listaEmpleados);	
+			RequestDispatcher rd = request.getRequestDispatcher("/ListadoEmpleados.jsp");
+			rd.forward(request, response);
+		
+		}
 	}
 }

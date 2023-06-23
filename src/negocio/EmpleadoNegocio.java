@@ -14,4 +14,5 @@ public interface EmpleadoNegocio {
 	public ArrayList<Persona> readAll();
 	public int dniNoExiste(Persona empleado);
 	public Persona BuscarEmpleado(String dni);
+	public boolean updateMedicosEspecialidad(Medico medico);
 }
