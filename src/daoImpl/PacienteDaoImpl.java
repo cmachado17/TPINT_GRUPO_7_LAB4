@@ -10,6 +10,11 @@ import dao.PacienteDao;
 import entidad.Nacionalidad;
 import entidad.Paciente;
 import entidad.Provincia;
+import excepciones.BuscarException;
+import excepciones.DeleteException;
+import excepciones.InsertException;
+import excepciones.ReadAllException;
+import excepciones.UpdateException;
 
 public class PacienteDaoImpl implements PacienteDao{
 	
@@ -26,7 +31,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			+ "INNER JOIN NACIONALIDADES NAC ON NAC.CODIGO = PA.COD_NACIONALIDAD WHERE pa.Dni = ?";
 	
 	@Override
-	public boolean insert(Paciente paciente) {
+	public boolean insert(Paciente paciente) throws InsertException {
 		
 		Connection conexion = null;
 		conexion=Conexion.getConexion().getSQLConexion();
@@ -61,6 +66,7 @@ public class PacienteDaoImpl implements PacienteDao{
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new InsertException();
 			}
 		}
 		
@@ -68,7 +74,7 @@ public class PacienteDaoImpl implements PacienteDao{
 	}
 
 	@Override
-	public boolean delete(int dni) {
+	public boolean delete(int dni) throws DeleteException {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
@@ -85,12 +91,13 @@ public class PacienteDaoImpl implements PacienteDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new DeleteException();
 		}
 		return isOk;
 	}
 
 	@Override
-	public boolean update(Paciente paciente) {
+	public boolean update(Paciente paciente) throws UpdateException {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
@@ -123,13 +130,14 @@ public class PacienteDaoImpl implements PacienteDao{
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new UpdateException();
 			}
 		}
 		return isOk;
 	}
 
 	@Override
-	public ArrayList<Paciente> readAll() {
+	public ArrayList<Paciente> readAll() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
@@ -150,12 +158,13 @@ public class PacienteDaoImpl implements PacienteDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return pacientes;
 	}
 
 	@Override
-	public int dniNoExiste(Paciente paciente) {
+	public int dniNoExiste(Paciente paciente) throws BuscarException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Paciente encontrado = new Paciente();
@@ -177,6 +186,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new BuscarException();
 		}
 		
 		return filas;
@@ -184,7 +194,7 @@ public class PacienteDaoImpl implements PacienteDao{
 	
 
 	@Override
-	public Paciente BuscarPaciente(String dni) {
+	public Paciente BuscarPaciente(String dni) throws BuscarException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Paciente encontrado = new Paciente();
@@ -220,6 +230,7 @@ public class PacienteDaoImpl implements PacienteDao{
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
+			throw new BuscarException();
 		}
 		return encontrado;
 		}

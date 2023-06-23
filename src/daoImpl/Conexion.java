@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import excepciones.ConexionException;
+
 public class Conexion {		//CONEXION GRUPO 7
 	
 	private String host = "jdbc:mysql://localhost:3306/";
@@ -14,7 +16,7 @@ public class Conexion {		//CONEXION GRUPO 7
 	
 	protected Connection connection;
 	
-	private Conexion()
+	private Conexion() 
 	{
 		try
 		{
@@ -25,11 +27,12 @@ public class Conexion {		//CONEXION GRUPO 7
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			
 		}
 	}
 	
 	
-	public static Conexion getConexion()   
+	public static Conexion getConexion()  
 	{								
 		if(instancia == null)
 		{
@@ -43,7 +46,7 @@ public class Conexion {		//CONEXION GRUPO 7
 		return this.connection;
 	}
 	
-	public void cerrarConexion()
+	public void cerrarConexion() throws ConexionException
 	{
 		try 
 		{
@@ -52,6 +55,7 @@ public class Conexion {		//CONEXION GRUPO 7
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			
 		}
 		instancia = null;
 	}

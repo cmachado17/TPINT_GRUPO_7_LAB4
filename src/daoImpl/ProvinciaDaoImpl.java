@@ -7,13 +7,14 @@ import java.util.ArrayList;
 
 import dao.ProvinciaDao;
 import entidad.Provincia;
+import excepciones.ReadAllException;
 
 public class ProvinciaDaoImpl implements ProvinciaDao {
 
 	private static final String readall = "SELECT * FROM provincias ";
 
 	@Override
-	public ArrayList<Provincia> obtenerProvincias() {
+	public ArrayList<Provincia> obtenerProvincias() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Provincia> provincias = new ArrayList<Provincia>();
@@ -33,6 +34,7 @@ public class ProvinciaDaoImpl implements ProvinciaDao {
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return provincias;
 	}

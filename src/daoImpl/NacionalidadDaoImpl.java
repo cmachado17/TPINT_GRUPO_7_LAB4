@@ -7,13 +7,14 @@ import java.util.ArrayList;
 
 import dao.NacionalidadDao;
 import entidad.Nacionalidad;
+import excepciones.ReadAllException;
 
 public class NacionalidadDaoImpl implements NacionalidadDao{
 
 	private static final String readall = "SELECT * FROM nacionalidades ";
 	
 	@Override
-	public ArrayList<Nacionalidad> obtenerNacionalidades() {
+	public ArrayList<Nacionalidad> obtenerNacionalidades() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Nacionalidad> nacionalidades = new ArrayList<Nacionalidad>();
@@ -33,6 +34,7 @@ public class NacionalidadDaoImpl implements NacionalidadDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return nacionalidades;
 	}

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import dao.PacienteDao;
 import daoImpl.PacienteDaoImpl;
 import entidad.Paciente;
+import excepciones.BuscarException;
+import excepciones.DeleteException;
+import excepciones.InsertException;
+import excepciones.ReadAllException;
+import excepciones.UpdateException;
 import negocio.PacienteNegocio;
 
 public class PacienteNegocioImpl implements PacienteNegocio{
@@ -13,7 +18,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 			
 
 	@Override
-	public boolean insert(Paciente paciente) {
+	public boolean insert(Paciente paciente) throws InsertException {
 		boolean estado=false;
 		if(paciente.getDni()> 0 && paciente.getNombre().trim().length()>0 
 			&& paciente.getApellido().trim().length()>0 && paciente.getSexo().trim().length()>0
@@ -28,7 +33,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 	}
 
 	@Override
-	public boolean delete(int dni) {
+	public boolean delete(int dni) throws DeleteException {
 		boolean estado=false;
 		if(dni > 0)
 		{
@@ -38,7 +43,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 	}
 
 	@Override
-	public boolean update(Paciente paciente) {
+	public boolean update(Paciente paciente) throws UpdateException {
 		boolean estado=false;
 		if(paciente.getDni()> 0 && paciente.getNombre().trim().length()>0 
 				&& paciente.getApellido().trim().length()>0 && paciente.getSexo().trim().length()>0
@@ -53,13 +58,13 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 	}
 
 	@Override
-	public ArrayList<Paciente> readAll() {
+	public ArrayList<Paciente> readAll() throws ReadAllException {
 		
 		return pDao.readAll();
 	}
 
 	@Override
-	public boolean dniNoExiste(Paciente paciente) {
+	public boolean dniNoExiste(Paciente paciente) throws BuscarException {
 		if(pDao.dniNoExiste(paciente)==0) {
 			return true;
 		}
@@ -67,7 +72,7 @@ public class PacienteNegocioImpl implements PacienteNegocio{
 	}
 
 	@Override
-	public Paciente buscarPaciente(String dni) {
+	public Paciente buscarPaciente(String dni) throws BuscarException {
 		return pDao.BuscarPaciente(dni);
 	}
 

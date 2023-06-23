@@ -14,6 +14,10 @@ import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Persona;
 import entidad.Provincia;
+import excepciones.BuscarException;
+import excepciones.DeleteException;
+import excepciones.InsertException;
+import excepciones.ReadAllException;
 
 public class MedicoDaoImpl implements MedicoDao{
 
@@ -37,7 +41,7 @@ public class MedicoDaoImpl implements MedicoDao{
 			+ "INNER JOIN EMPLEADOS AS E ON E.DNI = MPE.DNIMEDICO "
 			+ "WHERE E.ESTADO = 1 AND MPE.COD_ESPECIALIDAD = ?";
 	@Override
-	public boolean insert(Medico medico) {
+	public boolean insert(Medico medico) throws InsertException {
 		
 		Connection conexion = null;
 		conexion=Conexion.getConexion().getSQLConexion();
@@ -77,6 +81,7 @@ public class MedicoDaoImpl implements MedicoDao{
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new InsertException();
 			}
 		}
 		
@@ -86,7 +91,7 @@ public class MedicoDaoImpl implements MedicoDao{
 
 
 	@Override
-	public boolean delete(int dni) {
+	public boolean delete(int dni) throws DeleteException {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
@@ -103,6 +108,7 @@ public class MedicoDaoImpl implements MedicoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new DeleteException();
 		}
 		return isOk;
 	}
@@ -116,7 +122,7 @@ public class MedicoDaoImpl implements MedicoDao{
 	
 	@Override
 	
-	public ArrayList<Medico> readAll() {
+	public ArrayList<Medico> readAll() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -142,6 +148,7 @@ public class MedicoDaoImpl implements MedicoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return medicos;
 	}
@@ -149,7 +156,7 @@ public class MedicoDaoImpl implements MedicoDao{
 
 
 	@Override
-	public Medico buscarMedico(String dni) {
+	public Medico buscarMedico(String dni) throws BuscarException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Medico encontrado = new Medico();
@@ -194,6 +201,7 @@ public class MedicoDaoImpl implements MedicoDao{
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
+			throw new BuscarException();
 		}
 		return encontrado;
 		}
@@ -201,7 +209,7 @@ public class MedicoDaoImpl implements MedicoDao{
 
 
 	@Override
-	public ArrayList<Medico> medicosPorEspecialidad(int especialidad) {
+	public ArrayList<Medico> medicosPorEspecialidad(int especialidad) throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -223,6 +231,7 @@ public class MedicoDaoImpl implements MedicoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return medicos;
 	}

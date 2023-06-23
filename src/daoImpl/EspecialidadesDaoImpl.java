@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 import dao.EspecialidadesDao;
 import entidad.Especialidad;
+import excepciones.ConexionException;
+import excepciones.ReadAllException;
 
 public class EspecialidadesDaoImpl implements EspecialidadesDao{
 
 private static final String readall = "SELECT * FROM especialidades ";
 	
 	@Override
-	public ArrayList<Especialidad> obtenerEspecialidades() {
+	public ArrayList<Especialidad> obtenerEspecialidades() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Especialidad> especialidades = new ArrayList<Especialidad>();
@@ -33,6 +35,7 @@ private static final String readall = "SELECT * FROM especialidades ";
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return especialidades;
 	}

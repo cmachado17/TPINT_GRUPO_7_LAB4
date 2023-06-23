@@ -11,6 +11,12 @@ import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Persona;
 import entidad.Provincia;
+import excepciones.BuscarException;
+import excepciones.ConexionException;
+import excepciones.DeleteException;
+import excepciones.InsertException;
+import excepciones.ReadAllException;
+import excepciones.UpdateException;
 
 public class EmpleadoDaoImpl implements EmpleadoDao{
 	
@@ -29,7 +35,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 			+ "INNER JOIN NACIONALIDADES NAC ON NAC.CODIGO = empl.COD_NACIONALIDAD WHERE empl.Dni = ?";
 	
 	@Override
-	public boolean insert(Persona empleado) {
+	public boolean insert(Persona empleado) throws InsertException {
 		
 		Connection conexion = null;
 		conexion=Conexion.getConexion().getSQLConexion();
@@ -60,10 +66,12 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new InsertException();
 			}
 		}
 		
@@ -71,7 +79,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	}
 
 	@Override
-	public boolean insertMedicosPorEspecialidad(Medico medico) {
+	public boolean insertMedicosPorEspecialidad(Medico medico) throws InsertException {
 		
 		Connection conexion = null;
 		conexion=Conexion.getConexion().getSQLConexion();
@@ -97,10 +105,12 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new InsertException();
 			}
 		}
 		
@@ -108,7 +118,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	}
 
 	@Override
-	public boolean delete(int dni) {
+	public boolean delete(int dni) throws DeleteException {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
@@ -125,12 +135,13 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new DeleteException();
 		}
 		return isOk;
 	}
 
 	@Override
-	public boolean update(Persona empleado) {
+	public boolean update(Persona empleado) throws UpdateException {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
@@ -159,17 +170,19 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new UpdateException();
 			}
 		}
 		return isOk;
 	}
 
 	@Override
-	public ArrayList<Persona> readAll() {
+	public ArrayList<Persona> readAll() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<Persona> empleados = new ArrayList<Persona>();
@@ -194,12 +207,13 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return empleados;
 	}
 
 	@Override
-	public int dniNoExiste(Persona empleado) {
+	public int dniNoExiste(Persona empleado) throws BuscarException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Persona encontrado = new Persona();
@@ -221,6 +235,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new BuscarException();
 		}
 		
 		return filas;
@@ -228,7 +243,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	
 
 	@Override
-	public Persona BuscarEmpleado(String dni) {
+	public Persona BuscarEmpleado(String dni) throws BuscarException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		Persona encontrado = new Persona();
@@ -264,12 +279,13 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
+			throw new BuscarException();
 		}
 		return encontrado;
 		}
 
 	@Override
-	public boolean updateEspecialidadesMedico(Medico medico) {
+	public boolean updateEspecialidadesMedico(Medico medico) throws UpdateException {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		boolean isOk = false;
@@ -291,10 +307,12 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
+				throw new UpdateException();
 			}
 		}
 		return isOk;

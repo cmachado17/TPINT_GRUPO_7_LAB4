@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 import dao.DiaSemanaDao;
 import entidad.DiaSemana;
+import excepciones.ConexionException;
+import excepciones.ReadAllException;
 
 public class DiaSemanaDaoImpl implements DiaSemanaDao {
 
 private static final String readall = "SELECT * FROM diasemana ";
 	
 	@Override
-	public ArrayList<DiaSemana> obtenerDiaSemana() {
+	public ArrayList<DiaSemana> obtenerDiaSemana() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
 		ArrayList<DiaSemana> diasSemana = new ArrayList<DiaSemana>();
@@ -33,6 +35,7 @@ private static final String readall = "SELECT * FROM diasemana ";
 		catch (SQLException e) 
 		{
 			e.printStackTrace();
+			throw new ReadAllException();
 		}
 		return diasSemana;
 	}
