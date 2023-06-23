@@ -47,7 +47,7 @@ public class servletPacientes extends HttpServlet {
 			switch(request.getParameter("Param")) {
 			case "0":
 				//se pasa el dato para el mensaje, si tiene 0 no muestra nada 
-				request.setAttribute("insercion", filas);
+				//request.setAttribute("insercion", filas);
 				
 				//Se carga la lista de provincias y nacionalidades
 				request.setAttribute("listaProv", negProv.obtenerProvincias());
@@ -120,9 +120,9 @@ public class servletPacientes extends HttpServlet {
 
 			//REQUEST DISPATCHER
 			//Se carga la lista de provincias y nacionalidades
-			//request.setAttribute("listaProv", negProv.obtenerProvincias());
-			//request.setAttribute("listaNac", negNac.obtenerNacionalidades());
-			//request.setAttribute("insercion", filas);
+			request.setAttribute("listaProv", negProv.obtenerProvincias());
+			request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+			request.setAttribute("insercion", filas);
 			
 			RequestDispatcher rd = request.getRequestDispatcher(dispatcher);
 			rd.forward(request, response);

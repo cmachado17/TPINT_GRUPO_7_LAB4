@@ -180,6 +180,11 @@ public class servletEmpleados extends HttpServlet {
 
 			//REQUEST DISPATCHER
 			request.setAttribute("insercion", filas);
+			//Se carga la lista de provincias y nacionalidades
+			request.setAttribute("listaProv", negProv.obtenerProvincias());
+			request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+			request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
+			request.setAttribute("listaDias", negDia.obtenerDiaSemana());
 			RequestDispatcher rd = request.getRequestDispatcher("/AltaEmpleados.jsp");
 			rd.forward(request, response);
 		}
