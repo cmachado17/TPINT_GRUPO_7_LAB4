@@ -6,8 +6,8 @@ import java.sql.Time;
 public class Turno {
 
 	private Medico medico;
-	private Date dia;
-	private Time horario;
+	private String dia;
+	private String horario;
 	private Paciente paciente;
 	private Especialidad especialidad;
 	private EstadoTurno estadoTurno;
@@ -17,7 +17,7 @@ public class Turno {
 
 	}
 	
-	public Turno(Medico medico, Date dia, Time horario, Paciente paciente, Especialidad especialidad,
+	public Turno(Medico medico, String dia, String horario, Paciente paciente, Especialidad especialidad,
 			EstadoTurno estadoTurno, boolean estado) {
 		this.medico = medico;
 		this.dia = dia;
@@ -34,16 +34,16 @@ public class Turno {
 	public void setMedico(Medico medico) {
 		this.medico = medico;
 	}
-	public Date getDia() {
+	public String getDia() {
 		return dia;
 	}
-	public void setDia(Date dia) {
+	public void setDia(String dia) {
 		this.dia = dia;
 	}
-	public Time getHorario() {
+	public String getHorario() {
 		return horario;
 	}
-	public void setHorario(Time horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 	public Paciente getPaciente() {

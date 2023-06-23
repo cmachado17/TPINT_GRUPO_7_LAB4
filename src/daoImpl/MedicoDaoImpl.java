@@ -32,9 +32,10 @@ public class MedicoDaoImpl implements MedicoDao{
 			+ "INNER JOIN ESPECIALIDADES AS ESP ON MXE.COD_ESPECIALIDAD = ESP.CODIGO "
 			+ "INNER JOIN PROVINCIAS AS PRO ON PRO.CODIGO = E.PROVINCIA "
 			+ "INNER JOIN DIASEMANA AS DS ON DS.CODIGO = MXE.DIASEMANA "
-			+ "WHERE E.ESTADO = 1 AND E.DNI = ?"
-;
-	
+			+ "WHERE E.ESTADO = 1 AND E.DNI = ?";
+	private static final String medicosEspecialidad = "SELECT E.DNI, E.NOMBRE, E.APELLIDO FROM MEDICO_POR_ESPECIALIDAD AS MPE "
+			+ "INNER JOIN EMPLEADOS AS E ON E.DNI = MPE.DNIMEDICO "
+			+ "WHERE E.ESTADO = 1 AND MPE.COD_ESPECIALIDAD = ?";
 	@Override
 	public boolean insert(Medico medico) {
 		
@@ -196,5 +197,34 @@ public class MedicoDaoImpl implements MedicoDao{
 		}
 		return encontrado;
 		}
+
+
+
+	@Override
+	public ArrayList<Medico> medicosPorEspecialidad(int especialidad) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		ArrayList<Medico> medicos = new ArrayList<Medico>();
+		Conexion conexion = Conexion.getConexion();
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(medicosEspecialidad);
+			statement.setInt(1,especialidad);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{							
+				Medico medico = new Medico();
+				medico.setDni(resultSet.getInt("DNI"));
+				medico.setNombre(resultSet.getString("NOMBRE"));
+				medico.setApellido(resultSet.getString("APELLIDO"));
+				medicos.add(medico);
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return medicos;
+	}
 	}
 	

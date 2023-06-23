@@ -38,4 +38,9 @@ public class MedicoNegocioImpl implements MedicoNegocio{
 		return mDao.buscarMedico(dni);
 	}
 
+	@Override
+	public ArrayList<Medico> medicosPorEspecialidad(int especialidad) {
+		return mDao.medicosPorEspecialidad(especialidad);
+	}
+
 }

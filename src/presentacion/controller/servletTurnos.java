@@ -10,7 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import negocio.EspecialidadNegocio;
+import negocio.MedicoNegocio;
+import negocio.PacienteNegocio;
+import negocio.TurnoNegocio;
 import negocioImpl.EspecialidadNegocioImpl;
+import negocioImpl.MedicoNegocioImpl;
+import negocioImpl.PacienteNegocioImpl;
+import negocioImpl.TurnoNegocioImpl;
 
 @WebServlet("/servletTurnos")
 public class servletTurnos extends HttpServlet {
@@ -18,6 +24,9 @@ public class servletTurnos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
+	PacienteNegocio negPac = new PacienteNegocioImpl();
+	MedicoNegocio negMed = new MedicoNegocioImpl();
+	TurnoNegocio negTurn = new TurnoNegocioImpl();
 	
     public servletTurnos() {
         super();
@@ -59,7 +68,29 @@ public class servletTurnos extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		if(request.getParameter("btnEnviar")!=null) {
+			String dispatcher="/AsignarTurnos1.jsp";
+			
+			//medicos filtrados
+			request.setAttribute("listaMedicos",negMed.medicosPorEspecialidad(Integer.parseInt(request.getParameter("especialidad").toString())));
+			//guardo la especialidad para usar despues
+			request.getSession().setAttribute("EspecialidadTurno", Integer.parseInt(request.getParameter("especialidad").toString()));
+			
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}
+		
+		if(request.getParameter("btnEnviar-1")!=null) {
+			String dispatcher="/AsignarTurnos2.jsp";
+			
+			//turnos del medico elegido
+			request.setAttribute("turnosMedico",negTurn.turnosMedico(request.getParameter("medico").toString()));
+			//guardo el medico para usarlo despues
+			request.getSession().setAttribute("MedicoTurno", request.getParameter("medico"));
+		
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}
 	}
 
 }

@@ -11,4 +11,5 @@ public interface MedicoNegocio {
 	public boolean update(Medico medico);
 	public ArrayList<Medico> readAll();
 	public Medico buscarMedico(String dni);
+	public ArrayList<Medico> medicosPorEspecialidad(int especialidad);
 }

@@ -11,6 +11,10 @@ public class Medico extends Persona {
 		super();
 	}
 	
+	public Medico(int dni) {
+		super();
+		this.setDni(dni);
+	}
 
 	public Medico(Especialidad especialidad, DiaSemana diaAtencion, String horarioInicioAtencion,
 			String horarioFinAtencion) {

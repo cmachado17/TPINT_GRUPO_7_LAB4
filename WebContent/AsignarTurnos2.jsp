@@ -1,5 +1,6 @@
 <%@page import="entidad.DiaSemana"%>
-<%@page import="entidad.Paciente"%>
+<%@page import="entidad.Medico"%>
+<%@page import="entidad.Turno"%>
 <%@page import="entidad.Especialidad"%>
 <%@page import="entidad.Provincia"%>
 <%@page import="entidad.Nacionalidad"%>
@@ -96,17 +97,13 @@
 </nav>
 
 <% 
-		List<Especialidad> listaEsp = new ArrayList<Especialidad>();
+		List<Turno> listaTurnos = new ArrayList<Turno>();
 		
-		if (request.getAttribute("listaEsp") != null) {
-			listaEsp = (List<Especialidad>) request.getAttribute("listaEsp");
+		if (request.getAttribute("turnosMedico") != null) {
+			listaTurnos = (List<Turno>) request.getAttribute("turnosMedico");
 		}
 		
-		List<Paciente> listaPac = new ArrayList<Paciente>();
-		
-		if (request.getAttribute("listaPac") != null) {
-			listaPac = (List<Paciente>) request.getAttribute("listaPac");
-		}
+
 %>
 
 	<div class="container">
@@ -115,18 +112,17 @@
 
 			<form method="post" action="servletTurnos">
 				<div class="formulario">
-					<label>Especialidad</label>
-					<select  name="especialidad" type="text" class="form-select"> 
-					<% for (Especialidad esp : listaEsp) {%>
-							<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+					<label>Turnos</label>
+					<select  name="medico" type="text" class="form-select"> 
+					<% for (Turno turn : listaTurnos) {%>
+							<option value="<%=turn.getMedico().getDni()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
 							<%}%>
 					</select>
 						
 				    <div class="submit">
-				     <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
+				     <input type="submit" class="btn btn-light" name="btnEnviar-1" value="Enviar" ></input></br>
 				    </div>
-			</form>
-					<!--  <% for (Paciente pac : listaPac) {%><option value="<%=pac.getDni()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option><%}%>-->
+			</form>			
 		</div>
 	</div>
 </body>
