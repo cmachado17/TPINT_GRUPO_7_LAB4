@@ -31,6 +31,11 @@ public class EmpleadoNegocioImpl implements EmpleadoNegocio {
 	public boolean delete(int dni) throws DeleteException {
 		return eDao.delete(dni);
 	}
+	
+	@Override
+	public boolean bajaFisica(int dni) throws DeleteException {
+		return eDao.bajaFisica(dni);
+	}
 
 	@Override
 	public boolean update(Persona empleado) throws UpdateException {

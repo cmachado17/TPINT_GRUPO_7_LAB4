@@ -104,12 +104,13 @@
 				</ul>
 			</li>
 		</ul>
-		<div class="text-light pt-2">
-			 <% if(session.getAttribute("Sesion") != null){ %>
-     	<p><%= session.getAttribute("Sesion") %></p>
-     	<a href="servletUsuarios?logout=1">Logout</a>
-     <%}else{ %>
-     	<p>No logueado</p>
+      <div class="text-light pt-2">
+      <% if(session.getAttribute("Sesion") != null){ %>
+      	<p class="user"><%= session.getAttribute("Sesion") %> - <%= session.getAttribute("DescripcionTipoUsuario") %></p>
+      	
+      	<a class="user2" href="servletUsuarios?logout=1">Logout</a>
+      <%}else{ %>
+      	<p class="user">No logueado</p>
      	<%} %>
 		</div>
 	</div>
@@ -141,7 +142,7 @@
 			
 
 	<div class="d-flex justify-content-center text-light">				
-			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
+			<form method="post" action="servletPacientes" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
 				<div class="form-group">
 					<label>DNI</label> <input type="number" name="DNI" class="form-control" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
 					<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20" class="form-control" required value="<%=paciente.getNombre() %>"></input>

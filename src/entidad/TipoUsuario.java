@@ -7,6 +7,10 @@ public class TipoUsuario {
 	
 	public TipoUsuario() {}
 	
+	public TipoUsuario(int codTipoUsuario) {
+		CodigoTipoUsuario=codTipoUsuario;
+	}
+	
 	public int getCodigoTipoUsuario() {
 		return CodigoTipoUsuario;
 	}

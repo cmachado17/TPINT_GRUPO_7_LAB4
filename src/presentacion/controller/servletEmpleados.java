@@ -22,18 +22,22 @@ import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Persona;
 import entidad.Provincia;
+import entidad.TipoUsuario;
+import entidad.Usuario;
 import negocio.DiaSemanaNegocio;
 import negocio.EmpleadoNegocio;
 import negocio.EspecialidadNegocio;
 import negocio.MedicoNegocio;
 import negocio.NacionalidadNegocio;
 import negocio.ProvinciaNegocio;
+import negocio.UsuarioNegocio;
 import negocioImpl.DiaSemanaNegocioImpl;
 import negocioImpl.EmpleadoNegocioImpl;
 import negocioImpl.EspecialidadNegocioImpl;
 import negocioImpl.MedicoNegocioImpl;
 import negocioImpl.NacionalidadNegocioImpl;
 import negocioImpl.ProvinciaNegocioImpl;
+import negocioImpl.UsuarioNegocioImpl;
 
 
 @WebServlet("/servletEmpleados")
@@ -42,6 +46,7 @@ public class servletEmpleados extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	EmpleadoNegocio negEmp = new EmpleadoNegocioImpl();
+	UsuarioNegocio negUser = new UsuarioNegocioImpl();
 	ProvinciaNegocio negProv = new ProvinciaNegocioImpl();
 	NacionalidadNegocio negNac = new NacionalidadNegocioImpl();
 	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
@@ -123,61 +128,59 @@ public class servletEmpleados extends HttpServlet {
 		if(request.getParameter("btnEnviar-empleados")!=null) 
 		{
 			int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
+			Usuario usuario = new Usuario();
+			usuario.setDni(Integer.parseInt(request.getParameter("DNI")));
+			usuario.setClave(String.valueOf(usuario.getDni()));
+//			usuario.setClave("1234");
+			TipoUsuario tu = new TipoUsuario();
+			tu.setCodigoTipoUsuario(tipoUsuario);			
+			usuario.setTipoUser(tu);
+			usuario.setEstado(true);
 			
-			if(tipoUsuario==1) {
-				
-				Administrador administrador = new Administrador();
-				administrador.setDni(Integer.parseInt(request.getParameter("DNI")));
-				administrador.setNombre(request.getParameter("nombre"));
-				administrador.setApellido(request.getParameter("apellido"));
-				administrador.setSexo(request.getParameter("sexo"));
-				administrador.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
-				administrador.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-				administrador.setDireccion(request.getParameter("direccion"));
-				administrador.setLocalidad(request.getParameter("localidad"));
-				administrador.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
-				administrador.setEmail(request.getParameter("email"));
-				administrador.setTelefono(request.getParameter("telefono"));
-				administrador.setEstado(true);
-				
-				if(negEmp.insert(administrador)) {
-					filas=1;			
+			Persona empleado = new Persona();
+			empleado.setDni(Integer.parseInt(request.getParameter("DNI")));
+			empleado.setNombre(request.getParameter("nombre"));
+			empleado.setApellido(request.getParameter("apellido"));
+			empleado.setSexo(request.getParameter("sexo"));
+			empleado.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+			empleado.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+			empleado.setDireccion(request.getParameter("direccion"));
+			empleado.setLocalidad(request.getParameter("localidad"));
+			empleado.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+			empleado.setEmail(request.getParameter("email"));
+			empleado.setTelefono(request.getParameter("telefono"));
+			empleado.setEstado(true);
+			
+			if(tipoUsuario==1) {			
+				if(negEmp.insert(empleado)) {
+					if(negUser.insert(usuario)) {
+						filas=1;									
+					}
 				}
 			}
 			
 			if(tipoUsuario==2) {
-				
-				//ESTA PARTE INSERTA UN NUEVO MÉDICO EN LA TABLA MÉDICOS
-				Medico medico = new Medico();
-				medico.setDni(Integer.parseInt(request.getParameter("DNI")));
-				medico.setNombre(request.getParameter("nombre"));
-				medico.setApellido(request.getParameter("apellido"));
-				medico.setSexo(request.getParameter("sexo"));
-				medico.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
-				medico.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-				medico.setDireccion(request.getParameter("direccion"));
-				medico.setLocalidad(request.getParameter("localidad"));
-				medico.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
-				medico.setEmail(request.getParameter("email"));
-				medico.setTelefono(request.getParameter("telefono"));
-				medico.setEstado(true);
-				
+				Medico medico = new Medico();				
 				
 				//ESTA PARTE INSERTA UN NUEVO MEDICO POR ESPECIALIDAD
+				medico.setDni(empleado.getDni());
 				medico.setEspecialidad(new Especialidad (Integer.parseInt(request.getParameter("especialidad"))));
 				medico.setDiaAtencion(new DiaSemana(Integer.parseInt(request.getParameter("dia"))));		
 				medico.setHorarioInicioAtencion(request.getParameter("horaInicio"));
 				medico.setHorarioFinAtencion(request.getParameter("horaFin"));
+				medico.setEstado(empleado.getEstado());
 				
-				if(negEmp.insert(medico)) {
-					if(negEmp.insertMedicosPorEspecialidad(medico)) {				
-						filas=1;		
-						TurnoDaoImpl turnoDao = new TurnoDaoImpl();
-						turnoDao.insert(medico);
+				if(negEmp.insert(empleado)) {
+					if(negEmp.insertMedicosPorEspecialidad(medico)) {
+						if(negUser.insert(usuario)) {				//método para agregar un usuario al sistema al crear un médico o administrador			
+							filas=1;		
+							TurnoDaoImpl turnoDao = new TurnoDaoImpl();
+							turnoDao.insert(medico);
+						}
 						
 					}
-					else {
-						negEmp.delete(medico.getDni());
+					else {	//si puede insertar el medico pero no la especialidad por médico elimina al médico creado.
+						negEmp.bajaFisica(empleado.getDni());	//creo el método bajaFisica hasta que veamos si hacemos trigger o no
 						filas=0;
 					}
 				}
@@ -198,6 +201,14 @@ public class servletEmpleados extends HttpServlet {
 		if(request.getParameter("btnModificar")!=null) {
 			
 			int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
+			Usuario usuario = new Usuario();
+
+			usuario.setDni(Integer.parseInt(request.getParameter("DNI")));
+			usuario.setClave(String.valueOf(usuario.getDni()));
+			TipoUsuario tu = new TipoUsuario();
+			tu.setCodigoTipoUsuario(tipoUsuario);			
+			usuario.setTipoUser(tu);
+			usuario.setEstado(true);
 			
 			if(tipoUsuario==1) {
 				
@@ -216,6 +227,7 @@ public class servletEmpleados extends HttpServlet {
 				administrador.setEstado(true);
 				
 				if(negEmp.update(administrador)) {
+					if(negUser.update(usuario));
 					filas=1;			
 				}
 			}
@@ -244,12 +256,14 @@ public class servletEmpleados extends HttpServlet {
 			medico.setHorarioFinAtencion(request.getParameter("horaFin"));
 			
 			if(negEmp.update(medico)) {
-				if(negEmp.updateMedicosEspecialidad(medico)) {				
-					filas=1;		
-					//tendriamos que borrar todos los turnos?		
+				if(negEmp.updateMedicosEspecialidad(medico)) {			//si puede insertar el medico pero no la especialidad por médico elimina al médico creado.	
+					if(negUser.update(usuario)) {			//método para modificar el usuario si cambia de médio a admin o viceversa
+						filas=1;		
+						//tendriamos que borrar todos los turnos?		
+					}
 				}
 				else {
-					negEmp.delete(medico.getDni());
+					//negEmp.bajaFisica(medico.getDni());	//creo el método bajaFisica hasta que veamos si hacemos trigger o no
 					filas=0;
 				}
 			}

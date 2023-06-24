@@ -24,6 +24,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	private static final String insertMedEspec  = "INSERT INTO medico_por_especialidad (DNIMEDICO, COD_ESPECIALIDAD, DIASEMANA, HORAINICIO, HORAFIN, ESTADO) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String updateMedEspec  = "UPDATE medico_por_especialidad  SET COD_ESPECIALIDAD = ?, DIASEMANA = ?, HORAINICIO = ?, HORAFIN = ? WHERE DNIMEDICO = ?";
 	private static final String delete  = "UPDATE empleados SET ESTADO=0 WHERE Dni = ?";
+	private static final String bajaFisica  = "DELETE from empleados WHERE Dni = ?";
 	private static final String readall = "SELECT * FROM empleados where estado = 1";
 	private static final String update  = "UPDATE empleados SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
 		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefono = ? WHERE Dni = ?";
@@ -125,6 +126,28 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		try 
 		{
 			statement = conexion.prepareStatement(delete);
+			statement.setInt(1, dni);
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			throw new DeleteException();
+		}
+		return isOk;
+	}
+	
+	public boolean bajaFisica(int dni) throws DeleteException {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try 
+		{
+			statement = conexion.prepareStatement(bajaFisica);
 			statement.setInt(1, dni);
 			if(statement.executeUpdate() > 0)
 			{

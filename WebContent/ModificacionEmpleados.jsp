@@ -1,3 +1,4 @@
+<%@page import="java.util.logging.Formatter"%>
 <%@page import="entidad.Medico"%>
 <%@page import="entidad.DiaSemana"%>
 <%@page import="entidad.Especialidad"%>
@@ -130,66 +131,46 @@
 		}
 		
 %>
-<div class="d-flex justify-content-center text-light">
-			<form method="post" action="servletEmpleados">
-	<div class="form-group">
-				<label>DNI</label> <input type="number" name="DNI"  min="1111111" max="99999999" class="form-control" readonly="readonly" value="<%=medico.getDni()%>" style="background-color: lightgrey;"></input>
-				</div>
+		<div class="d-flex justify-content-center text-light">
+			<form method="post" action="servletEmpleados"  class="w-75">
 				<div class="form-group">
-				<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20"  class="form-control"required value="<%=medico.getNombre()%>"></input>
-				</div>
-				<div class="form-group">
-				<label>Apellido</label> <input type="text" name="apellido"  minlength="3" maxlength="30" class="form-control" required value="<%=medico.getApellido()%>"></input>
-				</div>
-				<div class="form-group">
+					<label>DNI</label> <input type="number" name="DNI" min="1111111" max="99999999" class="form-control" readonly="readonly" value="<%=medico.getDni()%>" style="background-color: lightgrey;"></input>
+					<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20"  class="form-control"required value="<%=medico.getNombre()%>"></input>
+					<label>Apellido</label> <input type="text" name="apellido"  minlength="3" maxlength="30" class="form-control" required value="<%=medico.getApellido()%>"></input>
 					<label>Sexo</label>    
 				 	<select name="sexo" required class="form-select">
     					<option value="M" <% if (medico.getSexo() == "M") {%>selected <%}%>>M</option>
     					<option value="F" <% if (medico.getSexo()  == "F") {%>selected <%}%>>F</option>
    		 			</select> 
-				</div>
-				<div class="form-group">
 					<label>Nacionalidad</label> 
    		 			<select name="nacionalidad" required class="form-select custom-select">
   					<%for (Nacionalidad n : listaN) {%>
 						<option value="<%=n.getCodigo()%>" <% if (medico.getNacionalidad().getCodigo()    == n.getCodigo()) {%>selected <%}%>><%=n.getDescripcion()%></option>
 					<%}%>
 					</select> 
-				</div>
-				<div class="form-group">
-				 <label>Fecha Nac.</label> <input type="date" name="fechaNacimiento" required class="form-control" value="<%=medico.getFechaNacimiento()%>"></input> 
-				</div>
-				<div class="form-group">
-				<label>Direccion</label> <input type="text" name="direccion" minlength="3" maxlength="40"  required class="form-control" value="<%=medico.getDireccion() %>"></input>
-				</div>
-				<div class="form-group">
-				<label>Localidad</label><input type="text" name="localidad" minlength="3" maxlength="20" required class="form-control" value="<%=medico.getLocalidad() %>"></input>
-				</div>
-				<div class="form-group">
+					<label>Fecha Nac.</label> <input type="date" name="fechaNacimiento" required class="form-control" value="<%=medico.getFechaNacimiento()%>"></input> 
+					<label>Direccion</label> <input type="text" name="direccion" minlength="3" maxlength="40"  required class="form-control" value="<%=medico.getDireccion() %>"></input>
+					<label>Localidad</label><input type="text" name="localidad" minlength="3" maxlength="20" required class="form-control" value="<%=medico.getLocalidad() %>"></input>
 					 <label>Provincia</label>
 					<select type="text" name="provincia" required class="form-select">
 						<%for (Provincia p : listaP) {%>
 							<option value="<%=p.getCodigo()%>" <% if (medico.getProvincia().getCodigo()== p.getCodigo()) {%>selected <%}%>><%=p.getDescripcion()%></option>
 						<%}%>
 					</select> 
-				</div>
-				<div class="form-group">
-				<label>Email</label> <input type="email" name="email"  minlength="3" maxlength="40" required class="form-control" value="<%=medico.getEmail() %>"></input> 
-				</div>
-				<div class="form-group">
-				<label>Telefono</label> <input type="tel" name="telefono" minlength="6" maxlength="15" required class="form-control" value="<%=medico.getTelefono() %>"></input> 
-				</div>
-					<label>Tipo de Usuario</label>
-						<div class="form-check">
-							<input type="radio" id="show" name="tipousuario" value=2 class="form-check-input" checked></input> 
-							<label class="form-check-label">Médico</label>
-						</div>
-						<div class="form-check">
-							<input type="radio" id="Hided" name="tipousuario" value=1 class="form-check-input"></input>
-							<label class="form-check-label">Administrador</label>
-						</div>
-						<!-- <div id="show-this" style="display:none"> -->
-				<div id="show-this">
+					<label>Email</label> <input type="email" name="email"  minlength="3" maxlength="40" required class="form-control" value="<%=medico.getEmail() %>"></input> 
+					<label>Telefono</label> <input type="tel" name="telefono" minlength="6" maxlength="15" required class="form-control" value="<%=medico.getTelefono() %>"></input> 
+					</div>
+						<label>Tipo de Usuario</label>
+							<div class="form-check">
+								<input type="radio" id="show" name="tipousuario" value=2 class="form-check-input" checked></input> 
+								<label class="form-check-label">Médico</label>
+							</div>
+							<div class="form-check">
+								<input type="radio" id="Hided" name="tipousuario" value=1 class="form-check-input"></input>
+								<label class="form-check-label">Administrador</label>
+							</div>
+							<!-- <div id="show-this" style="display:none"> -->
+					<div id="show-this">
 					<div class="form-group">
 					<label >Especialidades</label> 
 						<select type="text" name="especialidad" class="form-select">
@@ -208,40 +189,34 @@
 					</div>
 					<div class="form-group">
 					<label>Hora Inicio</label> 
-						<select type="text" name="horaInicio" class="form-control">
-							  	<option value="8:00:00" <% if (medico.getHorarioInicioAtencion() == "8:00:00") {%> selected<%}%>>8:00</option>
-    						 	<option value="9:00:00" <% if (medico.getHorarioInicioAtencion() == "9:00:00") {%> selected<%}%>>9:00</option>
-    							<option value="10:00:00" <% if (medico.getHorarioInicioAtencion() == "10:00:00") {%> selected<%}%>>10:00</option>			
-    							<option value="11:00:00" <% if (medico.getHorarioInicioAtencion() == "11:00:00") {%> selected<%}%>>11:00</option>
-    							<option value="12:00:00"<% if (medico.getHorarioInicioAtencion() == "12:00:00") {%> selected<%}%>>12:00</option>
-    							<option value="13:00:00"<% if (medico.getHorarioInicioAtencion() == "13:00:00") {%> selected<%}%>>13:00</option>
-    							<option value="14:00:00"<% if (medico.getHorarioInicioAtencion() == "14:00:00") {%> selected<%}%>>14:00</option>
-    							<option value="15:00:00"<% if (medico.getHorarioInicioAtencion() == "15:00:00") {%> selected<%}%>>15:00</option>
-    							<option value="16:00:00"<% if (medico.getHorarioInicioAtencion() == "16:00:00") {%> selected<%}%>>16:00</option>  							
-    							<option value="17:00:00"<% if (medico.getHorarioInicioAtencion() == "17:00:00") {%> selected<%}%>>17:00</option>
-    							<option value="18:00:00"<% if (medico.getHorarioInicioAtencion() == "18:00:00") {%> selected<%}%>>18:00</option>
-    							<option value="19:00:00"<% if (medico.getHorarioInicioAtencion() == "19:00:00") {%> selected<%}%>>19:00</option> 							
-    							<option value="20:00:00"<% if (medico.getHorarioInicioAtencion() == "20:00:00") {%> selected<%}%>>20:00</option>
-    							<option value="21:00:00"<% if (medico.getHorarioInicioAtencion() == "21:00:00") {%> selected<%}%>>21:00</option>
+						<select type="text" name="horaInicio" class="form-select">
+							  	<option value="8:00:00" <% if (medico.getHorarioInicioAtencion().equals(("08:00:00").toString())) {%> selected<%}%>>8:00</option>
+    						 	<option value="9:00:00" <% if (medico.getHorarioInicioAtencion().equals(("09:00:00").toString())) {%> selected<%}%>>9:00</option>
+    							<option value="10:00:00" <% if (medico.getHorarioInicioAtencion().equals(("10:00:00").toString())) {%> selected<%}%>>10:00</option>			
+    							<option value="11:00:00" <% if (medico.getHorarioInicioAtencion().equals(("11:00:00").toString())) {%> selected<%}%>>11:00</option>
+    							<option value="12:00:00"<% if (medico.getHorarioInicioAtencion().equals(("12:00:00".toString()))) {%> selected<%}%>>12:00</option>
+    							<option value="13:00:00"<% if (medico.getHorarioInicioAtencion().equals(("13:00:00".toString()))) {%> selected<%}%>>13:00</option>
+    							<option value="14:00:00"<% if (medico.getHorarioInicioAtencion().equals(("14:00:00".toString()))) {%> selected<%}%>>14:00</option>
+    							<option value="15:00:00"<% if (medico.getHorarioInicioAtencion().equals(("15:00:00".toString()))) {%> selected<%}%>>15:00</option>
+    							<option value="16:00:00"<% if (medico.getHorarioInicioAtencion().equals(("16:00:00".toString()))) {%> selected<%}%>>16:00</option>  							
+    							<option value="17:00:00"<% if (medico.getHorarioInicioAtencion().equals(("17:00:00".toString()))) {%> selected<%}%>>17:00</option>
+    							<option value="18:00:00"<% if (medico.getHorarioInicioAtencion().equals(("18:00:00".toString()))) {%> selected<%}%>>18:00</option>
 						</select>
 					</div>
 					<div class="form-group">
 					<label>Hora Fin</label> 
-						<select type="text" name="horaFin" class="form-control">
-							  	<option value="8:00:00" <% if (medico.getHorarioFinAtencion() == "8:00:00") {%> selected<%}%>>8:00</option>
-    						 	<option value="9:00:00" <% if (medico.getHorarioFinAtencion() == "9:00:00") {%> selected<%}%>>9:00</option>
-    							<option value="10:00:00" <% if (medico.getHorarioFinAtencion() == "10:00:00") {%> selected<%}%>>10:00</option>			
-    							<option value="11:00:00" <% if (medico.getHorarioFinAtencion() == "11:00:00") {%> selected<%}%>>11:00</option>
-    							<option value="12:00:00"<% if (medico.getHorarioFinAtencion() == "12:00:00") {%> selected<%}%>>12:00</option>
-    							<option value="13:00:00"<% if (medico.getHorarioFinAtencion() == "13:00:00") {%> selected<%}%>>13:00</option>
-    							<option value="14:00:00"<% if (medico.getHorarioFinAtencion() == "14:00:00") {%> selected<%}%>>14:00</option>
-    							<option value="15:00:00"<% if (medico.getHorarioFinAtencion() == "15:00:00") {%> selected<%}%>>15:00</option>
-    							<option value="16:00:00"<% if (medico.getHorarioFinAtencion() == "16:00:00") {%> selected<%}%>>16:00</option>  							
-    							<option value="17:00:00"<% if (medico.getHorarioFinAtencion() == "17:00:00") {%> selected<%}%>>17:00</option>
-    							<option value="18:00:00"<% if (medico.getHorarioFinAtencion() == "18:00:00") {%> selected<%}%>>18:00</option>
-    							<option value="19:00:00"<% if (medico.getHorarioFinAtencion() == "19:00:00") {%> selected<%}%>>19:00</option> 							
-    							<option value="20:00:00"<% if (medico.getHorarioFinAtencion() == "20:00:00") {%> selected<%}%>>20:00</option>
-    							<option value="21:00:00"<% if (medico.getHorarioFinAtencion() == "21:00:00") {%> selected<%}%>>21:00</option>
+						<select type="text" name="horaFin" class="form-select">
+							  	<option value="8:00:00" <% if (medico.getHorarioFinAtencion().equals(("08:00:00".toString()))) {%> selected<%}%>>8:00</option>
+    						 	<option value="9:00:00" <% if (medico.getHorarioFinAtencion().equals(("09:00:00".toString()))) {%> selected<%}%>>9:00</option>
+    							<option value="10:00:00" <% if (medico.getHorarioFinAtencion().equals(("10:00:00".toString()))) {%> selected<%}%>>10:00</option>			
+    							<option value="11:00:00" <% if (medico.getHorarioFinAtencion().equals(("11:00:00".toString()))) {%> selected<%}%>>11:00</option>
+    							<option value="12:00:00"<% if (medico.getHorarioFinAtencion().equals(("12:00:00".toString()))) {%> selected<%}%>>12:00</option>
+    							<option value="13:00:00"<% if (medico.getHorarioFinAtencion().equals(("13:00:00".toString()))) {%> selected<%}%>>13:00</option>
+    							<option value="14:00:00"<% if (medico.getHorarioFinAtencion().equals(("14:00:00").toString())) {%> selected<%}%>>14:00</option>
+    							<option value="15:00:00"<% if (medico.getHorarioFinAtencion().equals(("15:00:00".toString()))) {%> selected<%}%>>15:00</option>
+    							<option value="16:00:00"<% if (medico.getHorarioFinAtencion().equals(("16:00:00").toString())) {%> selected<%}%>>16:00</option>  							
+    							<option value="17:00:00"<% if (medico.getHorarioFinAtencion().equals(("17:00:00".toString()))) {%> selected<%}%>>17:00</option>
+    							<option value="18:00:00"<% if (medico.getHorarioFinAtencion().equals(("18:00:00".toString()))) {%> selected<%}%>>18:00</option>
 						</select>
 					</div>
 				</div>

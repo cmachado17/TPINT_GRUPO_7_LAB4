@@ -17,6 +17,7 @@ public interface EmpleadoDao {
 	public boolean insert(Persona empleado) throws InsertException;
 	public boolean insertMedicosPorEspecialidad(Medico medico) throws InsertException;
 	public boolean delete(int dni) throws DeleteException;
+	public boolean bajaFisica(int dni) throws DeleteException;
 	public boolean update(Persona empleado) throws UpdateException;
 	public boolean updateEspecialidadesMedico (Medico empleado) throws UpdateException;
 	public ArrayList<Persona> readAll() throws ReadAllException;
