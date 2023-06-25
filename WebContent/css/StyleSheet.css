@@ -221,13 +221,20 @@ tr:nth-child(even)
 	}
 	
 	.center{
-	margin-left:32%;
+	margin-left:30%;
+	margin-right: 2%;
 	color:white;
 	font-family: 'Kanit', sans-serif;
 	}
 	
 		.center2{
-	margin-left:34.5%;
+	margin-left:33%;
+	margin-right: 2%;
+	color:white;
+	font-family: 'Kanit', sans-serif;
+	}
+	
+		.center3{
 	color:white;
 	font-family: 'Kanit', sans-serif;
 	}

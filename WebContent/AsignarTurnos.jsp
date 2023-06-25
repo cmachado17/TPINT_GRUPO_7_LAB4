@@ -261,24 +261,40 @@
 		  </div>
 		</form>  
 		
+		
 		<br>
 		
 		<form class="row g-3" method="post" action="servletTurnos">
-		 		<div class="col-auto center2">
+		
+		<div class="col-auto center2">
 				   <label class="formulario">Turnos</label>
 				   </div>
 				  <div class="col-auto">
-			    	<select  name="medico" type="text" class="form-select"> 
-					<% for (Turno turn : listaTurnos) {%>
-							<option value="<%=turn.getMedico().getDni()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
+			    	<select  name="turno" type="text" class="form-select"> 
+			    	<% 
+					 for (Turno turn : listaTurnos) {
+					%>
+							<option value="<%=turn.getDia() %> <%=turn.getHorario()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
 					<%}%>
 					</select>
   				</div>
-
-		  <div class="col-auto">
-		   <input type="submit" class="btn btn-light" name="btnBuscar3" value="Buscar" ></input></br>
-		  </div>
-		</form>
+  				
+  				
+				<div class="col-auto">
+					<label class="center3">Pacientes</label>
+					</div>
+					<div class="col-auto">
+					<select  name="paciente" type="text" class="form-select"> 
+					<% for (Paciente pac : listaPac) {%>
+							<option value="<%=pac.getDni()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option>
+							<%}%>
+					</select>
+					</div>
+						
+				    <div class="submit">
+				     <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
+				    </div>
+			</form>			
 <%} %> 
 
 

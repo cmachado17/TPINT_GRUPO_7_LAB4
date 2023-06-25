@@ -88,22 +88,24 @@ public class servletTurnos extends HttpServlet {
 		if(request.getParameter("btnBuscar2")!=null) {
 			String dispatcher="/AsignarTurnos.jsp";
 			
-			//En htttpSession obtengo todas las variables session creadas
-			HttpSession session = request.getSession();
-			
 			//turnos del medico elegido
 			request.setAttribute("turnosMedico",negTurn.turnosMedico(request.getParameter("medico").toString()));
 			//guardo el medico para usarlo despues
 			request.getSession().setAttribute("MedicoTurno", request.getParameter("medico"));
+			
+			//cargar pacientes
+			request.setAttribute("listaPac", negPac.readAll());
 		
 			//volver a cargar las especialidades
 			request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
 			//vuelvo a cargar los medicos de esa especialidad 
-			request.setAttribute("listaMedicos",negMed.medicosPorEspecialidad(Integer.parseInt(session.getAttribute("EspecialidadTurno").toString())));
+			request.setAttribute("listaMedicos",negMed.medicosPorEspecialidad(Integer.parseInt(request.getSession().getAttribute("EspecialidadTurno").toString())));
 			
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+		
+		
 	}
 
 }

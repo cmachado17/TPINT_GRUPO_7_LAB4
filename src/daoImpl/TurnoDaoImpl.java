@@ -16,6 +16,8 @@ import excepciones.ReadAllException;
 public class TurnoDaoImpl implements TurnosDao {
 	
 	private static final String insert  = "CALL INSERTTURNOS(?,?,?,?,?)";
+	private static final String update = "UPDATE turnos  SET COD_PACIENTE = ?, COD_ESTADO_TURNO = ? WHERE DNIMEDICO = ? AND"
+			+ "DIA = ? AND HORARIO = ? ";
 	private static final String turnosPorMedico = "SELECT * FROM TURNOS WHERE COD_PACIENTE IS NULL AND ESTADO = 1 AND DNIMEDICO = ?";
 
 	@Override
