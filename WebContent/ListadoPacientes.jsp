@@ -4,9 +4,14 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+    <%
+       if(session.getAttribute("Sesion") == null){ 
+    	   response.sendRedirect("Home.jsp"); 
+       }
+       else{
+      %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,16 +44,16 @@
 
 
 <script>
-    // Función para mostrar el cartel de confirmación
     function confirmarEliminacion(dni) {
         Swal.fire({
-            title: 'Confirmación',
-            text: '¿Estás seguro de que deseas eliminar este registro?',
+       	    title: 'ConfirmaciÃ³n',
+          	text: 'Â¿EstÃ¡s seguro de que deseas eliminar este registro?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#00a135',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Eliminar'
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
             	Swal.fire({
@@ -58,7 +63,7 @@
            		  showConfirmButton: false,
            		  timer: 1500
           		})
-          		 // Redirecciona a la página de servlet
+          		 // Redirecciona a la pÃ¡gina de servlet
           		setTimeout(function(){
           			window.location.href = 'servletPacientes?btnEliminar=1&txtDni=' + dni;
 					}, 1500);
@@ -66,16 +71,7 @@
         });
     }
 </script>
-
-
-
 <title>Listado de Pacientes</title>
-    <%
-       if(session.getAttribute("Sesion") == null){ 
-    	   response.sendRedirect("Home.jsp"); 
-       }
-       else{
-      %>
 </head>
 <%
 ArrayList <Paciente> listaPacientes = null;
@@ -161,8 +157,7 @@ if(request.getAttribute("listaPacientes") != null){
 						<th scope="col">Dni</th>
 						<th scope="col">Nombre</th>
 						<th scope="col">Apellido</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
+						<th scope="col">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>	
@@ -172,10 +167,12 @@ if(request.getAttribute("listaPacientes") != null){
 							<td scope="row"><%=paciente.getDni() %> </td>
 							<td scope="row"><%= paciente.getNombre() %></td>
 							<td scope="row"><%= paciente.getApellido() %></td>
-							<td><input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
-								onclick="confirmarEliminacion(<%= paciente.getDni()%>)" /></td>
-							<td><input class="btn-light"  type="submit" value="Editar" name="btnEditar"
-								onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=<%=paciente.getDni() %>&txtNombre=<%= paciente.getNombre()%>&txtApellido=<%= paciente.getApellido() %>'" /></td>
+							<td scope="row">							
+								<input class="btn-light"  type="submit" value="Editar" name="btnEditar"
+									onclick="window.location.href='servletPacientes?btnEditar=1&txtDni=<%=paciente.getDni() %>'" />
+								<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
+									onclick="confirmarEliminacion(<%= paciente.getDni()%>)" />
+							</td>
 						</tr>
 					<%} %>					
 				</tbody>

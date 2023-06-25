@@ -1,3 +1,5 @@
+<%@page import="entidad.Turno"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -19,17 +21,33 @@
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+<!-- Agrega los enlaces a DataTables -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+
+
+
+<!-- Agrega los enlaces a SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#table_id').DataTable();
 	});
 </script>
+
 <title>Turnos asignados</title>
 </head>
+<%
+ArrayList <Turno> listaTurnos = null;
+if(request.getAttribute("listaTurnos") != null){
+	listaTurnos = (ArrayList <Turno>) request.getAttribute("listaTurnos");
+}
+%>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
@@ -116,20 +134,23 @@
 			<tr>
 				<th scope="col">Dia y Horario</th>
 				<th scope="col">Paciente</th>
-				<th scope="col"></th>
 				<th scope="col">Estado</th>
-				<th scope="col"></th>
-				
+				<th scope="col">Acciones</th>				
 			</tr>
 		</thead>
 		<tbody>
+		<% if(listaTurnos != null)
+			for(Turno turno : listaTurnos){%>
 			<tr>
-				<td scope="row">17/06/2023 17:00 HS</td>
-				<td>Roberto Gomez</td>
-				<td><input type="submit" class="btn btn-light" value="Ver" name="btnVer" onclick="window.location.href='servletClinica?btnVer'"/></td>
-				<td>Ocupado</td>
-				<td><input type="submit" class="btn btn-light" value="Editar" name="btnEditarEstado" onclick="window.location.href='servletClinica?btnEditarEstado'"/></td>
+				<td scope="row"><%=turno.getDia()%> <%=turno.getHorario()%> </td>
+				<td scope="row"><%=turno.getPaciente().getNombre()%> <%=turno.getPaciente().getApellido()%>
+				<td scope="row"><%=turno.getEstadoTurno().getDescripcion()%></td>
+				<td scope="row">
+					<input type="submit" class="btn-light" value="Ver Paciente" name="btnVerPaciente" onclick="window.location.href='servletClinica?btnVerPaciente&txtDni=<%=turno.getPaciente().getDni() %>'" />
+					<input type="submit" class="btn-light" value="Editar Turno" name="btnEditarEstado" onclick="window.location.href='servletClinica?btnEditarEstado'"/>
+				</td>
 			</tr>
+		<%} %>	
 		</tbody>
 	</table>
 </div>

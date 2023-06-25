@@ -8,9 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import entidad.Especialidad;
 import entidad.Turno;
 import negocio.EspecialidadNegocio;
 import negocio.MedicoNegocio;
@@ -51,7 +49,7 @@ public class servletTurnos extends HttpServlet {
 				break;
 			case "1":
 				dispatcher = "/ListadoTurnos.jsp";
-				break;
+				break;	
 			default:
 				dispatcher = "/Principal.jsp";
 				break;

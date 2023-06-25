@@ -23,4 +23,9 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return turDao.update(turno);
 	}
 
+	@Override
+	public ArrayList<Turno> turnosAsignadosPorMedico(String dni) throws ReadAllException {
+		return turDao.turnosAsignadosPorMedico(dni);
+	}
+
 }

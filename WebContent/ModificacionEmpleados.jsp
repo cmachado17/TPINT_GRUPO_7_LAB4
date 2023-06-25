@@ -30,6 +30,45 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+
+<!-- Agrega los enlaces a SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
+
+<script>
+    // Función para mostrar el mensaje de confirmación
+    function confirmarModificacion() {
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas modificar este registro?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Modificar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            	Swal.fire({
+            		  position: 'center',
+            		  icon: 'success',
+            		  title: 'Registro modificado!',
+            		  showConfirmButton: false,
+            		  timer: 1500
+            		})
+            		setTimeout(function(){
+            			document.getElementById('formularioModificacion').submit()
+					}, 1500);
+            }
+        });
+    }
+    
+	 // Función para interceptar el envío del formulario
+    function interceptarEnvioFormulario(event) {
+        event.preventDefault(); // Evita que el formulario se envíe automáticamente
+        confirmarModificacion(); // Muestra el mensaje de confirmación
+    }
+</script>
 <title>Modificacion Empleados</title>
 
 </head>
@@ -132,7 +171,7 @@
 		
 %>
 		<div class="d-flex justify-content-center text-light">
-			<form method="post" action="servletEmpleados"  class="w-75">
+			<form method="POST" action="servletEmpleados?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
 				<div class="form-group">
 					<label>DNI</label> <input type="number" name="DNI" min="1111111" max="99999999" class="form-control" readonly="readonly" value="<%=medico.getDni()%>" style="background-color: lightgrey;"></input>
 					<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20"  class="form-control"required value="<%=medico.getNombre()%>"></input>

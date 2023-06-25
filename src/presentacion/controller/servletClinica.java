@@ -1,6 +1,7 @@
 package presentacion.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,10 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidad.Turno;
+import negocio.PacienteNegocio;
+import negocio.TurnoNegocio;
+import negocioImpl.PacienteNegocioImpl;
+import negocioImpl.TurnoNegocioImpl;
+
 @WebServlet("/servletClinica")
 public class servletClinica extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	TurnoNegocio negTurn = new TurnoNegocioImpl();
+	PacienteNegocio negPac = new PacienteNegocioImpl();
        
     public servletClinica() {
         super();
@@ -30,6 +40,9 @@ public class servletClinica extends HttpServlet {
 			
 			switch(request.getParameter("Param")) {
 			case "0":
+				String dniMedico = String.valueOf(request.getSession().getAttribute("Sesion"));
+				ArrayList<Turno> listaTurnos = negTurn.turnosAsignadosPorMedico(dniMedico);
+				request.setAttribute("listaTurnos", listaTurnos);	
 				dispatcher = "/TurnosAsignados.jsp";
 				break;
 			
@@ -56,6 +69,16 @@ public class servletClinica extends HttpServlet {
 				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 			    rd.forward(request, response);  
 				}
+			
+			// VER PACIENTE
+			if(request.getParameter("btnVerPaciente")!=null) {
+				String dispatcher="/VerPaciente.jsp";
+				
+				request.setAttribute("VerPaciente", negPac.buscarPaciente(request.getParameter("txtDni")));
+			
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}	
 		
 
 		}

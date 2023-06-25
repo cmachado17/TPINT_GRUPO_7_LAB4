@@ -56,9 +56,10 @@
             text: '¿Estás seguro de que deseas eliminar este registro?',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
+            confirmButtonColor: '#00a135',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Eliminar'
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
             	Swal.fire({
@@ -165,13 +166,11 @@
 				<th scope="col">Dni</th>
 				<th scope="col">Nombre</th>
 				<th scope="col">Apellido</th>
-				<th scope="col">Sexo</th>
 				<th scope="col">Email</th>
-				<th scope="col">fecha nacimiento</th>
+				<th scope="col">Fec Nacimiento</th>
 				<th scope="col">Nacionalidad</th>		
 				<th scope="col">Especialidad</th>					
-				<th></th>
-				<th></th>
+				<th scope="col">Acciones</th>
 			</tr>
 		</thead>
 		<tbody>	
@@ -182,16 +181,16 @@
 					<td scope="row"><%= empleado.getDni() %> </td>
 					<td scope="row"><%= empleado.getNombre() %></td>
 					<td scope="row"><%= empleado.getApellido() %></td>
-					<td scope="row"><%= empleado.getSexo() %></td>
 					<td scope="row"><%= empleado.getEmail()     %></td>
 					<td scope="row"><%= empleado.getFechaNacimiento()     %></td>	
 					<td scope="row"><%= empleado.getNacionalidad().getDescripcion()    %></td>
-					<td scope="row"><%= empleado.getEspecialidad().getDescripcion()    %></td>			
-					
-					<td><input type="submit" value="Eliminar" name="btnEliminar"
-						onclick="confirmarEliminacion(<%= empleado.getDni()%>)" /></td>
-					<td><input type="submit" value="Editar" name="btnEditar"
-						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=empleado.getDni() %>'" /></td>
+					<td scope="row"><%= empleado.getEspecialidad().getDescripcion()    %></td>		
+					<td scope="row">
+						<input class="btn-light" type="submit" value="Editar" name="btnEditar"
+						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=empleado.getDni() %>'" />
+						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
+						onclick="confirmarEliminacion(<%= empleado.getDni()%>)" />
+					</td>
 				</tr>
 			<%} %>					
 		</tbody>

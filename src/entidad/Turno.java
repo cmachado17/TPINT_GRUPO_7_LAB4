@@ -1,8 +1,5 @@
 package entidad;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class Turno {
 
 	private Medico medico;

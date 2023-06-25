@@ -75,68 +75,26 @@ public class servletPacientes extends HttpServlet {
 			}
 		
 		//MODIFICACION PACIENTE
-				if(request.getParameter("btnEditar")!=null) {
-					String dispatcher="/ModificacionPacientes.jsp";
-					
-					request.setAttribute("PacienteModificable", negPac.buscarPaciente(request.getParameter("txtDni")));
-					//Se carga la lista de provincias y nacionalidades
-					request.setAttribute("listaProv", negProv.obtenerProvincias());
-					request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+		if(request.getParameter("btnEditar")!=null) {
+			String dispatcher="/ModificacionPacientes.jsp";
+			
+			request.setAttribute("PacienteModificable", negPac.buscarPaciente(request.getParameter("txtDni")));
+			//Se carga la lista de provincias y nacionalidades
+			request.setAttribute("listaProv", negProv.obtenerProvincias());
+			request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+		
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+			}			
 				
-					RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
-				    rd.forward(request, response);  
-					}
-				
-				
-				if(request.getParameter("btnModificar")!=null)
-				{
-					int dni = Integer.parseInt(request.getParameter("DNI"));
-					String nombre = request.getParameter("nombre");
-					String apellido = request.getParameter("apellido");
-					String sexo = request.getParameter("sexo");
-					int codNacionalidad = Integer.parseInt(request.getParameter("nacionalidad"));
-					String fecha = request.getParameter("fechaNacimiento");
-					String direccion = request.getParameter("direccion");
-					String localidad = request.getParameter("localidad");
-					int provinciaForm = Integer.parseInt(request.getParameter("provincia"));
-					String email = request.getParameter("Email");
-					String telefono = request.getParameter("Telefono");
-					
-					Paciente paciente = new Paciente();
-					Nacionalidad nacionalidad = new Nacionalidad();
-					Provincia provincia = new Provincia();
-					
-					nacionalidad.setCodigo(codNacionalidad);
-					provincia.setCodigo(provinciaForm);
-					
-					paciente.setDni(dni);
-					paciente.setNombre(nombre);
-					paciente.setApellido(apellido);
-					paciente.setSexo(sexo);
-					paciente.setFechaNacimiento(fecha);
-					paciente.setDireccion(direccion);
-					paciente.setLocalidad(localidad);
-					paciente.setEmail(email);
-					paciente.setTelefono(telefono);
-					paciente.setNacionalidad(nacionalidad);
-					paciente.setProvincia(provincia);
-					
-					if(negPac.update(paciente)) {
-						//REQUEST DISPATCHER
-						request.setAttribute("modificacion", 1);
+		//BAJA PACIENTE
+		if(request.getParameter("btnEliminar")!= null) {
 						
-						ArrayList<Paciente> listaPacientes = negPac.readAll();
-						request.setAttribute("listaPacientes", listaPacientes);	
-						RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
-						rd.forward(request, response);
-					}
-					else {
-						RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
-						rd.forward(request, response);
-					}
-
-					
-				}
+			int dni = Integer.parseInt(request.getParameter("txtDni"));			
+			negPac.delete(dni);	
+			RequestDispatcher rd = request.getRequestDispatcher("/servletPacientes?Param=3");
+			rd.forward(request, response);
+		}
 
 	}
 
@@ -191,14 +149,57 @@ public class servletPacientes extends HttpServlet {
 		}
 		
 		
-		
-		//BAJA PACIENTE
-		if(request.getParameter("btnEliminar")!= null) {
-						
-			int dni = Integer.parseInt(request.getParameter("txtDni"));			
-			negPac.delete(dni);	
-			RequestDispatcher rd = request.getRequestDispatcher("/servletPacientes?Param=3");
-			rd.forward(request, response);
+		// MODIFICAR PACIENTE
+		if(request.getParameter("btnModificar")!=null)
+		{
+			int dni = Integer.parseInt(request.getParameter("DNI"));
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellido");
+			String sexo = request.getParameter("sexo");
+			int codNacionalidad = Integer.parseInt(request.getParameter("nacionalidad"));
+			String fecha = request.getParameter("fechaNacimiento");
+			String direccion = request.getParameter("direccion");
+			String localidad = request.getParameter("localidad");
+			int provinciaForm = Integer.parseInt(request.getParameter("provincia"));
+			String email = request.getParameter("Email");
+			String telefono = request.getParameter("Telefono");
+			
+			Paciente paciente = new Paciente();
+			Nacionalidad nacionalidad = new Nacionalidad();
+			Provincia provincia = new Provincia();
+			
+			nacionalidad.setCodigo(codNacionalidad);
+			provincia.setCodigo(provinciaForm);
+			
+			paciente.setDni(dni);
+			paciente.setNombre(nombre);
+			paciente.setApellido(apellido);
+			paciente.setSexo(sexo);
+			paciente.setFechaNacimiento(fecha);
+			paciente.setDireccion(direccion);
+			paciente.setLocalidad(localidad);
+			paciente.setEmail(email);
+			paciente.setTelefono(telefono);
+			paciente.setNacionalidad(nacionalidad);
+			paciente.setProvincia(provincia);
+			
+			if(negPac.update(paciente)) {
+				//REQUEST DISPATCHER
+				request.setAttribute("modificacion", 1);
+				
+				ArrayList<Paciente> listaPacientes = negPac.readAll();
+				request.setAttribute("listaPacientes", listaPacientes);	
+				RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
+				rd.forward(request, response);
+			}
+
+			
 		}
+		
+		
 	}
 }

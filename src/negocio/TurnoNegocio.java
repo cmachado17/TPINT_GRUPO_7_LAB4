@@ -10,4 +10,5 @@ public interface TurnoNegocio {
 	
 	public boolean update(Turno turno) throws UpdateException;
 	public ArrayList<Turno> turnosMedico(String dni) throws ReadAllException;
+	public ArrayList<Turno> turnosAsignadosPorMedico(String dni) throws ReadAllException;
 }

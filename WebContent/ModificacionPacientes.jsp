@@ -41,7 +41,8 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Modificar'
+            confirmButtonText: 'Modificar',
+            cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
             	Swal.fire({
@@ -142,7 +143,7 @@
 			
 
 	<div class="d-flex justify-content-center text-light">				
-			<form method="post" action="servletPacientes" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
+			<form method="POST" action="servletPacientes?btnModificar=1" id="formularioModificacion" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
 				<div class="form-group">
 					<label>DNI</label> <input type="number" name="DNI" class="form-control" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
 					<label>Nombre</label> <input type="text" name="nombre" minlength="3" maxlength="20" class="form-control" required value="<%=paciente.getNombre() %>"></input>
@@ -174,7 +175,7 @@
 					<input type="tel" name="Telefono" minlength="6" maxlength="15" required value="<%=paciente.getTelefono() %>" class="form-control"></input> 
 				</div>
 				<div class="submit">
-					<input type="submit" class="btn btn-light" name="btnModificar"></input></br>
+					<input type="submit" class="btn btn-light" name="btnModificar" value="Modificar"></input></br>
 				</div>
 			</form>
 		</div>

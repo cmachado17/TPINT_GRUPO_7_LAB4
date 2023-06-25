@@ -1,3 +1,8 @@
+<%@page import="entidad.Nacionalidad"%>
+<%@page import="entidad.Paciente"%>
+<%@page import="entidad.Provincia"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.awt.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -84,42 +89,48 @@
   </div>
 </nav>
 
-<div class="container"> 
+<div class="container">
 	<div class="p-3 contenedor-principal">
-	<h2 class="tituloForm mb-3"> Detalle paciente </h2>
-<form method="post" action="servletClinica">
-<div class="formulario">
-    <label>DNI</label>
-    <input type="number" name="DNI" disabled ></input>
-        <label>Nombre</label>
-    <input type="text" name="nombre" disabled ></input>
-        <label>Apellido</label>
-    <input type="text" name="apellido" disabled></input>
-        <label>Sexo</label>
-    <input type="text" name="sexo" disabled></input>
-        <label>Nacionalidad</label>
-   <input type="text" name="nacionalidad" disabled></input>
-        <label>Fecha</label>
-    <input type="date" name="fechaNacimiento" disabled></input>
-        <label>Direccion</label>
-    <input type="text" name="direccion" disabled></input>
-        <label>Localidad</label>
-    <input type="text" name="localidad" disabled></input>
-        <label>Provincia</label>
-    <input type="text" name="provincia" disabled></input>
-       <label>Email</label>
-     <input type="email" name="Email" disabled></input>
-       <label>Tel. fijo</label>
-   <input type="tel" name="Telefono" disabled></input>
-       <label>Celular</label>
-   <input type="tel" name="Celular" disabled></input>
-    </div>
-    <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnVolver" value="Volver" ></input></br>
-    </div>
-</form>
-</div>
-</div>
+	<h2 class="tituloForm">Paciente</h2>
+		<% 	
+			Paciente paciente = null;
+			if(request.getAttribute("VerPaciente") != null) {
+				paciente = (Paciente)request.getAttribute("VerPaciente");
+		%>	
+	<div class="d-flex justify-content-center text-light">				
+			<form method="POST" action="servletClinica?Param=0" id="formularioModificacion" class="w-75">
+				<div class="form-group">
+					<label>DNI</label> 
+					<input type="number" name="DNI" class="form-control" readonly="readonly" value="<%=paciente.getDni() %>" style="background-color: lightgrey;"></input>
+					<label>Nombre</label> 
+					<input type="text" name="nombre" readonly="readonly" minlength="3" maxlength="20" class="form-control" required value="<%=paciente.getNombre() %>"style="background-color: lightgrey;"></input>
+					<label>Apellido</label> 
+					<input type="text" name="apellido" readonly="readonly" minlength="3" maxlength="30" class="form-control" required value="<%=paciente.getApellido() %>"style="background-color: lightgrey;"></input>
+					<label>Sexo</label> 
+					<input type="text" name="sexo" readonly="readonly" minlength="3" maxlength="30" class="form-control" required value="<%=paciente.getSexo() %>"style="background-color: lightgrey;"></input>
+					<label>Nacionalidad</label>
+					<input type="text" name="nacionalidad" readonly="readonly" minlength="3" maxlength="30" class="form-control" required value="<%=paciente.getNacionalidad().getDescripcion() %>"style="background-color: lightgrey;"></input>
+		    		<label>Fecha</label>
+		    		<input type="date" name="fechaNacimiento" readonly="readonly" required value="<%=paciente.getFechaNacimiento()%>" class="form-control" style="background-color: lightgrey;"></input>
+					<label>Direccion</label> 
+					<input type="text" name="direccion" readonly="readonly" minlength="3" maxlength="40" required value="<%=paciente.getDireccion() %>" class="form-control" style="background-color: lightgrey;"></input>
+					<label>Localidad</label> 
+					<input type="text" name="localidad" readonly="readonly" minlength="3" maxlength="20" required value="<%=paciente.getLocalidad()%>" class="form-control" style="background-color: lightgrey;"></input> 
+					<label>Provincia</label>
+					<input type="text" name="provincia" readonly="readonly" minlength="3" maxlength="20" required value="<%=paciente.getProvincia().getDescripcion()%>" class="form-control" style="background-color: lightgrey;"></input> 
+					<label>Email</label>
+					<input type="email" name="Email" readonly="readonly" minlength="3" maxlength="40" required value="<%=paciente.getEmail() %>" class="form-control" style="background-color: lightgrey;"></input> 
+					<label>Tel. fijo</label>
+					<input type="tel" name="Telefono" readonly="readonly" minlength="6" maxlength="15" required value="<%=paciente.getTelefono() %>" class="form-control" style="background-color: lightgrey;"></input> 
+				</div>
+				<div class="submit">
+					<input type="submit" class="btn btn-light" name="btnVolver" value="Volver"></input></br>
+				</div>
+			</form>
+		</div>
+<%} %>
+		</div>
+	</div>
 </body>
 <% } %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

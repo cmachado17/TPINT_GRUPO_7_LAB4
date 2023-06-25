@@ -2,7 +2,6 @@ package negocioImpl;
 
 import dao.UsuarioDao;
 import daoImpl.UsuarioDaoImpl;
-import entidad.Persona;
 import entidad.Usuario;
 import excepciones.InsertException;
 import excepciones.ReadAllException;
