@@ -1,5 +1,7 @@
 <%@page import="entidad.DiaSemana"%>
 <%@page import="entidad.Paciente"%>
+<%@page import="entidad.Medico"%>
+<%@page import="entidad.Turno"%>
 <%@page import="entidad.Especialidad"%>
 <%@page import="entidad.Provincia"%>
 <%@page import="entidad.Nacionalidad"%>
@@ -102,6 +104,18 @@
 			listaEsp = (List<Especialidad>) request.getAttribute("listaEsp");
 		}
 		
+		List<Medico> listaMedicos = new ArrayList<Medico>();
+		
+		if (request.getAttribute("listaMedicos") != null) {
+			listaMedicos = (List<Medico>) request.getAttribute("listaMedicos");
+		}
+		
+		List<Turno> listaTurnos = new ArrayList<Turno>();
+		
+		if (request.getAttribute("turnosMedico") != null) {
+			listaTurnos = (List<Turno>) request.getAttribute("turnosMedico");
+		}
+		
 		List<Paciente> listaPac = new ArrayList<Paciente>();
 		
 		if (request.getAttribute("listaPac") != null) {
@@ -109,27 +123,176 @@
 		}
 %>
 
-	<div class="container">
-		<div class="p-3 contenedor-principal">
+	  <div class="container">
+		 <div class="p-3 contenedor-principal">
 			<h2 class="tituloForm"> Asignar turnos </h2> </br>
 
-			<form method="post" action="servletTurnos">
-				<div class="formulario">
-					<label>Especialidad</label>
-					<select  name="especialidad" type="text" class="form-select"> 
-					<% for (Especialidad esp : listaEsp) {%>
-							<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+<!--	si todavia no eligio especialidad muestra esto!-->
+<% 		if(request.getParameter("btnBuscar")==null && request.getParameter("btnBuscar2")==null
+&& request.getParameter("btnBuscar3")==null) {%>			
+			<form class="row g-3" method="post" action="servletTurnos">
+			 
+			  
+				  <div class="col-auto center">
+				   <label class="formulario">Especialidad</label>
+				   </div>
+				   <div class="col-auto ">
+			    			<select  name="especialidad" type="text" class="form-select"> 
+								<% for (Especialidad esp : listaEsp) {%>
+										<option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+										<%}%>
+								</select>
+  				</div>
+
+		  <div class="col-auto">
+		   <input type="submit" class="btn btn-light" name="btnBuscar" value="Buscar" ></input></br>
+		  </div>
+		</form>
+<%} %> 		
+		
+		
+<!--	Luego de presionar buscar se cargan los medicos !-->	
+<% 		if(request.getParameter("btnBuscar")!=null) {%>
+
+		<form class="row g-3" method="post" action="servletTurnos">
+			 
+			  
+				  <div class="col-auto center">
+				   <label class="formulario">Especialidad</label>
+				   </div>
+				   <div class="col-auto ">
+			    			<select  name="especialidad" type="text" class="form-select"> 
+			    				<!--	Si la especialidad es la elegida queda seleccionada por default !-->
+			    				<% int codigo = Integer.parseInt(session.getAttribute("EspecialidadTurno").toString());%>	
+								 <% for (Especialidad esp : listaEsp) {%>
+								 		<% int codigo2 = esp.getCodigo(); %>
+										<% if(codigo2 == codigo) {%> 
+										<option selected="selected" value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+										<%}else{%> 
+										 <option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+										<%}%> 
+								<%}%>
+								</select>
+  				</div>
+
+		  <div class="col-auto">
+		   <input type="submit" class="btn btn-light" name="btnBuscar" value="Buscar" ></input></br>
+		  </div>
+		</form>
+
+
+		<br>
+		
+
+		<form class="row g-3" method="post" action="servletTurnos">
+		 		<div class="col-auto center2">
+				   <label class="formulario">Medico</label>
+				   </div>
+				  <div class="col-auto">
+			    			<select  name="medico" type="text" class="form-select"> 
+					<% for (Medico mec : listaMedicos) {%>
+							<option value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>
 							<%}%>
 					</select>
-						
-				    <div class="submit">
-				     <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
-				    </div>
-			</form>
-					<!--  <% for (Paciente pac : listaPac) {%><option value="<%=pac.getDni()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option><%}%>-->
-		</div>
+  				</div>
+
+		  <div class="col-auto">
+		   <input type="submit" class="btn btn-light" name="btnBuscar2" value="Buscar" ></input></br>
+		  </div>
+		</form>
+<%} %> 
+
+
+
+<!--	Luego de presionar buscar2 se cargan los turnos !-->	
+<% 		if(request.getParameter("btnBuscar2")!=null) {%>
+
+		<form class="row g-3" method="post" action="servletTurnos">
+			 
+			  
+				  <div class="col-auto center">
+				   <label class="formulario">Especialidad</label>
+				   </div>
+				   <div class="col-auto ">
+			    			<select  name="especialidad" type="text" class="form-select"> 
+			    				<!--	Si la especialidad es la elegida queda seleccionada por default !-->
+			    				<% int codigo = Integer.parseInt(session.getAttribute("EspecialidadTurno").toString());%>	
+								 <% for (Especialidad esp : listaEsp) {%>
+								 		<% int codigo2 = esp.getCodigo(); %>
+										<% if(codigo2 == codigo) {%> 
+										<option selected="selected" value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+										<%}else{%> 
+										 <option value="<%=esp.getCodigo()%>"><%=esp.getDescripcion()%></option>
+										<%}%> 
+								<%}%>
+								</select>
+  				</div>
+
+		  <div class="col-auto">
+		   <input type="submit" class="btn btn-light" name="btnBuscar" value="Buscar" ></input></br>
+		  </div>
+		</form>
+
+
+		<br>
+		
+
+		 <form class="row g-3" method="post" action="servletTurnos">
+		 		<div class="col-auto center2">
+				   <label class="formulario">Medico</label>
+				   </div>
+				  <div class="col-auto">
+			    			<select  name="medico" type="text" class="form-select">
+			    			<% int codigoMedico = Integer.parseInt(session.getAttribute("MedicoTurno").toString());%> 
+					<% for (Medico mec : listaMedicos) {%>
+							<% int codigo2 = mec.getDni(); %>
+								<% if(codigo2 == codigo) {%> 
+							<option selected="selected" value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>
+							<%}else{%>
+							<option value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>
+							<%}%>
+					<%}%> 
+					
+					</select>
+  				</div>
+
+		  <div class="col-auto">
+		   <input type="submit" class="btn btn-light" name="btnBuscar2" value="Buscar" ></input></br>
+		  </div>
+		</form>  
+		
+		<br>
+		
+		<form class="row g-3" method="post" action="servletTurnos">
+		 		<div class="col-auto center2">
+				   <label class="formulario">Turnos</label>
+				   </div>
+				  <div class="col-auto">
+			    	<select  name="medico" type="text" class="form-select"> 
+					<% for (Turno turn : listaTurnos) {%>
+							<option value="<%=turn.getMedico().getDni()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
+					<%}%>
+					</select>
+  				</div>
+
+		  <div class="col-auto">
+		   <input type="submit" class="btn btn-light" name="btnBuscar3" value="Buscar" ></input></br>
+		  </div>
+		</form>
+<%} %> 
+
+
+
+
+
+
+
+		
+					<%-- <!--  <% for (Paciente pac : listaPac) {%><option value="<%=pac.getDni()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option><%}%>--> --%>
+		  </div>
 	</div>
 </body>
+<%-- cierra el else de la session --%>
 <% } %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </html>

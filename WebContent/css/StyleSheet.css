@@ -220,3 +220,15 @@ tr:nth-child(even)
 	.btnListado{
 	}
 	
+	.center{
+	margin-left:32%;
+	color:white;
+	font-family: 'Kanit', sans-serif;
+	}
+	
+		.center2{
+	margin-left:34.5%;
+	color:white;
+	font-family: 'Kanit', sans-serif;
+	}
+	

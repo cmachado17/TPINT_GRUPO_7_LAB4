@@ -111,7 +111,7 @@
 
 			<form method="post" action="servletTurnos">
 				<div class="formulario">
-					<label>Medico</label>
+					<label>Medico Pepe</label>
 					<select  name="medico" type="text" class="form-select"> 
 					<% for (Medico mec : listaMedicos) {%>
 							<option value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>

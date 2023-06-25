@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import entidad.Especialidad;
 import negocio.EspecialidadNegocio;
 import negocio.MedicoNegocio;
 import negocio.PacienteNegocio;
@@ -68,26 +70,37 @@ public class servletTurnos extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getParameter("btnEnviar")!=null) {
-			String dispatcher="/AsignarTurnos1.jsp";
+		if(request.getParameter("btnBuscar")!=null) {
+			String dispatcher="/AsignarTurnos.jsp";
 			
 			//medicos filtrados
 			request.setAttribute("listaMedicos",negMed.medicosPorEspecialidad(Integer.parseInt(request.getParameter("especialidad").toString())));
 			//guardo la especialidad para usar despues
 			request.getSession().setAttribute("EspecialidadTurno", Integer.parseInt(request.getParameter("especialidad").toString()));
+			//volver a cargar las especialidades
+			request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
 			
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
+		   
 			}
 		
-		if(request.getParameter("btnEnviar-1")!=null) {
-			String dispatcher="/AsignarTurnos2.jsp";
+		if(request.getParameter("btnBuscar2")!=null) {
+			String dispatcher="/AsignarTurnos.jsp";
+			
+			//En htttpSession obtengo todas las variables session creadas
+			HttpSession session = request.getSession();
 			
 			//turnos del medico elegido
 			request.setAttribute("turnosMedico",negTurn.turnosMedico(request.getParameter("medico").toString()));
 			//guardo el medico para usarlo despues
 			request.getSession().setAttribute("MedicoTurno", request.getParameter("medico"));
 		
+			//volver a cargar las especialidades
+			request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
+			//vuelvo a cargar los medicos de esa especialidad 
+			request.setAttribute("listaMedicos",negMed.medicosPorEspecialidad(Integer.parseInt(session.getAttribute("EspecialidadTurno").toString())));
+			
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
