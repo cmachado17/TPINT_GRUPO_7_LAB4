@@ -266,6 +266,7 @@
 		
 		<form class="row g-3" method="post" action="servletTurnos">
 		
+		
 		<div class="col-auto center2">
 				   <label class="formulario">Turnos</label>
 				   </div>
@@ -286,7 +287,7 @@
 					<div class="col-auto">
 					<select  name="paciente" type="text" class="form-select"> 
 					<% for (Paciente pac : listaPac) {%>
-							<option value="<%=pac.getDni()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option>
+							<option value="<%=pac.getCodPaciente() %>"><%=pac.getNombre() + " " + pac.getApellido()%></option>
 							<%}%>
 					</select>
 					</div>
@@ -304,7 +305,7 @@
 
 
 		
-					<%-- <!--  <% for (Paciente pac : listaPac) {%><option value="<%=pac.getDni()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option><%}%>--> --%>
+					
 		  </div>
 	</div>
 </body>

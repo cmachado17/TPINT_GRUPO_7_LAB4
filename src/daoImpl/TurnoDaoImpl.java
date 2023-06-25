@@ -9,9 +9,11 @@ import java.util.ArrayList;
 
 import dao.TurnosDao;
 import entidad.Medico;
+import entidad.Persona;
 import entidad.Turno;
 import excepciones.InsertException;
 import excepciones.ReadAllException;
+import excepciones.UpdateException;
 
 public class TurnoDaoImpl implements TurnosDao {
 	
@@ -86,6 +88,41 @@ public class TurnoDaoImpl implements TurnosDao {
 			throw new ReadAllException();
 		}
 		return turnos;
+	}
+	
+	@Override
+	public boolean update(Turno turno) throws UpdateException {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try
+		{
+			statement = conexion.prepareStatement(update);
+			
+			statement.setInt(1, turno.getPaciente().getCodPaciente());
+			statement.setInt(2, turno.getEstadoTurno().getCodigo());
+			statement.setInt(3, turno.getMedico().getDni());
+			statement.setString(4, turno.getDia());
+			statement.setString(5, turno.getHorario());
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				throw new UpdateException();
+			}
+		}
+		return isOk;
 	}
 }
 

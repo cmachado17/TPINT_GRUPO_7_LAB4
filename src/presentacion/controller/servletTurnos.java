@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entidad.Especialidad;
+import entidad.Turno;
 import negocio.EspecialidadNegocio;
 import negocio.MedicoNegocio;
 import negocio.PacienteNegocio;
@@ -104,6 +105,29 @@ public class servletTurnos extends HttpServlet {
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
 		    rd.forward(request, response);  
 			}
+		
+		if(request.getParameter("btnEnviar")!=null) {
+			
+			Turno turno = new Turno();
+			turno.getMedico().setDni(Integer.parseInt(request.getSession().getAttribute("MedicoTurno").toString()));
+			turno.getPaciente().setCodPaciente(Integer.parseInt(request.getParameter("paciente").toString()));
+			turno.setDia(request.getParameter("turno"));
+			turno.setHorario(request.getParameter("turno").toString());
+			
+			int filas = 0;
+			
+			if(!negTurn.update(turno)) {
+				filas=1;			
+			}
+			else {
+				filas=2;
+			}
+			
+			request.setAttribute("insercion", filas);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/AsignarTurnos.jsp");
+			rd.forward(request, response);
+		}
 		
 		
 	}
