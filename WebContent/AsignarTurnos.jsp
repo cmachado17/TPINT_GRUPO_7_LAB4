@@ -275,7 +275,7 @@
 			    	<% 
 					 for (Turno turn : listaTurnos) {
 					%>
-							<option value="<%=turn.getDia() %> <%=turn.getHorario()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
+							<option value="<%=turn.getDia() %>  <%=turn.getHorario()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
 					<%}%>
 					</select>
   				</div>
@@ -287,7 +287,7 @@
 					<div class="col-auto">
 					<select  name="paciente" type="text" class="form-select"> 
 					<% for (Paciente pac : listaPac) {%>
-							<option value="<%=pac.getCodPaciente() %>"><%=pac.getNombre() + " " + pac.getApellido()%></option>
+							<option value="<%=pac.getCodPaciente()%>"><%=pac.getNombre() + " " + pac.getApellido()%></option>
 							<%}%>
 					</select>
 					</div>

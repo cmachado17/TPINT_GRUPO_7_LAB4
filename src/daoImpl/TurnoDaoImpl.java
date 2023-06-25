@@ -21,7 +21,7 @@ import excepciones.UpdateException;
 public class TurnoDaoImpl implements TurnosDao {
 	
 	private static final String insert  = "CALL INSERTTURNOS(?,?,?,?,?)";
-	private static final String update = "UPDATE turnos  SET COD_PACIENTE = ?, COD_ESTADO_TURNO = ? WHERE DNIMEDICO = ? AND"
+	private static final String update = "UPDATE turnos SET COD_PACIENTE = ?, COD_ESTADO_TURNO = ? WHERE DNIMEDICO = ? AND "
 			+ "DIA = ? AND HORARIO = ? ";
 	private static final String turnosPorMedico = "SELECT * FROM TURNOS WHERE COD_PACIENTE IS NULL AND ESTADO = 1 AND DNIMEDICO = ?";
 	private static final String turnosAsignadosPorMedico = "SELECT T.DNIMEDICO, T.DIA, T.HORARIO, T.COD_PACIENTE, T.COD_ESTADO_TURNO, EST_TURNOS.DESCRIPCION AS DESC_ESTADO_TURNO,\r\n" + 

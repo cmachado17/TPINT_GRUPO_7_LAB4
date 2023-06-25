@@ -149,6 +149,7 @@ public class PacienteDaoImpl implements PacienteDao{
 			while(resultSet.next())
 			{
 				Paciente paciente = new Paciente();
+				paciente.setCodPaciente(resultSet.getInt("CODIGO"));
 				paciente.setDni(resultSet.getInt("DNI"));
 				paciente.setNombre(resultSet.getString("NOMBRE"));
 				paciente.setApellido(resultSet.getString("APELLIDO"));

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidad.EstadoTurno;
+import entidad.Medico;
+import entidad.Paciente;
 import entidad.Turno;
 import negocio.EspecialidadNegocio;
 import negocio.MedicoNegocio;
@@ -107,10 +110,23 @@ public class servletTurnos extends HttpServlet {
 		if(request.getParameter("btnEnviar")!=null) {
 			
 			Turno turno = new Turno();
-			turno.getMedico().setDni(Integer.parseInt(request.getSession().getAttribute("MedicoTurno").toString()));
-			turno.getPaciente().setCodPaciente(Integer.parseInt(request.getParameter("paciente").toString()));
-			turno.setDia(request.getParameter("turno"));
-			turno.setHorario(request.getParameter("turno").toString());
+			Medico medico = new Medico();
+			Paciente paciente = new Paciente();
+			medico.setDni(Integer.parseInt(request.getSession().getAttribute("MedicoTurno").toString()));
+			paciente.setCodPaciente(Integer.parseInt(request.getParameter("paciente").toString()));
+			//turno.getMedico().setDni(Integer.parseInt(request.getSession().getAttribute("MedicoTurno").toString()));
+			//turno.getPaciente().setCodPaciente(Integer.parseInt(request.getParameter("paciente").toString()));
+			turno.setMedico(medico);
+			turno.setPaciente(paciente);
+			
+			//Parseo el dia y hora
+			String[] diayhora = request.getParameter("turno").toString().split(" ");
+			
+			turno.setDia(diayhora[0]);
+			turno.setHorario(diayhora[2]);
+			
+			//Le paso el estado destino, "ocupado"
+			turno.setEstadoTurno(new EstadoTurno(2));
 			
 			int filas = 0;
 			
@@ -122,7 +138,7 @@ public class servletTurnos extends HttpServlet {
 			}
 			
 			request.setAttribute("insercion", filas);
-			
+			request.setAttribute("listaEsp", negEsp.obtenerEspecialidades());
 			RequestDispatcher rd = request.getRequestDispatcher("/AsignarTurnos.jsp");
 			rd.forward(request, response);
 		}

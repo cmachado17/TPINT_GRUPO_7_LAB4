@@ -8,6 +8,10 @@ public class EstadoTurno {
 	public EstadoTurno() {
 
 	}
+	
+	public EstadoTurno(int codigo) {
+		this.codigo = codigo;
+	}
 
 	public EstadoTurno(int codigo, String descripcion) {
 		this.codigo = codigo;
