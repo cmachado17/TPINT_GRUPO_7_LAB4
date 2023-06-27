@@ -26,6 +26,14 @@
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {			//script para hacer que el cartel de "Paciente agregado correctamente" se desvanezca a los 3 seg luego de aparecer
+    setTimeout(function() {
+        $(".content").fadeOut(1500);
+    },3000);
+});
+</script>
 <title>Asignar Turnos</title>
 </head>
     <%
@@ -126,6 +134,20 @@
 	  <div class="container">
 		 <div class="p-3 contenedor-principal">
 			<h2 class="tituloForm"> Asignar turnos </h2> </br>
+			<%int filas =0;
+			String mensaje = "";
+
+		if(request.getAttribute("insercion")!=null){
+		filas=Integer.parseInt(request.getAttribute("insercion").toString());
+		if(filas!=0) {
+			mensaje= "Turno asignado correctamente!";
+		}
+		else{
+			mensaje = "Error al asignar turno.";
+		}
+	}%>  
+			
+<div class="content mb-3" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
 
 <!--	si todavia no eligio especialidad muestra esto!-->
 <% 		if(request.getParameter("btnBuscar")==null && request.getParameter("btnBuscar2")==null
