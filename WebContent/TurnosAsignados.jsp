@@ -114,18 +114,19 @@ if(request.getAttribute("listaTurnos") != null){
 	<div class="p-3 contenedor-principal">
 
 <h2 class="tituloForm"> Turnos asignados </h2> </br>
-<form method="post" action="ServletHTML">
+<form method="post" action="servletClinica">
   <div class="row my-2">
     <div class="col">
     <label>Desde</label>
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" name="fechadesde" <%if (request.getAttribute("fechadesde") != null) { %>value ="<%= request.getAttribute("fechadesde").toString() %>"<%} %>>
     </div>
     <div class="col">
      <label>Hasta</label>
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" name="fechahasta" <%if (request.getAttribute("fechahasta") != null) { %>value ="<%= request.getAttribute("fechahasta").toString() %>"<%} %>>
     </div>
       <div class="col d-flex align-items-end">
-       <input type="submit" class="btn btn-light" name="btnBuscar" value="Enviar" ></input>
+       <input type="submit" class="btn btn-light mx-2" name="btnBuscar" value="Filtrar" ></input>
+         <input type="submit" class="btn btn-light" name="btnBorrar" value="Borrar filtros" ></input>
     </div>
   </div>
 </form>
