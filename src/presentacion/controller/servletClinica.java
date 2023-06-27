@@ -164,6 +164,36 @@ public class servletClinica extends HttpServlet {
 		    rd.forward(request, response);  
 		}
 		
+		if(request.getParameter("btnBuscarListado")!=null) {
+			String dispatcher="/ListadoTurnos.jsp";
+			
+			ArrayList<Turno> listaTurnos = negTurn.readAll();
+			request.setAttribute("listaTurnos", listaTurnos);	
+			
+			//filtro la lista con las fechas
+			String desde = (request.getParameter("fechadesde").toString());
+			String hasta = (request.getParameter("fechahasta").toString());
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDate inicio = LocalDate.parse(desde, formatter);
+	        LocalDate fin = LocalDate.parse(hasta, formatter);
+
+	        ArrayList<Turno> listaFiltrada = new ArrayList<>();
+	        for (Turno objeto : listaTurnos) {
+	            LocalDate fechaObjeto = LocalDate.parse(objeto.getDia(), formatter);
+	            if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin)) {
+	            	listaFiltrada.add(objeto);
+	            }
+	        }
+			
+			request.setAttribute("listaTurnos", listaFiltrada);	
+			request.setAttribute("fechadesde", desde);	
+			request.setAttribute("fechahasta", hasta);	
+			//Redirijo a listado de turnos asignados del medico
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+		}
+		
 		if(request.getParameter("btnBorrar")!=null) {
 			String dispatcher="/TurnosAsignados.jsp";
 			//Obtengo el medico de la sesion para el listado
@@ -172,6 +202,16 @@ public class servletClinica extends HttpServlet {
 			//recargo el listado de los turnos del medico
 			ArrayList<Turno> listaTurnos = negTurn.turnosAsignadosPorMedico(dniMedico);
 		
+			request.setAttribute("listaTurnos", listaTurnos);	
+			//Redirijo a listado de turnos asignados del medico
+			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+		    rd.forward(request, response);  
+		}
+		
+		if(request.getParameter("btnBorrarListado")!=null) {
+			String dispatcher="/ListadoTurnos.jsp";
+			
+			ArrayList<Turno> listaTurnos = negTurn.readAll();
 			request.setAttribute("listaTurnos", listaTurnos);	
 			//Redirijo a listado de turnos asignados del medico
 			RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  

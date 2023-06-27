@@ -37,10 +37,11 @@ public class TurnoDaoImpl implements TurnosDao {
 			"WHERE T.ESTADO = 1 AND COD_PACIENTE IS NOT NULL AND T.DNIMEDICO = ?";
 	
 	private static final String readall = "SELECT T.DNIMEDICO, T.DIA, T.HORARIO, T.COD_PACIENTE, T.COD_ESPECIALIDAD, T.COD_ESTADO_TURNO, ET.DESCRIPCION AS DESC_ESTADO, T.ESTADO, M.COD_ESPECIALIDAD, E.NOMBRE, E.APELLIDO, "
-			+ "Esp.DESCRIPCION as DESC_ESPECIALIDAD FROM Turnos AS T INNER JOIN medico_por_especialidad as M ON M.DNIMedico= T.DNIMEDICO "
+			+ "Esp.DESCRIPCION as DESC_ESPECIALIDAD, PA.Codigo, PA.Nombre, PA.Apellido FROM Turnos AS T INNER JOIN medico_por_especialidad as M ON M.DNIMedico= T.DNIMEDICO "
 			+ "INNER JOIN especialidades AS Esp ON M.COD_ESPECIALIDAD = Esp.CODIGO "
 			+ "INNER JOIN empleados AS E ON E.DNI = T.DNIMEDICO "
 			+ "INNER JOIN estados_turnos AS ET ON ET.CODIGO = T.COD_ESTADO_TURNO "
+			+ "LEFT JOIN Pacientes AS PA ON PA.Codigo = T.COD_PACIENTE "
 			+ "WHERE T.ESTADO=1 ";
 	private static final String updatePorMedico = "UPDATE turnos SET COD_ESTADO_TURNO = ?, COMENTARIO = ? WHERE DNIMEDICO = ? AND "
 			+ "DIA = ? AND HORARIO = ? ";
@@ -94,7 +95,10 @@ public class TurnoDaoImpl implements TurnosDao {
 				Turno turno = new Turno();
 				turno.setMedico(new Medico(Integer.parseInt(resultSet.getString("DNIMEDICO"))));
 				turno.getMedico().setNombre(resultSet.getString("NOMBRE"));
-				turno.getMedico().setApellido(resultSet.getString("APELLIDO"));
+				turno.getMedico().setApellido(resultSet.getString("APELLIDO"));		
+				turno.setPaciente(new Paciente(Integer.parseInt(resultSet.getString("PA.Codigo") != null ? resultSet.getString("PA.Codigo") : "0")));
+				turno.getPaciente().setNombre(resultSet.getString("PA.Nombre"));
+				turno.getPaciente().setApellido(resultSet.getString("PA.Apellido"));
 				turno.setDia(resultSet.getString("DIA"));
 				turno.setHorario(resultSet.getString("HORARIO"));
 				turno.setEspecialidad(new Especialidad(resultSet.getInt("COD_ESPECIALIDAD"), resultSet.getString("DESC_ESPECIALIDAD")));

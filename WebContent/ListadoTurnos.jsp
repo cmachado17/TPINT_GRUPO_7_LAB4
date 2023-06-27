@@ -123,18 +123,19 @@
 	<div class="container">
 		<div class="p-3 contenedor-principal">
 <h2 class="tituloForm"> Listado de turnos </h2> </br>
-<form method="post" action="ServletHTML">
-  <div class="row my-2">
+<form method="post" action="servletClinica">
+   <div class="row my-2">
     <div class="col">
     <label>Desde</label>
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" name="fechadesde" <%if (request.getAttribute("fechadesde") != null) { %>value ="<%= request.getAttribute("fechadesde").toString() %>"<%} %>>
     </div>
     <div class="col">
      <label>Hasta</label>
-      <input type="date" class="form-control">
+      <input type="date" class="form-control" name="fechahasta" <%if (request.getAttribute("fechahasta") != null) { %>value ="<%= request.getAttribute("fechahasta").toString() %>"<%} %>>
     </div>
       <div class="col d-flex align-items-end">
-       <input type="submit" class="btn btn-light" name="btnBuscar" value="Enviar" ></input>
+       <input type="submit" class="btn btn-light mx-2" name="btnBuscarListado" value="Filtrar" ></input>
+         <input type="submit" class="btn btn-light" name="btnBorrarListado" value="Borrar filtros" ></input>
     </div>
   </div>
 </form>
@@ -159,11 +160,9 @@
 					<td scope="row"><%= turnos.getMedico().getNombre() %> <%=turnos.getMedico().getApellido()%></td>
 					<td scope="row"><%= turnos.getDia()%></td>
 					<td scope="row"><%= turnos.getHorario()%></td>
-					<td scope="row"> Cosmo Fulanitos </td>
+					<td scope="row"> <% if(turnos.getPaciente().getCodPaciente() != 0) {%> <%= turnos.getPaciente().getNombre() + " " + turnos.getPaciente().getApellido()  %> <%}else{%><%= "-"%><%} %></td>
 					<td scope="row"><%= turnos.getEstadoTurno().getDescripcion()%></td>						
 					<td scope="row">
-						<input class="btn-light" type="submit" value="Editar" name="btnEditar"
-						onclick="window.location.href='servletTurnos?btnEditar=1&txtDni=<%=turnos.getMedico().getDni() %>'" />
 						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
 						onclick="confirmarEliminacion(<%= turnos.getMedico().getDni()%>)" />
 					</td>
