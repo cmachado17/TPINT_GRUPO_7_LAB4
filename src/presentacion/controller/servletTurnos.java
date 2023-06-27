@@ -1,6 +1,7 @@
 package presentacion.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -51,6 +52,8 @@ public class servletTurnos extends HttpServlet {
 				dispatcher = "/AsignarTurnos.jsp";
 				break;
 			case "1":
+				ArrayList<Turno> listaTurnos = negTurn.readAll();
+				request.setAttribute("listaTurnos", listaTurnos);	
 				dispatcher = "/ListadoTurnos.jsp";
 				break;	
 			default:

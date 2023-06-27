@@ -1,3 +1,7 @@
+<%@page import="entidad.Medico"%>
+<%@page import="entidad.Persona"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Turno"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -9,6 +13,9 @@
        else{
       %>
 <head>
+
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -44,6 +51,12 @@
 
 <title>Listado de Turnos</title>
 </head>
+<%
+	ArrayList <Turno> listaTurnos = null;
+	if(request.getAttribute("listaTurnos") != null){
+	listaTurnos = (ArrayList <Turno>) request.getAttribute("listaTurnos");
+	}
+%>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
@@ -130,24 +143,32 @@
 			<tr>
 				<th scope="col">Especialidad</th>
 				<th scope="col">Medico</th>
-				<th scope="col">Dia y Horario</th>
+				<th scope="col">Dia</th>
+				<th scope="col">Horario</th>
 				<th scope="col">Paciente</th>
 				<th scope="col">Estado</th>
-				<th scope="col"></th>
-				<th scope="col"></th>
+				<th scope="col">Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td scope="row">Cardiologia</td>
-				<td>Pepito Luna</td>
-				<td>17/06/2023 17:00 HS</td>
-				<td>Roberto Gomez</td>
-				<td>Ocupado</td>
-
-				<td><input type="submit" value="Eliminar" name="btnEliminar"/></td>
-				<td><input type="submit" value="Editar" name="btnEditar" onclick="window.location.href='servletTurnos?btnEditar=1'"/></td>
-			</tr>
+			<% 
+				if(listaTurnos != null)
+				for(Turno turnos : listaTurnos){%>
+				<tr>			
+					<td scope="row"><%= turnos.getEspecialidad().getDescripcion()%></td>	
+					<td scope="row"><%= turnos.getMedico().getNombre() %> <%=turnos.getMedico().getApellido()%></td>
+					<td scope="row"><%= turnos.getDia()%></td>
+					<td scope="row"><%= turnos.getHorario()%></td>
+					<td scope="row"> Cosmo Fulanitos </td>
+					<td scope="row"><%= turnos.getEstadoTurno().getDescripcion()%></td>						
+					<td scope="row">
+						<input class="btn-light" type="submit" value="Editar" name="btnEditar"
+						onclick="window.location.href='servletTurnos?btnEditar=1&txtDni=<%=turnos.getMedico().getDni() %>'" />
+						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
+						onclick="confirmarEliminacion(<%= turnos.getMedico().getDni()%>)" />
+					</td>
+				</tr>
+			<%} %>	
 		</tbody>
 	</table>
 </div>
