@@ -33,4 +33,14 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 		return turDao.readAll();
 	}
 
+	@Override
+	public boolean updatePorMedico(Turno turno) throws UpdateException {
+		return turDao.updatePorMedico(turno);
+	}
+
+	@Override
+	public Turno buscarTurno(String paciente, String medico, String hora, String dia) {
+		return turDao.buscarTurno(paciente,medico,hora,dia);
+	}
+
 }

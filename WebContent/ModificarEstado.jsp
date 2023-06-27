@@ -95,20 +95,22 @@
  <div class="form-group">
 	<label class="mb-2">Estado</label>
 	<select class="form-control" name="estado"> 
-		<option value="1">Ausente</option>
-		<option value="2">Presente</option>
+		<option value="3">Ausente</option>
+		<option value="4">Presente</option>
 	</select>
 	</div>
 	<div class="form-group">
     	<label for="comentario" class="mb-2">Comentario</label>
-    	<textarea class="form-control" id="comentario" rows="3"></textarea>
+    	<textarea class="form-control" id="comentario" rows="3" name="comentario"></textarea>
     </div>
 		<br> <br>
 		
     <div class="submit">
      <input type="submit" class="btn btn-light" name="btnVolver" value="Volver" ></input></br>
     </div>
-    
+     <div class="submit">
+     <input type="submit" class="btn btn-light" name="btnActualizar" value="Actualizar" ></input></br>
+    </div>
 </div>
 
 </form>

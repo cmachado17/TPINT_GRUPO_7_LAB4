@@ -147,7 +147,9 @@ if(request.getAttribute("listaTurnos") != null){
 				<td scope="row"><%=turno.getEstadoTurno().getDescripcion()%></td>
 				<td scope="row">
 					<input type="submit" class="btn-light" value="Ver Paciente" name="btnVerPaciente" onclick="window.location.href='servletClinica?btnVerPaciente&txtDni=<%=turno.getPaciente().getDni() %>'" />
-					<input type="submit" class="btn-light" value="Editar Turno" name="btnEditarEstado" onclick="window.location.href='servletClinica?btnEditarEstado'"/>
+					<% if (turno.getEstadoTurno().getCodigo() != 3 && turno.getEstadoTurno().getCodigo() != 4){  %>
+					<input type="submit" class="btn-light" value="Editar Turno" name="btnEditarEstado" onclick="window.location.href='servletClinica?btnEditarEstado&paciente=<%=turno.getPaciente().getCodPaciente()%>&dia=<%=turno.getDia()%>&hora=<%=turno.getHorario()%> '"/>
+					<%} %>
 				</td>
 			</tr>
 		<%} %>	

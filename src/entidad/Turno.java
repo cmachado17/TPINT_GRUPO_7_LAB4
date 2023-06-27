@@ -6,6 +6,9 @@ public class Turno {
 	private String dia;
 	private String horario;
 	private Paciente paciente;
+	private String comentario;
+	
+
 	private Especialidad especialidad;
 	private EstadoTurno estadoTurno;
 	private boolean estado;
@@ -48,6 +51,13 @@ public class Turno {
 	}
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 	public Especialidad getEspecialidad() {
 		return especialidad;

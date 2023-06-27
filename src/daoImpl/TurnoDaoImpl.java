@@ -42,7 +42,9 @@ public class TurnoDaoImpl implements TurnosDao {
 			+ "INNER JOIN empleados AS E ON E.DNI = T.DNIMEDICO "
 			+ "INNER JOIN estados_turnos AS ET ON ET.CODIGO = T.COD_ESTADO_TURNO "
 			+ "WHERE T.ESTADO=1 ";
-
+	private static final String updatePorMedico = "UPDATE turnos SET COD_ESTADO_TURNO = ?, COMENTARIO = ? WHERE DNIMEDICO = ? AND "
+			+ "DIA = ? AND HORARIO = ? ";
+	private static final String buscarTurno = "SELECT * FROM TURNOS WHERE DNIMEDICO = ? AND DIA = ? AND HORARIO = ? AND COD_PACIENTE = ? AND ESTADO = 1";
 	@Override
 	public boolean insert(Medico medico) throws InsertException {
 		Connection conexion = null;
@@ -214,6 +216,77 @@ public class TurnoDaoImpl implements TurnosDao {
 		}
 		return turnos;
 	}
+
+	@Override
+	public boolean updatePorMedico(Turno turno) throws UpdateException {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try
+		{
+			statement = conexion.prepareStatement(updatePorMedico);
+
+			statement.setInt(1, turno.getEstadoTurno().getCodigo());
+			statement.setInt(3, turno.getMedico().getDni());
+			statement.setString(4, turno.getDia());
+			statement.setString(5, turno.getHorario());
+			
+			if(turno.getEstadoTurno().getCodigo() == 4) {
+				//presente
+				statement.setString(2, turno.getComentario());
+			}else {
+				//ausente, no requiere comentario
+				statement.setString(2, "-");
+			}
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				throw new UpdateException();
+			}
+		}
+		return isOk;
+	}
+
+	@Override
+	public Turno buscarTurno(String paciente, String medico, String hora, String dia) {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		Turno turno = new Turno();
+		Conexion conexion = Conexion.getConexion();
+		
+		try 
+		{
+			statement = conexion.getSQLConexion().prepareStatement(buscarTurno);
+			statement.setString(1,medico);
+			statement.setString(2,dia);
+			statement.setString(3,hora);
+			statement.setString(4,paciente);
+			resultSet = statement.executeQuery();
+			while(resultSet.next())
+			{							
+				turno.setMedico(new Medico(Integer.parseInt(resultSet.getString("DNIMEDICO"))));
+				turno.setPaciente(new Paciente(Integer.parseInt(resultSet.getString("COD_PACIENTE"))));
+				turno.setHorario(resultSet.getString("HORARIO"));
+				turno.setDia(resultSet.getString("DIA"));
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return turno;
+	}	
 }
 
 
