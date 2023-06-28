@@ -240,22 +240,23 @@
 	 
         <% if(estadisticasTurnosXEsp != null)
     		for(EstadisticasPacientes paciente : estadisticasTurnosXEsp){%>    		
-    			var mesTurno = mesSelectElement.options[<%= paciente.getMesTurno()%>].text;
+    			var mesTurno = "<%= paciente.getMesTurno()%>"
+    			var mesTurnoText = mesSelectElement.options[<%= paciente.getMesTurno()%>].text
     			var anioTurno = "<%= paciente.getAnioTurno()%>"
     			var especialidad = "<%= paciente.getEspecialidadTurno()%>"
     			var cantidad = <%= paciente.getCantidadTurno() %>
     				
 	    		if(mesTurno === mesSeleccionado && anioTurno === anioSeleccionado){
-	    			labelsTorta.push(especialidad + " ( " + mesTurno + "/" + anioTurno + " )");
+	    			labelsTorta.push(especialidad + " ( " + mesTurnoText + "/" + anioTurno + " )");
 	    			valoresTorta.push(cantidad);
 	    		} else if ( mesSeleccionado === "0" && anioSeleccionado === anioTurno ) {
-	    			labelsTorta.push(especialidad + " ( " + mesTurno + "/" + anioTurno + " )");
+	    			labelsTorta.push(especialidad + " ( " + mesTurnoText + "/" + anioTurno + " )");
 	    			valoresTorta.push(cantidad);
 	    		} else if ( anioSeleccionado === "0" && mesSeleccionado === mesTurno ) {
-	    			labelsTorta.push(especialidad + " ( " + mesTurno + "/" + anioTurno + " )");
+	    			labelsTorta.push(especialidad + " ( " + mesTurnoText + "/" + anioTurno + " )");
 	    			valoresTorta.push(cantidad);
 	    		} else if ( anioSeleccionado === "0" && mesSeleccionado === "0" ) {
-	    			labelsTorta.push(especialidad + " ( " + mesTurno + "/" + anioTurno + " )");
+	    			labelsTorta.push(especialidad + " ( " + mesTurnoText + "/" + anioTurno + " )");
 	    			valoresTorta.push(cantidad);
 	    		}  
         <% } %>   
