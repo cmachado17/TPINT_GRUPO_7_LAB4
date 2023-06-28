@@ -12,7 +12,6 @@ import entidad.Nacionalidad;
 import entidad.Persona;
 import entidad.Provincia;
 import excepciones.BuscarException;
-import excepciones.ConexionException;
 import excepciones.DeleteException;
 import excepciones.InsertException;
 import excepciones.ReadAllException;

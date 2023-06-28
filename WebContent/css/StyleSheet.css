@@ -1,3 +1,15 @@
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /*background-color: white;*/
+  }
+
+  .chart {
+    width: 45%; /* Ajusta el ancho de los gráficos según sea necesario */
+  }
+
+
 .hidden {
     display: none;
 }

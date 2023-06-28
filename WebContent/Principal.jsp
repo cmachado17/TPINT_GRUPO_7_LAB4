@@ -38,7 +38,8 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a href="servletPacientes?Param=0" class="dropdown-item">Alta Pacientes</a></li>
-            <li><a href="servletPacientes?Param=3" class="dropdown-item">Listado Pacientes</a></li>
+            <li><a href="servletPacientes?Param=3" class="dropdown-item">Listado Pacientes</a></li>            
+            <li><a href="servletPacientes?Param=1" class="dropdown-item">Estadísticas Pacientes</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

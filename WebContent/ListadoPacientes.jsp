@@ -22,32 +22,45 @@
 </style>
 
 
-<!-- Agrega los enlaces a DataTables -->
+<!-- Dependencia de DataTables desde CDN -->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
-
-
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap5.min.css">
 
 <!-- Agrega los enlaces a SweetAlert2 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.js"></script>
 
-<script type="text/javascript">
+<script>
 	$(document).ready(function() {
-		$('#table_id').DataTable();
-	});
+    	$('#table_id').DataTable( {
+        	dom: 'Bfrtip',
+        	buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        	]
+    	} );
+	} );
 </script>
+
 
 
 
 <script>
     function confirmarEliminacion(dni) {
         Swal.fire({
-       	    title: 'ConfirmaciÃ³n',
-          	text: 'Â¿EstÃ¡s seguro de que deseas eliminar este registro?',
+       	    title: 'Confirmación',
+          	text: '¿Estás seguro de que deseas eliminar este registro?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#00a135',
@@ -96,6 +109,7 @@ if(request.getAttribute("listaPacientes") != null){
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a href="servletPacientes?Param=0" class="dropdown-item">Alta Pacientes</a></li>
             <li><a href="servletPacientes?Param=3" class="dropdown-item">Listado Pacientes</a></li>
+            <li><a href="servletPacientes?Param=1" class="dropdown-item">Estadísticas Pacientes</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

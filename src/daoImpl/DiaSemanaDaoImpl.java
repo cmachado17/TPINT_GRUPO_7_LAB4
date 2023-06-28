@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import dao.DiaSemanaDao;
 import entidad.DiaSemana;
-import excepciones.ConexionException;
 import excepciones.ReadAllException;
 
 public class DiaSemanaDaoImpl implements DiaSemanaDao {

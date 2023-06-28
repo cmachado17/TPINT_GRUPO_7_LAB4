@@ -9,12 +9,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import entidad.EstadisticasPacientes;
 import entidad.Nacionalidad;
 import entidad.Paciente;
 import entidad.Provincia;
+import negocio.EstadisticasPacientesNegocio;
 import negocio.NacionalidadNegocio;
 import negocio.PacienteNegocio;
 import negocio.ProvinciaNegocio;
+import negocioImpl.EstadisticasPacientesNegocioImpl;
 import negocioImpl.NacionalidadNegocioImpl;
 import negocioImpl.PacienteNegocioImpl;
 import negocioImpl.ProvinciaNegocioImpl;
@@ -27,6 +31,7 @@ public class servletPacientes extends HttpServlet {
 	PacienteNegocio negPac = new PacienteNegocioImpl();
 	ProvinciaNegocio negProv = new ProvinciaNegocioImpl();
 	NacionalidadNegocio negNac = new NacionalidadNegocioImpl();
+	EstadisticasPacientesNegocio negEstadisticas = new EstadisticasPacientesNegocioImpl();
 	
 	String dispatcher = "";
 	int filas = 0;
@@ -55,7 +60,11 @@ public class servletPacientes extends HttpServlet {
 				dispatcher = "/AltaPacientes.jsp";
 				break;
 			case "1":
-				dispatcher = "/BajaPacientes.jsp";
+				ArrayList<EstadisticasPacientes> estadisticasPacientes = negEstadisticas.obtenerEstadisticasRangoEdades();
+				request.setAttribute("estadisticasRangoEdades", estadisticasPacientes);
+				estadisticasPacientes = negEstadisticas.obtenerEstadisticasTurnosXEsp();
+				request.setAttribute("estadisticasTurnosXEsp", estadisticasPacientes);
+				dispatcher = "/EstadisticasPacientes.jsp";
 				break;
 			case "2":
 				dispatcher = "/ModificacionPacientes.jsp";

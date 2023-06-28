@@ -2,7 +2,6 @@ package negocio;
 
 import java.util.ArrayList;
 
-import entidad.Persona;
 import entidad.Turno;
 import excepciones.BuscarException;
 import excepciones.ReadAllException;

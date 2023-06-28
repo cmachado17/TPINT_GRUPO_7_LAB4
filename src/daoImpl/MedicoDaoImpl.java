@@ -12,7 +12,6 @@ import entidad.DiaSemana;
 import entidad.Especialidad;
 import entidad.Medico;
 import entidad.Nacionalidad;
-import entidad.Persona;
 import entidad.Provincia;
 import excepciones.BuscarException;
 import excepciones.DeleteException;
@@ -27,7 +26,6 @@ public class MedicoDaoImpl implements MedicoDao{
 			+ "E.FECHA_NAC, E.EMAIL, M.COD_ESPECIALIDAD, Esp.DESCRIPCION as DESC_ESPECIALIDAD "
 			+ "FROM empleados AS E inner join medico_por_especialidad as M ON M.DNIMEDICO= E.DNI inner join nacionalidades as N ON E.COD_NACIONALIDAD = N.CODIGO "
 			+ "inner join especialidades as Esp ON M.COD_ESPECIALIDAD = Esp.CODIGO where E.ESTADO= 1;";
-	private static final String update  = "CALL EDITMEDICO(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String buscarMedico  = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO,E.DIRECCION, E.LOCALIDAD, E.COD_NACIONALIDAD, N.DESCRIPCION, E.PROVINCIA, PRO.DESCRIPCION, "
 			+ "E.FECHA_NAC, E.EMAIL, E.TELEFONO, MXE.COD_ESPECIALIDAD, ESP.DESCRIPCION, MXE.DIASEMANA, MXE.HORAINICIO, MXE.HORAFIN, DS.DESCRIPCION "
 			+ "FROM EMPLEADOS AS E "

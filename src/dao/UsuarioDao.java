@@ -1,6 +1,5 @@
 package dao;
 
-import entidad.Persona;
 import entidad.Usuario;
 import excepciones.InsertException;
 import excepciones.ReadAllException;

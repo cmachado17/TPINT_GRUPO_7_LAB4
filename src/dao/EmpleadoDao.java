@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import entidad.Medico;
 import entidad.Persona;
 import excepciones.BuscarException;
-import excepciones.ConexionException;
 import excepciones.DeleteException;
 import excepciones.InsertException;
 import excepciones.ReadAllException;

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import dao.UsuarioDao;
-import entidad.Persona;
 import entidad.TipoUsuario;
 import entidad.Usuario;
 import excepciones.InsertException;

@@ -13,7 +13,6 @@ import entidad.EstadoTurno;
 import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Paciente;
-import entidad.Persona;
 import entidad.Provincia;
 import entidad.Turno;
 import excepciones.BuscarException;

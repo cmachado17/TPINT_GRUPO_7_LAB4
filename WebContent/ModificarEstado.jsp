@@ -9,6 +9,39 @@
        else{
       %>
 <head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function validarCampo() { 
+  	   var opcionSeleccionada = document.getElementById("estado").value;
+ 	   var campoRequerido = document.getElementById("comentario");
+ 	   var btnActualizar = document.getElementById("btnActualizar");
+ 	   var btnVolver = document.getElementById("btnVolver");
+ 	   
+   	   if (opcionSeleccionada === "4" ) {
+   	      campoRequerido.required = true; // Hace que el campo sea requerido
+   	   	} else {
+   	      campoRequerido.required = false; // No se requiere el campo
+   	    }
+	 	// Validar el formulario cuando se presiona el botón
+	    btnActualizar.addEventListener("click", function(event) {	
+	      if (!campoRequerido.validity.valid) {
+	        event.preventDefault(); // Evita el envío del formulario si el campo requerido no está completo
+	        Swal.fire({
+	            icon: 'warning',
+	            title: 'Ingrese un valor',
+	            text: 'Debe ingresar un valor en el campo comentario.',
+	            confirmButtonText: 'Aceptar'
+          	});	
+	      }
+	    });
+	 	
+	    btnVolver.addEventListener("click", function(event) {	
+	    	campoRequerido.required = false; // No se requiere el campo
+	    });
+	       
+  }
+</script>
+
 <% request.setCharacterEncoding("UTF-8"); %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -94,7 +127,7 @@
 <div class="form-group w-50">
  <div class="form-group">
 	<label class="mb-2">Estado</label>
-	<select class="form-select" name="estado"> 
+	<select class="form-select" name="estado" id="estado" onchange="validarCampo()"> 
 		<option value="3">Ausente</option>
 		<option value="4">Presente</option>
 	</select>
@@ -105,11 +138,9 @@
     </div>
 		<br> <br>
 		
-    <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnVolver" value="Volver" ></input></br>
-    </div>
-     <div class="submit">
-     <input type="submit" class="btn btn-light" name="btnActualizar" value="Actualizar" ></input></br>
+    <div class="container">
+     <input type="submit" class="btn btn-light" name="btnActualizar" id="btnActualizar" value="Actualizar" ></input>
+     <input type="submit" class="btn btn-light" name="btnVolver" id="btnVolver" value="Volver" ></input>
     </div>
 </div>
 

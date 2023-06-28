@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import dao.EspecialidadesDao;
 import entidad.Especialidad;
-import excepciones.ConexionException;
 import excepciones.ReadAllException;
 
 public class EspecialidadesDaoImpl implements EspecialidadesDao{
