@@ -139,10 +139,11 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 
 		if(request.getAttribute("insercion")!=null){
 		filas=Integer.parseInt(request.getAttribute("insercion").toString());
-		if(filas!=0) {
+		if(filas!=1) {
 			mensaje= "Turno asignado correctamente!";
-		}
-		else{
+		}else if(filas==3){
+			mensaje= "Ya tiene un turno asignado!";
+		}else if(filas==2){
 			mensaje = "Error al asignar turno.";
 		}
 	}%>  

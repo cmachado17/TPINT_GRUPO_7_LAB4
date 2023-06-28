@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import dao.TurnosDao;
 import daoImpl.TurnoDaoImpl;
 import entidad.Turno;
+import excepciones.BuscarException;
 import excepciones.ReadAllException;
 import excepciones.UpdateException;
 import negocio.TurnoNegocio;
@@ -61,5 +62,10 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 	@Override
 	public String maxDiaTurno() {
 		return turDao.maxDiaTurno();
+	}
+
+	@Override
+	public boolean validarTurno(int dni, int codPaciente) throws BuscarException {
+		return turDao.validarTurno(dni, codPaciente);
 	}
 }

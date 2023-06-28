@@ -16,6 +16,7 @@ import entidad.Paciente;
 import entidad.Persona;
 import entidad.Provincia;
 import entidad.Turno;
+import excepciones.BuscarException;
 import excepciones.InsertException;
 import excepciones.ReadAllException;
 import excepciones.UpdateException;
@@ -52,7 +53,8 @@ public class TurnoDaoImpl implements TurnosDao {
 	private static final String libTurno  = "UPDATE turnos set COD_PACIENTE=null, COD_ESTADO_TURNO=2 WHERE dnimedico=? and COD_ESTADO_TURNO=1 and dia> CURDATE()";
 	private static final String anulTurnoFechas  = "UPDATE turnos set COD_ESTADO_TURNO=5, ESTADO=0 WHERE dnimedico=? and dia between ? and ?";
 	private static final String anulTurno  = "UPDATE turnos set COD_ESTADO_TURNO=5, ESTADO=0 WHERE dnimedico=? and dia> CURDATE()";
-			
+	private static final String validarTurno = "SELECT DNIMEDICO FROM turnos AS T WHERE COD_ESTADO_TURNO = 2 "
+			+ "AND DNIMEDICO = ? AND  COD_PACIENTE = ?";		
 	
 	@Override
 	public boolean insert(Medico medico) throws InsertException {
@@ -395,6 +397,37 @@ public class TurnoDaoImpl implements TurnosDao {
 		}
 		return turno;
 	}
+	
+	@Override
+	public boolean validarTurno(int dni, int codPaciente) throws BuscarException {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		Turno turno = new Turno();
+		boolean encontrado = false;
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(validarTurno);
+			statement.setInt(1,dni);
+			statement.setInt(2,codPaciente);
+			resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				turno.setMedico(new Medico(Integer.parseInt(resultSet.getString("DNIMEDICO"))));
+				encontrado = true;
+			}
+			
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+			throw new BuscarException();
+		}
+		
+		return encontrado;
+	}
+	
 }
 
 

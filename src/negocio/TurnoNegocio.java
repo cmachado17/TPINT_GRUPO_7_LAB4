@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entidad.Persona;
 import entidad.Turno;
+import excepciones.BuscarException;
 import excepciones.ReadAllException;
 import excepciones.UpdateException;
 
@@ -19,4 +20,5 @@ public interface TurnoNegocio {
 	public boolean anularTurnos(int dni, String fechaInicio, String fechaFin);
 	public String minDiaTurno();
 	public String maxDiaTurno();
+	public boolean validarTurno(int dni, int codPaciente) throws BuscarException;
 }
