@@ -134,7 +134,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 	  <div class="container">
 		 <div class="p-3 contenedor-principal">
 			<h2 class="tituloForm"> Asignar turnos </h2> </br>
-			<%int filas =0;
+<%			int filas =0;
 			String mensaje = "";
 
 		if(request.getAttribute("insercion")!=null){
@@ -146,9 +146,12 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		}else if(filas==2){
 			mensaje = "Error al asignar turno.";
 		}
-	}%>  
+	}  
+	
+%>  
 			
-<div class="content mb-3" style="text-align: center; font-weight: bold;"><%=mensaje %></div>		<!-- Lo que mostrará el timer -->
+<div class="content" style="text-align: center; font-weight: bold;"><%=mensaje %></div>	
+<!-- Lo que mostrará el timer -->
 
 <!--	si todavia no eligio especialidad muestra esto!-->
 <% 		if(request.getParameter("btnBuscar")==null && request.getParameter("btnBuscar2")==null
