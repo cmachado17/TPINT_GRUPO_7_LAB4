@@ -141,8 +141,17 @@ public class servletClinica extends HttpServlet {
 			ArrayList<Turno> listaTurnos = negTurn.turnosAsignadosPorMedico(dniMedico);
 			
 			//filtro la lista con las fechas
-			String desde = (request.getParameter("fechadesde").toString());
-			String hasta = (request.getParameter("fechahasta").toString());
+			String desde=(request.getParameter("fechadesde").toString());
+			if(desde=="") {
+				desde=negTurn.minDiaTurno();
+			}
+			String hasta= (request.getParameter("fechahasta").toString());
+			if(hasta=="") {				
+				hasta=negTurn.maxDiaTurno();
+			}
+
+			//String desde = (request.getParameter("fechadesde").toString());
+			//String hasta = (request.getParameter("fechahasta").toString());
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        LocalDate inicio = LocalDate.parse(desde, formatter);
@@ -171,8 +180,14 @@ public class servletClinica extends HttpServlet {
 			request.setAttribute("listaTurnos", listaTurnos);	
 			
 			//filtro la lista con las fechas
-			String desde = (request.getParameter("fechadesde").toString());
-			String hasta = (request.getParameter("fechahasta").toString());
+			String desde=(request.getParameter("fechadesde").toString());
+			if(desde=="") {
+				desde=negTurn.minDiaTurno(); 	//si no se filtra y se aprieta buscar trae las fechas mín y máx de los turnos históricos.
+			}
+			String hasta= (request.getParameter("fechahasta").toString());
+			if(hasta=="") {				
+				hasta=negTurn.maxDiaTurno();
+			}
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        LocalDate inicio = LocalDate.parse(desde, formatter);

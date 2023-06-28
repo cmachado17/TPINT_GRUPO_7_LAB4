@@ -80,7 +80,7 @@
 
 
 
-<title>Listado de empleados</title>
+<title>Listado de Médicos</title>
 </head>
 <%
 	ArrayList <Medico> listaEmpleados = null;
@@ -159,7 +159,7 @@
 
 <div class="container">
 	<div class="p-3 contenedor-principal">
-	<h2 class="tituloForm"> Listado de Empleados </h2> </br>
+	<h2 class="tituloForm"> Listado de Médicos </h2> </br>
 	<table id="table_id" class="display table table-striped bg-light">
 		<thead>
 			<tr>

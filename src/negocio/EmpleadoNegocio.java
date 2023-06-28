@@ -16,6 +16,8 @@ public interface EmpleadoNegocio {
 	public boolean insertMedicosPorEspecialidad(Medico medico) throws InsertException;
 	public boolean delete(int dni) throws DeleteException;
 	public boolean bajaFisica(int dni) throws DeleteException;
+	public boolean liberarTurnos(int dni);
+	public boolean anularTurnos(int dni, String fechaInicio, String fechaFin);
 	public boolean update(Persona empleado) throws UpdateException;
 	public ArrayList<Persona> readAll() throws ReadAllException;
 	public int dniNoExiste(Persona empleado) throws BuscarException;

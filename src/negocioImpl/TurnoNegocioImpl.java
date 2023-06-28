@@ -42,5 +42,24 @@ public class TurnoNegocioImpl implements TurnoNegocio {
 	public Turno buscarTurno(String paciente, String medico, String hora, String dia) {
 		return turDao.buscarTurno(paciente,medico,hora,dia);
 	}
+	
+	@Override
+	public boolean liberarTurnos(int dni) {
+		return turDao.liberarTurnos(dni);
+	}
 
+	@Override
+	public boolean anularTurnos(int dni, String fechaInicio, String fechaFin) {
+		return turDao.anularTurnos(dni, fechaInicio, fechaFin);
+	}
+
+	@Override
+	public String minDiaTurno() {
+		return turDao.minDiaTurno();
+	}
+
+	@Override
+	public String maxDiaTurno() {
+		return turDao.maxDiaTurno();
+	}
 }

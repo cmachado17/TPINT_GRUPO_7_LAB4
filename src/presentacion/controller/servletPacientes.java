@@ -196,10 +196,8 @@ public class servletPacientes extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/ListadoPacientes.jsp");
 				rd.forward(request, response);
 			}
-
-			
+		
 		}
-		
-		
+	
 	}
 }

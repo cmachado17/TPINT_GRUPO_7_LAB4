@@ -176,7 +176,7 @@
 				</div>
 				<div class="submit">
 					<input type="submit" class="btn btn-light" name="btnModificar" value="Modificar"></input></br>
-				</div>
+			    </div>
 			</form>
 		</div>
 <%} %>

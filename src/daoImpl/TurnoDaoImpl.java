@@ -13,6 +13,7 @@ import entidad.EstadoTurno;
 import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Paciente;
+import entidad.Persona;
 import entidad.Provincia;
 import entidad.Turno;
 import excepciones.InsertException;
@@ -46,6 +47,13 @@ public class TurnoDaoImpl implements TurnosDao {
 	private static final String updatePorMedico = "UPDATE turnos SET COD_ESTADO_TURNO = ?, COMENTARIO = ? WHERE DNIMEDICO = ? AND "
 			+ "DIA = ? AND HORARIO = ? ";
 	private static final String buscarTurno = "SELECT * FROM TURNOS WHERE DNIMEDICO = ? AND DIA = ? AND HORARIO = ? AND COD_PACIENTE = ? AND ESTADO = 1";
+	private static final String minDia  = "select min(dia) from turnos";
+	private static final String maxDia  = "select max(dia) from turnos";
+	private static final String libTurno  = "UPDATE turnos set COD_PACIENTE=null, COD_ESTADO_TURNO=2 WHERE dnimedico=? and COD_ESTADO_TURNO=1 and dia> CURDATE()";
+	private static final String anulTurnoFechas  = "UPDATE turnos set COD_ESTADO_TURNO=5, ESTADO=0 WHERE dnimedico=? and dia between ? and ?";
+	private static final String anulTurno  = "UPDATE turnos set COD_ESTADO_TURNO=5, ESTADO=0 WHERE dnimedico=? and dia> CURDATE()";
+			
+	
 	@Override
 	public boolean insert(Medico medico) throws InsertException {
 		Connection conexion = null;
@@ -291,6 +299,102 @@ public class TurnoDaoImpl implements TurnosDao {
 		}
 		return turno;
 	}	
+
+	@Override
+	public boolean liberarTurnos(int dniMedico) {		//LIBERA LOS TURNOS FUTUROS YA ASIGNADOS DEL MÉDICO --> FECHATURNO>GETDATE() AND COD_ESTADO_TURNO=2
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try 
+		{
+			statement = conexion.prepareStatement(libTurno);
+			statement.setInt(1, dniMedico);
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isOk;
+	}
+	
+	@Override
+	public boolean anularTurnos(int dniMedico, String fechaInicio, String fechaFin) {		//ANULA LOS TURNOS FUTUROS DEL MÉDICO --> FECHATURNO>GETDATE()
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		boolean isOk = false;
+		try 
+		{
+			if(fechaInicio!="" && fechaFin!="") {
+				statement = conexion.prepareStatement(anulTurnoFechas);
+				statement.setInt(1, dniMedico);
+				statement.setString(2, fechaInicio);
+				statement.setString(3, fechaFin);
+			}
+			else {		
+				statement = conexion.prepareStatement(anulTurno);
+				statement.setInt(1, dniMedico);
+			}
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isOk = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return isOk;
+	}
+	
+	@Override
+	public String minDiaTurno() {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		String turno="";
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(minDia);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				turno=resultSet.getString(1);
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return turno;
+	}
+
+	@Override
+	public String maxDiaTurno() {
+		PreparedStatement statement;
+		ResultSet resultSet; 
+		String turno="";
+		
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		try 
+		{
+			statement = conexion.prepareStatement(maxDia);
+			resultSet = statement.executeQuery();
+			if(resultSet.next()) {
+				turno=resultSet.getString(1);
+			}
+		}
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		return turno;
+	}
 }
 
 

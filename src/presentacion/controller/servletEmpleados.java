@@ -48,7 +48,8 @@ public class servletEmpleados extends HttpServlet {
 	EspecialidadNegocio negEsp = new EspecialidadNegocioImpl();
 	DiaSemanaNegocio negDia = new DiaSemanaNegocioImpl();
 	MedicoNegocio medicoNegocio = new MedicoNegocioImpl();
-   
+	TurnoDaoImpl turnoDao = new TurnoDaoImpl();
+	
     public servletEmpleados() {
         super();
     }
@@ -108,7 +109,8 @@ public class servletEmpleados extends HttpServlet {
 			
 			if(request.getParameter("btnEliminar")!=null) {						
 				int dni = Integer.parseInt(request.getParameter("txtDni"));			
-				negEmp.delete(dni);	
+				negEmp.delete(dni);
+				turnoDao.anularTurnos(dni, "","");	//ANULA los turnos del médico dado de baja (los pone en estado=0, y cod_estado_turno=ANULADO). Si pasamos fechas anula ese rango de fechas.
 				RequestDispatcher rd = request.getRequestDispatcher("/servletEmpleados?Param=3");
 				rd.forward(request, response);
 			}
@@ -170,7 +172,7 @@ public class servletEmpleados extends HttpServlet {
 					if(negEmp.insertMedicosPorEspecialidad(medico)) {
 						if(negUser.insert(usuario)) {				//método para agregar un usuario al sistema al crear un médico o administrador			
 							filas=1;		
-							TurnoDaoImpl turnoDao = new TurnoDaoImpl();
+
 							turnoDao.insert(medico);
 						}
 						

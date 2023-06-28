@@ -34,7 +34,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 			+ "NAC.CODIGO, NAC.DESCRIPCION FROM empleados empl "
 			+ "INNER JOIN PROVINCIAS PRO ON PRO.CODIGO = empl.PROVINCIA "
 			+ "INNER JOIN NACIONALIDADES NAC ON NAC.CODIGO = empl.COD_NACIONALIDAD WHERE empl.Dni = ?";
-	
+			
 	@Override
 	public boolean insert(Persona empleado) throws InsertException {
 		
@@ -162,7 +162,7 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		}
 		return isOk;
 	}
-
+	
 	@Override
 	public boolean update(Persona empleado) throws UpdateException {
 		PreparedStatement statement;

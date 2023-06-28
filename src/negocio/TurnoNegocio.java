@@ -15,4 +15,8 @@ public interface TurnoNegocio {
 	public ArrayList<Turno> readAll() throws ReadAllException;
 	public boolean updatePorMedico(Turno turno)throws UpdateException;
 	public Turno buscarTurno(String paciente, String medico, String hora, String dia);
+	public boolean liberarTurnos(int dni);
+	public boolean anularTurnos(int dni, String fechaInicio, String fechaFin);
+	public String minDiaTurno();
+	public String maxDiaTurno();
 }

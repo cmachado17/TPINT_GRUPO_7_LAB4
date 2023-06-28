@@ -94,7 +94,7 @@
 <div class="form-group w-50">
  <div class="form-group">
 	<label class="mb-2">Estado</label>
-	<select class="form-control" name="estado"> 
+	<select class="form-select" name="estado"> 
 		<option value="3">Ausente</option>
 		<option value="4">Presente</option>
 	</select>

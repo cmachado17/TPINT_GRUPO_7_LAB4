@@ -35,8 +35,7 @@ public class EmpleadoNegocioImpl implements EmpleadoNegocio {
 	@Override
 	public boolean bajaFisica(int dni) throws DeleteException {
 		return eDao.bajaFisica(dni);
-	}
-
+	}	
 	@Override
 	public boolean update(Persona empleado) throws UpdateException {
 		return eDao.update(empleado);
@@ -61,7 +60,4 @@ public class EmpleadoNegocioImpl implements EmpleadoNegocio {
 	public boolean updateMedicosEspecialidad(Medico medico) throws UpdateException {
 		return eDao.updateEspecialidadesMedico(medico);
 	}
-	
-	
-
 }
