@@ -221,7 +221,6 @@ public class MedicoDaoImpl implements MedicoDao{
 			{							
 				Medico medico = new Medico();
 				medico.setDni(resultSet.getInt("DNI"));
-				System.out.println("esto tiene dni " + medico.getDni());
 				medico.setNombre(resultSet.getString("NOMBRE"));
 				medico.setApellido(resultSet.getString("APELLIDO"));
 				medicos.add(medico);
