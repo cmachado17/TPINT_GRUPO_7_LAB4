@@ -116,7 +116,6 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		
 		if (request.getAttribute("listaMedicos") != null && request.getAttribute("listaMedicos") != "") {
 			listaMedicos = (List<Medico>) request.getAttribute("listaMedicos");
-			System.out.println(request.getAttribute("listaMedicos"));
 		}
 		
 		List<Turno> listaTurnos = new ArrayList<Turno>();
@@ -213,11 +212,12 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		
  
 		<form class="row g-3" method="post" action="servletTurnos">
-		 		<div class="col-auto center2">
+			   <%if (request.getAttribute("listaMedicos") != null && request.getAttribute("listaMedicos") != "") {%>
+				 
+				 	<div class="col-auto center2">
 				   <label class="formulario">Medico</label>
 				   </div>
-			   
-			   <%if (request.getAttribute("listaMedicos") != null && request.getAttribute("listaMedicos") != "") {%>
+				 
 				  <div class="col-auto">
 			    		<select  name="medico" type="text" class="form-select"> 
 						<% for (Medico mec : listaMedicos) {%>
@@ -231,8 +231,9 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		  </div>
 		  
 		  <%} else {%>
+		  <div class="col-auto center2">
 		<p class="user"> "No hay medicos de la especialidad seleccionada" <p>
-				
+			</div>	
 		<%}%>
 		
 		</form>
@@ -284,9 +285,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 			    			<% int codigoMedico = Integer.parseInt(session.getAttribute("MedicoTurno").toString());%> 
 					<% for (Medico mec : listaMedicos) {%>
 							<% int codigo2 = mec.getDni(); %>
-							<% System.out.println("esto tiene codigo" + codigo); %>
-								<% System.out.println("esto tiene codigo2" + codigo2); %>
-								<% if(codigo2 == codigo) {%> 
+								<% if(codigo2 == codigoMedico) {%> 
 							<option selected="selected" value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>
 							<%}else{%>
 							<option value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>
@@ -306,22 +305,20 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		
 		<form class="row g-3" method="post" action="servletTurnos">
 		
-		
-		<div class="col-auto center2">
+		<%if (request.getAttribute("turnosMedico") != null && request.getAttribute("turnosMedico") != "") {%>
+				<div class="col-auto center2">
 				   <label class="formulario">Turnos</label>
 				   </div>
 				  <div class="col-auto">
 			    	<select  name="turno" type="text" class="form-select"> 
 			    	<% 
-			    	 if(request.getAttribute("turnosMedico") != null){
 					 for (Turno turn : listaTurnos) {
 					%>
-							<option value="<%=turn.getDia() %>  <%=turn.getHorario()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
-					<%}%>
+						<option value="<%=turn.getDia() %>  <%=turn.getHorario()%>"><%=turn.getDia() + " " + turn.getHorario()%></option>
 					<%}%>
 					</select>
   				</div>
-  				
+  			 
   				
 				<div class="col-auto">
 					<label class="center3">Pacientes</label>
@@ -339,6 +336,12 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 				    <div class="submit">
 				     <input type="submit" class="btn btn-light" name="btnEnviar" value="Enviar" ></input></br>
 				    </div>
+				    
+				     <%} else {%>
+				  <div class="col-auto center2">
+				<p class="user"> "No hay turnos disponibles" <p>
+					</div>	
+				<%}%>	
 			</form>			
 <%} %> 
 

@@ -85,7 +85,6 @@ public class servletTurnos extends HttpServlet {
 			if(listaMedicos.isEmpty()) {
 				//medicos filtrados
 				request.setAttribute("listaMedicos", null);
-				System.out.println("entre aca");
 			}else {
 				//medicos filtrados
 				request.setAttribute("listaMedicos", listaMedicos);
@@ -104,8 +103,18 @@ public class servletTurnos extends HttpServlet {
 		if(request.getParameter("btnBuscar2")!=null) {
 			String dispatcher="/AsignarTurnos.jsp";
 			
-			//turnos del medico elegido
-			request.setAttribute("turnosMedico",negTurn.turnosMedico(request.getParameter("medico").toString()));
+			List<Turno> listaTurnos = new ArrayList<Turno>();
+			listaTurnos = negTurn.turnosMedico(request.getParameter("medico").toString());
+			
+			if(listaTurnos.isEmpty()) {
+				//turnos del medico elegido
+				request.setAttribute("turnosMedico", null);
+				System.out.println("entro aca");
+			}else {
+				//turnos del medico elegido
+				request.setAttribute("turnosMedico", listaTurnos);
+			}
+			
 			//guardo el medico para usarlo despues
 			request.getSession().setAttribute("MedicoTurno", request.getParameter("medico"));
 			
