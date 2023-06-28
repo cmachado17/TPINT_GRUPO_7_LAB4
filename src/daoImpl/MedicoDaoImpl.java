@@ -226,7 +226,9 @@ public class MedicoDaoImpl implements MedicoDao{
 				medico.setNombre(resultSet.getString("NOMBRE"));
 				medico.setApellido(resultSet.getString("APELLIDO"));
 				medicos.add(medico);
+				
 			}
+			
 		} 
 		catch (SQLException e) 
 		{

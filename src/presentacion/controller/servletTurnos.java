@@ -2,6 +2,7 @@ package presentacion.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -78,8 +79,18 @@ public class servletTurnos extends HttpServlet {
 		if(request.getParameter("btnBuscar")!=null) {
 			String dispatcher="/AsignarTurnos.jsp";
 			
-			//medicos filtrados
-			request.setAttribute("listaMedicos",negMed.medicosPorEspecialidad(Integer.parseInt(request.getParameter("especialidad").toString())));
+			List<Medico> listaMedicos = new ArrayList<Medico>();
+			listaMedicos = negMed.medicosPorEspecialidad(Integer.parseInt(request.getParameter("especialidad").toString()));
+			
+			if(listaMedicos.isEmpty()) {
+				//medicos filtrados
+				request.setAttribute("listaMedicos", null);
+				System.out.println("entre aca");
+			}else {
+				//medicos filtrados
+				request.setAttribute("listaMedicos", listaMedicos);
+			}
+			
 			//guardo la especialidad para usar despues
 			request.getSession().setAttribute("EspecialidadTurno", Integer.parseInt(request.getParameter("especialidad").toString()));
 			//volver a cargar las especialidades
@@ -117,8 +128,6 @@ public class servletTurnos extends HttpServlet {
 			Paciente paciente = new Paciente();
 			medico.setDni(Integer.parseInt(request.getSession().getAttribute("MedicoTurno").toString()));
 			paciente.setCodPaciente(Integer.parseInt(request.getParameter("paciente").toString()));
-			//turno.getMedico().setDni(Integer.parseInt(request.getSession().getAttribute("MedicoTurno").toString()));
-			//turno.getPaciente().setCodPaciente(Integer.parseInt(request.getParameter("paciente").toString()));
 			turno.setMedico(medico);
 			turno.setPaciente(paciente);
 			

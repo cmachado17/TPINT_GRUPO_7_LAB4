@@ -60,4 +60,16 @@ public class EmpleadoNegocioImpl implements EmpleadoNegocio {
 	public boolean updateMedicosEspecialidad(Medico medico) throws UpdateException {
 		return eDao.updateEspecialidadesMedico(medico);
 	}
+
+	@Override
+	public boolean liberarTurnos(int dni) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean anularTurnos(int dni, String fechaInicio, String fechaFin) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
