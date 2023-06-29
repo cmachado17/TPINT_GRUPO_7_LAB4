@@ -39,8 +39,8 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 	function validarHorario() {
 	    var horaInicio = parseInt(document.getElementById('horaInicio').value.split(':')[0]);
 	    var horaFin = parseInt(document.getElementById('horaFin').value.split(':')[0]);
-	
-	    if (horaInicio >= horaFin) {
+		var tipousuario = parseInt(document.querySelector('input[name="tipousuario"]:checked').value);
+	    if (horaInicio >= horaFin && tipousuario == 2) {
 	        Swal.fire({
 	            title: 'Error',
 	            text: 'La hora de fin debe ser mayor a la hora de inicio!',

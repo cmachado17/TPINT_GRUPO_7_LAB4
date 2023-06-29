@@ -102,6 +102,8 @@ public class servletPacientes extends HttpServlet {
 						
 			int dni = Integer.parseInt(request.getParameter("txtDni"));			
 			negPac.delete(dni);	
+			ArrayList<Paciente> listaPacientes = negPac.readAll();
+			request.setAttribute("listaPacientes", listaPacientes);	
 			RequestDispatcher rd = request.getRequestDispatcher(dispatcher);
 			rd.forward(request, response);
 		}
