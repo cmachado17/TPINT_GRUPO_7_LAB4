@@ -284,7 +284,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
     							<option value="18:00:00">18:00</option>
     							<option value="19:00:00">19:00</option>							
     							<option value="20:00:00">20:00</option>
-    							<option value="12:00:00">21:00</option>
+    							<option value="21:00:00">21:00</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -303,7 +303,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
     							<option value="18:00:00">18:00</option>
     							<option value="19:00:00">19:00</option>							
     							<option value="20:00:00">20:00</option>
-    							<option value="12:00:00">21:00</option>
+    							<option value="21:00:00">21:00</option>
 						</select>
 					</div>
 				</div>

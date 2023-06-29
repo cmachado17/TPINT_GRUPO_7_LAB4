@@ -98,10 +98,11 @@ public class servletPacientes extends HttpServlet {
 				
 		//BAJA PACIENTE
 		if(request.getParameter("btnEliminar")!= null) {
+			String dispatcher="/ListadoPacientes.jsp";
 						
 			int dni = Integer.parseInt(request.getParameter("txtDni"));			
 			negPac.delete(dni);	
-			RequestDispatcher rd = request.getRequestDispatcher("/servletPacientes?Param=3");
+			RequestDispatcher rd = request.getRequestDispatcher(dispatcher);
 			rd.forward(request, response);
 		}
 
