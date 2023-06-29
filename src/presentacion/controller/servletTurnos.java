@@ -53,6 +53,7 @@ public class servletTurnos extends HttpServlet {
 				dispatcher = "/AsignarTurnos.jsp";
 				break;
 			case "1":
+				request.setAttribute("listaMedicos", negMed.readAll());
 				ArrayList<Turno> listaTurnos = negTurn.readAll();
 				request.setAttribute("listaTurnos", listaTurnos);	
 				dispatcher = "/ListadoTurnos.jsp";

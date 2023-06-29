@@ -1,6 +1,7 @@
 <%@page import="entidad.Medico"%>
 <%@page import="entidad.Persona"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="entidad.Turno"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -69,6 +70,11 @@
 	ArrayList <Turno> listaTurnos = null;
 	if(request.getAttribute("listaTurnos") != null){
 	listaTurnos = (ArrayList <Turno>) request.getAttribute("listaTurnos");
+	}
+	
+	List<Medico> listaMedicos = new ArrayList<Medico>();	
+	if (request.getAttribute("listaMedicos") != null && request.getAttribute("listaMedicos") != "") {
+		listaMedicos = (List<Medico>) request.getAttribute("listaMedicos");
 	}
 %>
 <body>
@@ -150,6 +156,14 @@
       <input type="date" class="form-control" name="fechahasta" <%if (request.getAttribute("fechahasta") != null) { %>value ="<%= request.getAttribute("fechahasta").toString() %>"<%} %>>
     </div>
       <div class="col d-flex align-items-end">
+      <select  name="medicoListado" type="text" class="form-select"> 
+						<% for (Medico mec : listaMedicos) {%>
+							<option value="<%=mec.getDni()%>"><%=mec.getNombre() + " " + mec.getApellido()%></option>			
+						<%} %>
+					</select>
+		
+    </div>
+      <div class="col d-flex align-items-end">
        <input type="submit" class="btn btn-light mx-2" name="btnBuscarListado" value="Filtrar" ></input>
          <input type="submit" class="btn btn-light" name="btnBorrarListado" value="Borrar filtros" ></input>
     </div>
@@ -164,7 +178,7 @@
 				<th scope="col">Horario</th>
 				<th scope="col">Paciente</th>
 				<th scope="col">Estado</th>
-				<th scope="col">Acciones</th>
+<!-- 				<th scope="col">Acciones</th> -->
 			</tr>
 		</thead>
 		<tbody>
@@ -178,9 +192,9 @@
 					<td scope="row"><%= turnos.getHorario()%></td>
 					<td scope="row"> <% if(turnos.getPaciente().getCodPaciente() != 0) {%> <%= turnos.getPaciente().getNombre() + " " + turnos.getPaciente().getApellido()  %> <%}else{%><%= "-"%><%} %></td>
 					<td scope="row"><%= turnos.getEstadoTurno().getDescripcion()%></td>						
-					<td scope="row">
-						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
-						onclick="confirmarEliminacion(<%= turnos.getMedico().getDni()%>)" />
+<!-- 					<td scope="row">
+						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar" -->
+<%-- 						onclick="confirmarEliminacion(<%= turnos.getMedico().getDni()%>)" /> --%>
 					</td>
 				</tr>
 			<%} %>	

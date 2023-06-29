@@ -13,9 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidad.EstadoTurno;
+import entidad.Medico;
 import entidad.Turno;
+import negocio.MedicoNegocio;
 import negocio.PacienteNegocio;
 import negocio.TurnoNegocio;
+import negocioImpl.MedicoNegocioImpl;
 import negocioImpl.PacienteNegocioImpl;
 import negocioImpl.TurnoNegocioImpl;
 
@@ -26,7 +29,8 @@ public class servletClinica extends HttpServlet {
 	
 	TurnoNegocio negTurn = new TurnoNegocioImpl();
 	PacienteNegocio negPac = new PacienteNegocioImpl();
-       
+	MedicoNegocio negMed = new MedicoNegocioImpl();
+	
     public servletClinica() {
         super();
     }
@@ -153,6 +157,11 @@ public class servletClinica extends HttpServlet {
 			//String desde = (request.getParameter("fechadesde").toString());
 			//String hasta = (request.getParameter("fechahasta").toString());
 			
+			int dniDelMedico = 0;
+			if(request.getParameter("medicoListado")!=null){				
+				dniDelMedico=Integer.parseInt(request.getParameter("medicoListado"));
+			}
+			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			LocalDate inicio = LocalDate.parse(desde, formatter).minusDays(1);
 	        LocalDate fin = LocalDate.parse(hasta, formatter).plusDays(1);
@@ -160,8 +169,15 @@ public class servletClinica extends HttpServlet {
 	        ArrayList<Turno> listaFiltrada = new ArrayList<>();
 	        for (Turno objeto : listaTurnos) {
 	            LocalDate fechaObjeto = LocalDate.parse(objeto.getDia(), formatter);
-	            if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin)) {
-	            	listaFiltrada.add(objeto);
+	            if(dniDelMedico!=0) {	            	
+		            if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin) && objeto.getMedico().getDni()==dniDelMedico) {
+		            	listaFiltrada.add(objeto);
+		            }
+	            }
+	            else {
+		            if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin)) {
+		            	listaFiltrada.add(objeto);
+		            }
 	            }
 	        }
 			
@@ -176,6 +192,7 @@ public class servletClinica extends HttpServlet {
 		if(request.getParameter("btnBuscarListado")!=null) {
 			String dispatcher="/ListadoTurnos.jsp";
 			
+			request.setAttribute("listaMedicos", negMed.readAll());
 			ArrayList<Turno> listaTurnos = negTurn.readAll();
 			request.setAttribute("listaTurnos", listaTurnos);	
 			
@@ -188,6 +205,12 @@ public class servletClinica extends HttpServlet {
 			if(hasta=="") {				
 				hasta=negTurn.maxDiaTurno();
 			}
+
+			int dniDelMedico = 0;
+						
+			if(request.getParameter("medicoListado")!=null){				
+				dniDelMedico=Integer.parseInt(request.getParameter("medicoListado"));
+			}
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        LocalDate inicio = LocalDate.parse(desde, formatter).minusDays(1);
@@ -196,9 +219,16 @@ public class servletClinica extends HttpServlet {
 	        ArrayList<Turno> listaFiltrada = new ArrayList<>();
 	        for (Turno objeto : listaTurnos) {
 	            LocalDate fechaObjeto = LocalDate.parse(objeto.getDia(), formatter);
-	            if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin)) {
-	            	listaFiltrada.add(objeto);
-	            }
+            		if(dniDelMedico!=0) {
+            			if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin) && objeto.getMedico().getDni()==dniDelMedico) {
+            				listaFiltrada.add(objeto);
+            			}
+            		}
+            		else {
+    	            	if (fechaObjeto.isAfter(inicio) && fechaObjeto.isBefore(fin)) {
+    	            		listaFiltrada.add(objeto);
+    	            	}
+    	            }
 	        }
 			
 			request.setAttribute("listaTurnos", listaFiltrada);	
@@ -225,7 +255,8 @@ public class servletClinica extends HttpServlet {
 		
 		if(request.getParameter("btnBorrarListado")!=null) {
 			String dispatcher="/ListadoTurnos.jsp";
-			
+			request.setAttribute("listaMedicos", negMed.readAll());
+
 			ArrayList<Turno> listaTurnos = negTurn.readAll();
 			request.setAttribute("listaTurnos", listaTurnos);	
 			//Redirijo a listado de turnos asignados del medico
