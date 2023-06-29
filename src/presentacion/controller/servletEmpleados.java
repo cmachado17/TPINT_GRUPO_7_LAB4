@@ -223,39 +223,6 @@ public class servletEmpleados extends HttpServlet {
 		
 		if(request.getParameter("btnModificar")!=null) {
 			
-			/*int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
-			Usuario usuario = new Usuario();
-
-			usuario.setDni(Integer.parseInt(request.getParameter("DNI")));
-			usuario.setClave(String.valueOf(usuario.getDni()));
-			TipoUsuario tu = new TipoUsuario();
-			tu.setCodigoTipoUsuario(tipoUsuario);			
-			usuario.setTipoUser(tu);
-			usuario.setEstado(true);
-			
-			if(tipoUsuario==1) {
-				
-				Administrador administrador = new Administrador();
-				administrador.setDni(Integer.parseInt(request.getParameter("DNI")));
-				administrador.setNombre(request.getParameter("nombre"));
-				administrador.setApellido(request.getParameter("apellido"));
-				administrador.setSexo(request.getParameter("sexo"));
-				administrador.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
-				administrador.setFechaNacimiento(request.getParameter("fechaNacimiento"));
-				administrador.setDireccion(request.getParameter("direccion"));
-				administrador.setLocalidad(request.getParameter("localidad"));
-				administrador.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
-				administrador.setEmail(request.getParameter("email"));
-				administrador.setTelefono(request.getParameter("telefono"));
-				administrador.setEstado(true);
-				
-				if(negEmp.update(administrador)) {
-					if(negUser.update(usuario));
-					filas=1;			
-				}
-			}
-			
-			if(tipoUsuario==2) {*/
 			
 			//SETEO EL MEDICO A ACTUALIZAR
 			Medico medico = new Medico();
