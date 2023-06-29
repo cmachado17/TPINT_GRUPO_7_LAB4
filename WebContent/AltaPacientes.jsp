@@ -65,7 +65,8 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a href="servletEmpleados?Param=0" class="dropdown-item">Alta Empleados</a></li>
-            <li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado Empleados</a></li>
+           <li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado Medicos</a></li>
+             <li><a href="servletEmpleados?Param=4" class="dropdown-item">Listado Empleados</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">

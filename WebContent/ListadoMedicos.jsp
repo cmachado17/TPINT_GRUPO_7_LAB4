@@ -1,9 +1,12 @@
-<%@page import="entidad.Turno"%>
+<%@page import="entidad.Medico"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="entidad.Persona"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+
     <%
        if(session.getAttribute("Sesion") == null){ 
     	   response.sendRedirect("Home.jsp"); 
@@ -12,7 +15,11 @@
       %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,13 +60,46 @@
 </script>
 
 
-<title>Turnos asignados</title>
+
+<script>
+    // Función para mostrar el cartel de confirmación
+    function confirmarEliminacion(dni) {
+        Swal.fire({
+            title: 'Confirmación',
+            text: '¿Estás seguro de que deseas eliminar este registro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#00a135',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+            	Swal.fire({
+           		 position: 'center',
+           		  icon: 'success',
+           		  title: 'Registro eliminado!',
+           		  showConfirmButton: false,
+           		  timer: 1500
+          		})
+          		 // Redirecciona a la página de servlet
+          		setTimeout(function(){
+          			window.location.href = 'servletEmpleados?btnEliminar=1&txtDni=' + dni;
+					}, 1500);
+            }
+        });
+    }
+</script>
+
+
+
+<title>Listado de Médicos</title>
 </head>
 <%
-ArrayList <Turno> listaTurnos = null;
-if(request.getAttribute("listaTurnos") != null){
-	listaTurnos = (ArrayList <Turno>) request.getAttribute("listaTurnos");
-}
+	ArrayList <Medico> listaEmpleados = null;
+	if(request.getAttribute("listaEmpleados") != null){
+		listaEmpleados = (ArrayList <Medico>) request.getAttribute("listaEmpleados");
+	}
 %>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -78,6 +118,7 @@ if(request.getAttribute("listaTurnos") != null){
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a href="servletPacientes?Param=0" class="dropdown-item">Alta Pacientes</a></li>
             <li><a href="servletPacientes?Param=3" class="dropdown-item">Listado Pacientes</a></li>
+            <li><a href="servletPacientes?Param=1" class="dropdown-item">Estadísticas Pacientes</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -124,52 +165,53 @@ if(request.getAttribute("listaTurnos") != null){
     </div>
   </div>
 </nav>
-<div class="container"> 
-	<div class="p-3 contenedor-principal">
 
-<h2 class="tituloForm"> Turnos asignados </h2> </br>
-<form method="post" action="servletClinica">
-  <div class="row my-2">
-    <div class="col">
-    <label>Desde</label>
-      <input type="date" class="form-control" name="fechadesde" <%if (request.getAttribute("fechadesde") != null) { %>value ="<%= request.getAttribute("fechadesde").toString() %>"<%} %>>
-    </div>
-    <div class="col">
-     <label>Hasta</label>
-      <input type="date" class="form-control" name="fechahasta" <%if (request.getAttribute("fechahasta") != null) { %>value ="<%= request.getAttribute("fechahasta").toString() %>"<%} %>>
-    </div>
-      <div class="col d-flex align-items-end">
-       <input type="submit" class="btn btn-light mx-2" name="btnBuscar" value="Filtrar" ></input>
-         <input type="submit" class="btn btn-light" name="btnBorrar" value="Borrar filtros" ></input>
-    </div>
-  </div>
-</form>
+
+
+
+
+
+
+<div class="container">
+	<div class="p-3 contenedor-principal">
+	<h2 class="tituloForm"> Listado de Médicos </h2> </br>
 	<table id="table_id" class="display table table-striped bg-light">
 		<thead>
 			<tr>
-				<th scope="col">Dia y Horario</th>
-				<th scope="col">Paciente</th>
-				<th scope="col">Estado</th>
-				<th scope="col">Acciones</th>				
+				<th scope="col">Dni</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">Email</th>
+				<th scope="col">Fec Nacimiento</th>
+				<th scope="col">Nacionalidad</th>		
+				<th scope="col">Especialidad</th>					
+				<th scope="col">Acciones</th>
 			</tr>
 		</thead>
-		<tbody>
-		<% if(listaTurnos != null)
-			for(Turno turno : listaTurnos){%>
-			<tr>
-				<td scope="row"><%=turno.getDia()%> <%=turno.getHorario()%> </td>
-				<td scope="row"><%=turno.getPaciente().getNombre()%> <%=turno.getPaciente().getApellido()%>
-				<td scope="row"><%=turno.getEstadoTurno().getDescripcion()%></td>
-				<td scope="row">
-					<input type="submit" class="btn-light" value="Ver Paciente" name="btnVerPaciente" onclick="window.location.href='servletClinica?btnVerPaciente&txtDni=<%=turno.getPaciente().getDni() %>'" />
-					<% if (turno.getEstadoTurno().getCodigo() != 3 && turno.getEstadoTurno().getCodigo() != 4){  %>
-					<input type="submit" class="btn-light" value="Editar Turno" name="btnEditarEstado" onclick="window.location.href='servletClinica?btnEditarEstado&paciente=<%=turno.getPaciente().getCodPaciente()%>&dia=<%=turno.getDia()%>&hora=<%=turno.getHorario()%> '"/>
-					<%} %>
-				</td>
-			</tr>
-		<%} %>	
+		<tbody>	
+			<% 
+				if(listaEmpleados != null)
+				for(Medico empleado : listaEmpleados){%>
+				<tr>			
+					<td scope="row"><%= empleado.getDni() %> </td>
+					<td scope="row"><%= empleado.getNombre() %></td>
+					<td scope="row"><%= empleado.getApellido() %></td>
+					<td scope="row"><%= empleado.getEmail()     %></td>
+					<td scope="row"><%= empleado.getFechaNacimiento()     %></td>	
+					<td scope="row"><%= empleado.getNacionalidad().getDescripcion()    %></td>
+					<td scope="row"><%= empleado.getEspecialidad().getDescripcion()    %></td>		
+					<td scope="row">
+						<input class="btn-light" type="submit" value="Editar" name="btnEditar"
+						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=empleado.getDni() %>'" />
+						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
+						onclick="confirmarEliminacion(<%= empleado.getDni()%>)" />
+					</td>
+				</tr>
+			<%} %>					
 		</tbody>
 	</table>
+
+
 </div>
 </div>
 </body>

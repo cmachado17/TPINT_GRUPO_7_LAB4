@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.EmpleadoDao;
+import entidad.Administrador;
+import entidad.Especialidad;
 import entidad.Medico;
 import entidad.Nacionalidad;
 import entidad.Persona;
@@ -24,7 +26,10 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 	private static final String updateMedEspec  = "UPDATE medico_por_especialidad  SET COD_ESPECIALIDAD = ?, DIASEMANA = ?, HORAINICIO = ?, HORAFIN = ? WHERE DNIMEDICO = ?";
 	private static final String delete  = "UPDATE empleados SET ESTADO=0 WHERE Dni = ?";
 	private static final String bajaFisica  = "DELETE from empleados WHERE Dni = ?";
-	private static final String readall = "SELECT * FROM empleados where estado = 1";
+	private static final String readall = "SELECT E.DNI, E.NOMBRE, E.APELLIDO, E.SEXO, E.COD_NACIONALIDAD, N.DESCRIPCION AS DESC_NACIONALIDAD," 
+			+ "E.FECHA_NAC, E.EMAIL from empleados AS E INNER JOIN NACIONALIDADES AS N ON E.COD_NACIONALIDAD = N.CODIGO "
+			+ "INNER JOIN USUARIOS AS U ON E.DNI = U.DNI where E.ESTADO = 1 AND U.COD_TIPOSUSUARIO = 1" ;
+		
 	private static final String update  = "UPDATE empleados SET Nombre = ? , Apellido = ?, Sexo = ?, Cod_Nacionalidad = ?,"
 		+	"Fecha_Nac = ?, Direccion = ?, Localidad = ?, Provincia = ?, Email = ?, Telefono = ? WHERE Dni = ?";
 	private static final String dniExiste= "SELECT * FROM empleados WHERE Dni = ?";
@@ -203,7 +208,6 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 		return isOk;
 	}
 
-	@Override
 	public ArrayList<Persona> readAll() throws ReadAllException {
 		PreparedStatement statement;
 		ResultSet resultSet; 
@@ -214,15 +218,16 @@ public class EmpleadoDaoImpl implements EmpleadoDao{
 			statement = conexion.getSQLConexion().prepareStatement(readall);
 			resultSet = statement.executeQuery();
 			while(resultSet.next())
-			{
-				Persona empleado = new Persona();
+			{							
+				Persona empleado = new Administrador();
 				empleado.setDni(resultSet.getInt("DNI"));
 				empleado.setNombre(resultSet.getString("NOMBRE"));
 				empleado.setApellido(resultSet.getString("APELLIDO"));
 				empleado.setSexo(resultSet.getString("SEXO"));
-				empleado.setEmail(resultSet.getString("FECHA_NAC"));
-				empleado.setFechaNacimiento(resultSet.getString("EMAIL"));
-				empleado.setTelefono(resultSet.getString("TELEFONO"));
+				empleado.setFechaNacimiento(resultSet.getString("FECHA_NAC"));
+				empleado.setEmail(resultSet.getString("EMAIL"));
+				empleado.setNacionalidad(new Nacionalidad(resultSet.getInt("COD_NACIONALIDAD"), resultSet.getString("DESC_NACIONALIDAD")));
+								
 				empleados.add(empleado);
 			}
 		} 

@@ -109,7 +109,6 @@ public class servletTurnos extends HttpServlet {
 			if(listaTurnos.isEmpty()) {
 				//turnos del medico elegido
 				request.setAttribute("turnosMedico", null);
-				System.out.println("entro aca");
 			}else {
 				//turnos del medico elegido
 				request.setAttribute("turnosMedico", listaTurnos);

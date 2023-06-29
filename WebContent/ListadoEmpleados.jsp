@@ -84,7 +84,7 @@
           		})
           		 // Redirecciona a la página de servlet
           		setTimeout(function(){
-          			window.location.href = 'servletEmpleados?btnEliminar=1&txtDni=' + dni;
+          			window.location.href = 'servletEmpleados?btnEliminarA=1&txtDni=' + dni;
 					}, 1500);
             }
         });
@@ -93,12 +93,12 @@
 
 
 
-<title>Listado de Médicos</title>
+<title>Listado de Empleados</title>
 </head>
 <%
-	ArrayList <Medico> listaEmpleados = null;
-	if(request.getAttribute("listaEmpleados") != null){
-		listaEmpleados = (ArrayList <Medico>) request.getAttribute("listaEmpleados");
+	ArrayList <Persona> listaEmpleadosA = null;
+	if(request.getAttribute("listaEmpleadosA") != null){
+		listaEmpleadosA = (ArrayList <Persona>) request.getAttribute("listaEmpleadosA");
 	}
 %>
 <body>
@@ -127,7 +127,8 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a href="servletEmpleados?Param=0" class="dropdown-item">Alta Empleados</a></li>
-            <li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado Empleados</a></li>
+            <li><a href="servletEmpleados?Param=3" class="dropdown-item">Listado Medicos</a></li>
+             <li><a href="servletEmpleados?Param=4" class="dropdown-item">Listado Empleados</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -173,7 +174,7 @@
 
 <div class="container">
 	<div class="p-3 contenedor-principal">
-	<h2 class="tituloForm"> Listado de Médicos </h2> </br>
+	<h2 class="tituloForm"> Listado de Empleados </h2> </br>
 	<table id="table_id" class="display table table-striped bg-light">
 		<thead>
 			<tr>
@@ -183,14 +184,14 @@
 				<th scope="col">Email</th>
 				<th scope="col">Fec Nacimiento</th>
 				<th scope="col">Nacionalidad</th>		
-				<th scope="col">Especialidad</th>					
+								
 				<th scope="col">Acciones</th>
 			</tr>
 		</thead>
 		<tbody>	
 			<% 
-				if(listaEmpleados != null)
-				for(Medico empleado : listaEmpleados){%>
+				if(listaEmpleadosA != null)
+				for(Persona empleado : listaEmpleadosA){%>
 				<tr>			
 					<td scope="row"><%= empleado.getDni() %> </td>
 					<td scope="row"><%= empleado.getNombre() %></td>
@@ -198,11 +199,11 @@
 					<td scope="row"><%= empleado.getEmail()     %></td>
 					<td scope="row"><%= empleado.getFechaNacimiento()     %></td>	
 					<td scope="row"><%= empleado.getNacionalidad().getDescripcion()    %></td>
-					<td scope="row"><%= empleado.getEspecialidad().getDescripcion()    %></td>		
+							
 					<td scope="row">
-						<input class="btn-light" type="submit" value="Editar" name="btnEditar"
-						onclick="window.location.href='servletEmpleados?btnEditar=1&txtDni=<%=empleado.getDni() %>'" />
-						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminar"
+						<input class="btn-light" type="submit" value="Editar" name="btnEditarA"
+						onclick="window.location.href='servletEmpleados?btnEditarA=1&txtDni=<%=empleado.getDni() %>'" />
+						<input class="btn-light" type="submit" value="Eliminar" name="btnEliminarA"
 						onclick="confirmarEliminacion(<%= empleado.getDni()%>)" />
 					</td>
 				</tr>

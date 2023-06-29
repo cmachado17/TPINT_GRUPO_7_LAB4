@@ -82,6 +82,11 @@ public class servletEmpleados extends HttpServlet {
 			case "3":
 				ArrayList<Medico> listaEmpleados = medicoNegocio.readAll();
 				request.setAttribute("listaEmpleados", listaEmpleados);	
+				dispatcher = "/ListadoMedicos.jsp";
+				break;
+			case "4":
+				ArrayList<Persona> listaEmpleadosA = negEmp.readAll();
+				request.setAttribute("listaEmpleadosA", listaEmpleadosA);	
 				dispatcher = "/ListadoEmpleados.jsp";
 				break;
 			default:
@@ -93,7 +98,7 @@ public class servletEmpleados extends HttpServlet {
 		    }
 				
 			if(request.getParameter("btnEditar")!=null) {
-				String dispatcher="/ModificacionEmpleados.jsp";
+				String dispatcher="/ModificacionMedicos.jsp";
 				
 				request.setAttribute("MedicoModificable", medicoNegocio.buscarMedico(request.getParameter("txtDni")));
 				//Se carga la lista de provincias, nacionalidades, especialidades y horas
@@ -106,12 +111,32 @@ public class servletEmpleados extends HttpServlet {
 			    rd.forward(request, response);  
 				}
 			
+			if(request.getParameter("btnEditarA")!=null) {
+				String dispatcher="/ModificacionEmpleados.jsp";
+				
+				request.setAttribute("EmpleadoModificable", negEmp.BuscarEmpleado(request.getParameter("txtDni")));
+				//Se carga la lista de provincias, nacionalidades, especialidades y horas
+				request.setAttribute("listaProv", negProv.obtenerProvincias());
+				request.setAttribute("listaNac", negNac.obtenerNacionalidades());
+				
+				RequestDispatcher rd=request.getRequestDispatcher(dispatcher);  
+			    rd.forward(request, response);  
+				}
+			
 			
 			if(request.getParameter("btnEliminar")!=null) {						
 				int dni = Integer.parseInt(request.getParameter("txtDni"));			
 				negEmp.delete(dni);
 				turnoDao.anularTurnos(dni, "","");	//ANULA los turnos del médico dado de baja (los pone en estado=0, y cod_estado_turno=ANULADO). Si pasamos fechas anula ese rango de fechas.
 				RequestDispatcher rd = request.getRequestDispatcher("/servletEmpleados?Param=3");
+				rd.forward(request, response);
+			}
+			
+			if(request.getParameter("btnEliminarA")!=null) {						
+				int dni = Integer.parseInt(request.getParameter("txtDni"));			
+				negEmp.delete(dni);
+				
+				RequestDispatcher rd = request.getRequestDispatcher("/servletEmpleados?Param=4");
 				rd.forward(request, response);
 			}
 		
@@ -198,7 +223,7 @@ public class servletEmpleados extends HttpServlet {
 		
 		if(request.getParameter("btnModificar")!=null) {
 			
-			int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
+			/*int tipoUsuario = Integer.parseInt(request.getParameter("tipousuario"));
 			Usuario usuario = new Usuario();
 
 			usuario.setDni(Integer.parseInt(request.getParameter("DNI")));
@@ -230,7 +255,7 @@ public class servletEmpleados extends HttpServlet {
 				}
 			}
 			
-			if(tipoUsuario==2) {
+			if(tipoUsuario==2) {*/
 			
 			//SETEO EL MEDICO A ACTUALIZAR
 			Medico medico = new Medico();
@@ -254,24 +279,62 @@ public class servletEmpleados extends HttpServlet {
 			medico.setHorarioFinAtencion(request.getParameter("horaFin"));
 			
 			if(negEmp.update(medico)) {
-				if(negEmp.updateMedicosEspecialidad(medico)) {			//si puede insertar el medico pero no la especialidad por médico elimina al médico creado.	
-					if(negUser.update(usuario)) {			//método para modificar el usuario si cambia de médio a admin o viceversa
+				if(negEmp.updateMedicosEspecialidad(medico)) {				
 						filas=1;		
-						//tendriamos que borrar todos los turnos?		
-					}
 				}
 				else {
-					//negEmp.bajaFisica(medico.getDni());	//creo el método bajaFisica hasta que veamos si hacemos trigger o no
 					filas=0;
 				}
 			}
-		}
+		
 			//Redirecciono al listado
 			ArrayList<Medico> listaEmpleados = medicoNegocio.readAll();
 			request.setAttribute("listaEmpleados", listaEmpleados);	
+			RequestDispatcher rd = request.getRequestDispatcher("/ListadoMedicos.jsp");
+			rd.forward(request, response);
+		
+		}
+		
+		
+			if(request.getParameter("btnModificarA")!=null) {
+				
+				Administrador administrador = new Administrador();
+				administrador.setDni(Integer.parseInt(request.getParameter("DNI")));
+				administrador.setNombre(request.getParameter("nombre"));
+				administrador.setApellido(request.getParameter("apellido"));
+				administrador.setSexo(request.getParameter("sexo"));
+				administrador.setNacionalidad(new Nacionalidad(Integer.parseInt(request.getParameter("nacionalidad"))));
+				administrador.setFechaNacimiento(request.getParameter("fechaNacimiento"));
+				administrador.setDireccion(request.getParameter("direccion"));
+				administrador.setLocalidad(request.getParameter("localidad"));
+				administrador.setProvincia(new Provincia (Integer.parseInt(request.getParameter("provincia"))));
+				administrador.setEmail(request.getParameter("email"));
+				administrador.setTelefono(request.getParameter("telefono"));
+				administrador.setEstado(true);
+				
+				if(negEmp.update(administrador)) {
+					
+					filas=1;			
+				}
+			
+		
+			//Redirecciono al listado
+			ArrayList<Persona> listaEmpleadosA = negEmp.readAll();
+			request.setAttribute("listaEmpleadosA", listaEmpleadosA);	
 			RequestDispatcher rd = request.getRequestDispatcher("/ListadoEmpleados.jsp");
 			rd.forward(request, response);
 		
 		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
