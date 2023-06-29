@@ -222,8 +222,7 @@ public class servletEmpleados extends HttpServlet {
 		}
 		
 		if(request.getParameter("btnModificar")!=null) {
-			
-			
+
 			//SETEO EL MEDICO A ACTUALIZAR
 			Medico medico = new Medico();
 			medico.setDni(Integer.parseInt(request.getParameter("DNI")));

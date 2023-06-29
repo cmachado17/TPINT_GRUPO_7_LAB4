@@ -63,10 +63,28 @@
         });
     }
     
+    function validarHorario() {
+        var horaInicio = parseInt(document.getElementById('horaInicio').value.split(':')[0]);
+        var horaFin = parseInt(document.getElementById('horaFin').value.split(':')[0]);
+
+        if (horaInicio >= horaFin) {
+            Swal.fire({
+                title: 'Error',
+                text: 'La hora de fin debe ser mayor a la hora de inicio!',
+                icon: 'error',
+                confirmButtonText: 'Aceptar'
+            });
+            return false;
+        }
+        return true;
+    }
+    
 	 // Función para interceptar el envío del formulario
     function interceptarEnvioFormulario(event) {
         event.preventDefault(); // Evita que el formulario se envíe automáticamente
-        confirmarModificacion(); // Muestra el mensaje de confirmación
+        if (validarHorario()){ // valido horarios de inicio y fin 
+        	 confirmarModificacion(); // Muestra el mensaje de confirmación
+        }        
     }
 </script>
 <title>Modificacion Medicos</title>
@@ -222,7 +240,7 @@
 					</div>
 					<div class="form-group">
 					<label>Hora Inicio</label> 
-						<select type="text" name="horaInicio" class="form-select">
+						<select type="text" name="horaInicio"  id="horaInicio" class="form-select">
 							  	<option value="8:00:00" <% if (medico.getHorarioInicioAtencion().equals(("08:00:00").toString())) {%> selected<%}%>>8:00</option>
     						 	<option value="9:00:00" <% if (medico.getHorarioInicioAtencion().equals(("09:00:00").toString())) {%> selected<%}%>>9:00</option>
     							<option value="10:00:00" <% if (medico.getHorarioInicioAtencion().equals(("10:00:00").toString())) {%> selected<%}%>>10:00</option>			
@@ -241,7 +259,7 @@
 					</div>
 					<div class="form-group">
 					<label>Hora Fin</label> 
-						<select type="text" name="horaFin" class="form-select">
+						<select type="text" name="horaFin" id="horaFin" class="form-select">
 							  	<option value="8:00:00" <% if (medico.getHorarioFinAtencion().equals(("08:00:00".toString()))) {%> selected<%}%>>8:00</option>
     						 	<option value="9:00:00" <% if (medico.getHorarioFinAtencion().equals(("09:00:00".toString()))) {%> selected<%}%>>9:00</option>
     							<option value="10:00:00" <% if (medico.getHorarioFinAtencion().equals(("10:00:00".toString()))) {%> selected<%}%>>10:00</option>			

@@ -154,8 +154,8 @@ public class servletClinica extends HttpServlet {
 			//String hasta = (request.getParameter("fechahasta").toString());
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        LocalDate inicio = LocalDate.parse(desde, formatter);
-	        LocalDate fin = LocalDate.parse(hasta, formatter);
+			LocalDate inicio = LocalDate.parse(desde, formatter).minusDays(1);
+	        LocalDate fin = LocalDate.parse(hasta, formatter).plusDays(1);
 
 	        ArrayList<Turno> listaFiltrada = new ArrayList<>();
 	        for (Turno objeto : listaTurnos) {
@@ -190,8 +190,8 @@ public class servletClinica extends HttpServlet {
 			}
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	        LocalDate inicio = LocalDate.parse(desde, formatter);
-	        LocalDate fin = LocalDate.parse(hasta, formatter);
+	        LocalDate inicio = LocalDate.parse(desde, formatter).minusDays(1);
+	        LocalDate fin = LocalDate.parse(hasta, formatter).plusDays(1);
 
 	        ArrayList<Turno> listaFiltrada = new ArrayList<>();
 	        for (Turno objeto : listaTurnos) {

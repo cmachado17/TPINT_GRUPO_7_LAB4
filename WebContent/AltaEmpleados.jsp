@@ -19,17 +19,45 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Kanit:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 <style type="text/css">
 	<jsp:include page="css\StyleSheet.css"></jsp:include>
 </style>
 
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {			//script para hacer que el cartel de "Paciente agregado correctamente" se desvanezca a los 3 seg luego de aparecer
     setTimeout(function() {
         $(".content").fadeOut(1500);
     },3000);
 });
+</script>
+
+<script>
+    
+	function validarHorario() {
+	    var horaInicio = parseInt(document.getElementById('horaInicio').value.split(':')[0]);
+	    var horaFin = parseInt(document.getElementById('horaFin').value.split(':')[0]);
+	
+	    if (horaInicio >= horaFin) {
+	        Swal.fire({
+	            title: 'Error',
+	            text: 'La hora de fin debe ser mayor a la hora de inicio!',
+	            icon: 'error',
+	            confirmButtonText: 'Aceptar'
+	        });
+	        return false;
+	    }
+	    return true;
+	}
+    
+	 // Función para interceptar el envío del formulario
+    function interceptarEnvioFormulario(event) {    	
+     	if (!validarHorario()){ // valido el horario de inicio y fin 
+     		event.preventDefault(); // Evita que el formulario se envíe automáticamente
+       	}   
+    }
 </script>
 
 <title>Alta Empleados</title>
@@ -166,7 +194,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 		}
 %>
 <div class="d-flex justify-content-center text-light">
-			<form method="post" action="servletEmpleados" class="w-75">
+			<form method="post" action="servletEmpleados" id="formularioAlta" onsubmit="interceptarEnvioFormulario(event)" class="w-75">
 				<div class="form-group">
 				<label>DNI</label> <input type="number" name="DNI"  min="1111111" max="99999999" class="form-control" required></input>
 				</div>
@@ -242,7 +270,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 					</div>
 					<div class="form-group">
 					<label>Hora Inicio</label> 
-						<select type="text" name="horaInicio" class="form-control">
+						<select type="text" name="horaInicio" id="horaInicio" class="form-control">
 							  	<option value="8:00:00">8:00</option>
     						 	<option value="9:00:00">9:00</option>
     							<option value="10:00:00">10:00</option>			
@@ -261,7 +289,7 @@ $(document).ready(function() {			//script para hacer que el cartel de "Paciente 
 					</div>
 					<div class="form-group">
 					<label>Hora Fin</label> 
-						<select type="text" name="horaFin" class="form-control">
+						<select type="text" name="horaFin" id="horaFin" class="form-control">
 							  	<option value="8:00:00">8:00</option>
     						 	<option value="9:00:00">9:00</option>
     							<option value="10:00:00">10:00</option>		
